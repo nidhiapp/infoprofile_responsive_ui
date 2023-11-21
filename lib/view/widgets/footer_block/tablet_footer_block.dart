@@ -25,51 +25,56 @@ class TabletFooter extends StatelessWidget {
           child: Column(
             children: [
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Column(
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        InfoProfileFooterLogo.tabletInfoProfileFooterLogo(),
+                        const NotNormalApp(),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        SizedBox(
+                            width: w * 0.13,
+                            child: Image.asset(AppImages.socilaMedia)),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(width: 30,),
+                  Expanded(
+                    child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      InfoProfileFooterLogo.tabletInfoProfileFooterLogo(),
-                      const NotNormalApp(),
-                      const SizedBox(
-                        height: 10,
-                      ),
+                      Feature_Footer(),
                       SizedBox(
-                          width: w * 0.13,
-                          child: Image.asset(AppImages.socilaMedia)),
+                        height: 25,
+                      ),
+                      LinkFooter()
                     ],
-                  ),
-                  // const SizedBox(width: 30,),
-                  Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Feature_Footer(),
-                    SizedBox(
-                      height: 25,
                     ),
-                    LinkFooter()
-                  ],
                   ),
-                                  //  const SizedBox(width: 20,),
+                                   const SizedBox(width: 20,),
                   Container(
                     height: 240,
                     width: 0.5,
                     color: AppColors.inbetweenContCol,
                   ),
 
-                 // const SizedBox(width: 20,),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                  CompanyFooter(),
-                  SizedBox(
-                    height: 25,
-                  ),
-                  SizedBox(width: 80,
-                    child: HelpNdSupport())
-                    ],
+                  const SizedBox(width: 20,),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                    CompanyFooter(),
+                    SizedBox(
+                      height: 25,
+                    ),
+                    HelpNdSupport()
+                      ],
+                    ),
                   ),
                   SizedBox(width: 5,)
                   
@@ -78,7 +83,7 @@ class TabletFooter extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.only(
-                    left: 22.0, right: 22.0, bottom: 8, top: 30),
+                    left: 0.0, right: 22.0, bottom: 8, top: 30),
                 child: Container(
                   height: 0.5,
                   width: double.infinity,
@@ -87,7 +92,7 @@ class TabletFooter extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.only(
-                  left: 22.0,
+                  left: 0.0,
                   right: 22.0,
                   bottom: 18,
                 ),

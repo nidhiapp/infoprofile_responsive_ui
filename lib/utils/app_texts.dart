@@ -55,7 +55,7 @@ class AppTexts {
       "Create Different Profile Pages";
   static const String linksFooter = "Links";
   static const String privacyPolicyFooter = "Privacy Policy";
-  static const String termsConditionsFooter = "Terms & Conditions";
+  static const String termsConditionsFooter = "Help & Support";
   static const String companyBlock = "Company";
   static const String aboutFooter = "About Us";
   static const String contactFooter = "Contact Us";

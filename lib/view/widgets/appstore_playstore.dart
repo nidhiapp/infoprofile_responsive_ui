@@ -41,9 +41,9 @@ class AppleStorePlayStore extends StatelessWidget {
     return   SizedBox(
         child: Row(mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset(AppImages.appstoreimgs,height:h*0.03,width:w*0.35 ,),
+          Image.asset(AppImages.appstoreimgs,height:h*0.03,),
           const SizedBox(width: 18,),
-          Image.asset(AppImages.googlePlay,height:h*0.03,width:w*0.35,),
+          Image.asset(AppImages.googlePlay,height:h*0.03,),
          
         ],
       ),

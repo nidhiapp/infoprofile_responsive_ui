@@ -22,7 +22,7 @@ return Image.asset(AppImages.infoProfFooterLogo,height: h*0.1,);
 
 //for tablet
 static Widget tabletInfoProfileFooterLogo(){
-return Image.asset(AppImages.infoProfFooterLogo,height: h*0.05,);
+return Image.asset(AppImages.infoProfFooterLogo,height: h*0.07,);
 }
 
 //for mobile

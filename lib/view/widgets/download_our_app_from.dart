@@ -85,7 +85,7 @@ class DownloadOurAppFrom extends StatelessWidget {
             ),
         ),
       ),
-       const DotRectangleBg(),
+        DotRectangleBg.tabletDotRectangleBg(),
       ]
     );
   }

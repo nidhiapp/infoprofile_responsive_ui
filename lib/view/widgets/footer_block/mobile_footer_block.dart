@@ -37,8 +37,8 @@ class MobileFooter extends StatelessWidget {
                SizedBox(height: h*0.03,),
               const HelpNdSupport(),
                Padding(
-                padding: const EdgeInsets.only(
-                   left: 10.0, right: 10.0, bottom: 8, top: 30
+                padding: const EdgeInsets.only(right: 20,
+                  bottom: 8, top: 30,
                     ),
                 child: Container(
                   height: 0.5,

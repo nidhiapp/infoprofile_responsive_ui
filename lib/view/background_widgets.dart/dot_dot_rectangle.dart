@@ -54,7 +54,7 @@ return Column(
             )
           ],
         ),
-        SizedBox(height: h*0.05,),
+        SizedBox(height: h*0.3,),
          Row(
           children: [
             Expanded(

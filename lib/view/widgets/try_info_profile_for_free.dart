@@ -220,7 +220,7 @@ class TryInfoProfileForFree extends StatelessWidget {
     return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 50.0),
         child: Container(
-            width: w * 0.7,
+            width: 400,
             decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(20),

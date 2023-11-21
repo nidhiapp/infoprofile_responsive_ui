@@ -78,9 +78,9 @@ class ImageplusText extends StatelessWidget {
         OverlappingShapesBg.tabletOverlappingShapesBg(),
         Column(
         children: [
-           Image.asset(AppImages.runPng,height: h*0.5,width: w*0.7,),
+           Image.asset(AppImages.runPng,height: h*0.5,width: w*0.8,),
            SizedBox(height: h*0.07,),
-          SizedBox(width: w*0.5,
+          SizedBox(width: w*0.6,
                     child: Column(crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Wrap(
@@ -96,8 +96,8 @@ class ImageplusText extends StatelessWidget {
     
                          SizedBox(height: h*0.13,),
     
-                         Image.asset(AppImages.creativeImg,height: h*0.5,width: w*0.7,),
-                  SizedBox(width: w*0.5,
+                         Image.asset(AppImages.creativeImg,height: h*0.5,width: w*0.8,),
+                  SizedBox(width: w*0.6,
                     child: Column(crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Wrap(

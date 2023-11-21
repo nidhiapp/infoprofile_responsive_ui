@@ -71,10 +71,10 @@ class MakeFriendsByBuilding extends StatelessWidget {
       children: [
         Image.asset(
           AppImages.mapimg,
-         height: h*0.5,width: w*0.7,
+         height: h*0.5,width: w*0.8,
         ),
         SizedBox(
-            width: w * 0.5,
+            width: w * 0.6,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

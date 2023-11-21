@@ -59,27 +59,28 @@ final ScrollController sc = ScrollController();
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          InfoProfileLogo.desktopInfoProfileLogo(),
-                          SizedBox(
-                            height: h * 0.2,
-                          ),
-                          MeetYourBestConnection.desktopMeetYrBestCon(),
-                          SizedBox(
-                            height: h * 0.02,
-                          ),
-                          AppleStorePlayStore.desktopAppleStorePlayStore(),
-                          SizedBox(
-                            height: h * 0.2,
-                          ),
-                        ],
-                      ),
+                     
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            InfoProfileLogo.desktopInfoProfileLogo(),
+                            SizedBox(
+                              height: h * 0.16,
+                            ),
+                            MeetYourBestConnection.desktopMeetYrBestCon(),
+                            SizedBox(
+                              height: h * 0.02,
+                            ),
+                            AppleStorePlayStore.desktopAppleStorePlayStore(),
+                            SizedBox(
+                              height: h * 0.15,
+                            ),
+                          ],
+                        ),
                       InkWell(onTap: (){
                               sc.animateTo(
                               
@@ -274,7 +275,7 @@ final ScrollController sc = ScrollController();
               Column(
                 children: [
                   SizedBox(
-                    height: h * 0.1,
+                    height: h * 0.15,
                   ),
                   const MobileFooter()
                 ],
