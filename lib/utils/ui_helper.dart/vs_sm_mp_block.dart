@@ -43,8 +43,8 @@ class _VsSmMpBlockContentState extends State<VsSmMpBlockContent> {
            
           },
           child: Container(
-          width: 300,
-        height: 350,
+          width: 380,
+        height: 360,
             margin:  const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
             decoration: BoxDecoration(
                 color: container, 
@@ -75,7 +75,7 @@ class _VsSmMpBlockContentState extends State<VsSmMpBlockContent> {
                   ),
                 ),
                 const SizedBox(
-                  height: 10,
+                  height: 15,
                 ),
                 Text(
                   widget.item,
@@ -83,7 +83,7 @@ class _VsSmMpBlockContentState extends State<VsSmMpBlockContent> {
                 fontWeight: FontWeight.w700, fontSize: 22),),
                 ),
                 const SizedBox(
-                  height: 5,
+                  height: 10,
                 ),
                 Text(widget.item2,
                 style: GoogleFonts.poppins(textStyle: TextStyle(color: contentColor,

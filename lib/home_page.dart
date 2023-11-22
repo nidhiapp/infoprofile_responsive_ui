@@ -114,18 +114,19 @@ final ScrollController sc = ScrollController();
             ImageplusText.desktopImageplusText(),
             DownloadOurAppFrom.desktopDownloadOurAppFrom(),
             MakeFriendsByBuilding.desktopMakeFriendsByBuilding(),
-            Stack(alignment: Alignment.topCenter,
-             children: [
-              Column(
-                children: [
-                  // SizedBox(
-                  //   height: h * 0.03,
-                  // ),
-                  const DesktopFooterSetUp()
-                ],
-              ),
-              TryInfoProfileForFree.desktopTryInfoProfileForFree()
-            ]),
+            // Stack(alignment: Alignment.topCenter,
+            //  children: [
+            //   Column(
+            //     children: [
+            //       SizedBox(
+            //         height: h * 0.03,
+            //       ),
+            //       const DesktopFooterSetUp()
+            //     ],
+            //   ),
+            
+            // ]),
+            DesktopFooterSetUp()
           ],
         ),
       ),

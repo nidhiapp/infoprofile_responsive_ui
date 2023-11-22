@@ -18,9 +18,9 @@ class TryInfoProfileForFree extends StatelessWidget {
 
   static Widget desktopTryInfoProfileForFree() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 50.0),
+      padding: const EdgeInsets.symmetric(horizontal: 80.0),
       child: Container(
-          width: 900,height: 120,
+          width: w*0.6,
           decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(20),
@@ -80,33 +80,32 @@ class TryInfoProfileForFree extends StatelessWidget {
                     )
                   ],
                 ),
-                SizedBox(
-                  width: w * 0.1,
+                // SizedBox(
+                //   width: w * 0.05,
+                // ),
+                Row(
+                  children: [
+                    Text(
+                      AppTexts.signin,
+                      style: font500_18Ts,
+                    ),
+                    const SizedBox(
+                      width: 15,
+                    ),
+                    Container(padding: const EdgeInsets.symmetric(horizontal:5,vertical: 3),
+                      height: 40,width: 100,
+                      decoration: BoxDecoration(
+                          color: AppColors.primaryColor,
+                          borderRadius: BorderRadius.circular(8)),
+                      child: Center(
+                          child: Text(
+                        AppTexts.signupinfopro ,
+                        style: font600_18Ts,
+                      )),
+                    ),
+                  ],
                 ),
-                Align(alignment: Alignment.centerRight,
-                  child: Row(
-                    children: [
-                      Text(
-                        AppTexts.signin,
-                        style: font500_18Ts,
-                      ),
-                      const SizedBox(
-                        width: 15,
-                      ),
-                      Container(padding: const EdgeInsets.symmetric(horizontal:5,vertical: 3),
-                        height: 40,width: 100,
-                        decoration: BoxDecoration(
-                            color: AppColors.primaryColor,
-                            borderRadius: BorderRadius.circular(8)),
-                        child: Center(
-                            child: Text(
-                          AppTexts.signUp,
-                          style: font600_18Ts,
-                        )),
-                      ),
-                    ],
-                  ),
-                )
+               
               ],
             ),
           )),

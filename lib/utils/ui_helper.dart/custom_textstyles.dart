@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:info_profile_ui/utils/app_colors.dart';
+import 'package:info_profile_ui/utils/constants.dart';
 
 TextStyle loginTS = const TextStyle(
     color: AppColors.primaryColor, // Text color
@@ -97,7 +98,7 @@ TextStyle buildfastTs = GoogleFonts.roboto(
   textStyle:  const TextStyle(
   fontSize: 18,
   fontWeight: FontWeight.w400,
-  color: AppColors.blackNormalTextColor,
+  color: AppColors.blackColor,
 
 ));
 TextStyle infoprofileTs = GoogleFonts.poppins(

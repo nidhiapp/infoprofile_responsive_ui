@@ -13,7 +13,7 @@ class AppTexts {
   static const String or = "  OR  ";
   static const String loginWith = "Log In with OTP";
   static const String dontHaveAccount = "Don't have an account? ";
-  static const String signUp = "Sign Up";
+  static const String signUp = "SignUp";
   static const String infoprofile = "Infoprofile is designed for everyone.";
   static const String what = "What ";
   static const String provide = "InfoProfile provides";
@@ -66,6 +66,7 @@ class AppTexts {
   static const String createCompanies =  "Create Companies";
   static const String mobileApp=  "Mobile App";
   static const String signin =   "Sign In";
-    static const String copyright = " Copyright Infoprofile LTD.";
+  static const String copyright = " Copyright Infoprofile LTD.";
+  static const String signupinfopro = "Sign Up";
 
 }

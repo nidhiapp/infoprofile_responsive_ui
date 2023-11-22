@@ -66,13 +66,17 @@ static TextEditingController passCont=TextEditingController();
           Padding(padding: const EdgeInsets.symmetric(vertical: 30),
             child: Row(mainAxisAlignment: MainAxisAlignment.center,
               children: [
-              Container(height: 1.5,width: w*0.1,
-              color: const Color.fromARGB(255, 234, 232, 232),
+              Expanded(
+                child: Container(height: 1.5,width: w*0.1,
+                color: const Color.fromARGB(255, 234, 232, 232),
+                ),
               ),
               Text(AppTexts.or,style: orTs,),
-               Container(height: 1.5,width: w*0.13,
-              color: const Color.fromARGB(255, 234, 232, 232),
-              ),
+               Expanded(
+                 child: Container(height: 1.5,width: w*0.13,
+                             color: const Color.fromARGB(255, 234, 232, 232),
+                             ),
+               ),
             ],),
           ),
 

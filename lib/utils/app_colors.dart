@@ -15,4 +15,5 @@ class AppColors {
   static const Color tryInfoProfBorderCol = Color.fromRGBO(0, 0, 0, 0.07);
   static const Color inbetweenContCol = Color.fromRGBO(191, 196, 202, 1);
   static const Color muteCol = Color.fromRGBO(105, 123, 152, 1);
+  static const Color blackColor = Color.fromRGBO(66, 58, 58, 1);
 }

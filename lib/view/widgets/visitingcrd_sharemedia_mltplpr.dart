@@ -9,7 +9,7 @@ class VisitingcrdSharemediaMltplprof extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   return Wrap(spacing: 10,
+   return Wrap(spacing: 80,
    runSpacing: 10,
    runAlignment:WrapAlignment.start,
     children: [
@@ -17,12 +17,12 @@ class VisitingcrdSharemediaMltplprof extends StatelessWidget {
       icon: AppImages.iconVisitingCard,
          item: AppTexts.visitingCard,
          item2:AppTexts.shareYourVisiting),
-         const SizedBox(width: 20,),
+        // const SizedBox(width: 20,),
      VsSmMpBlockContent(
        icon: AppImages.iconShareMedia,
          item: AppTexts.shareMedia,
          item2:AppTexts.shareYourFavourite),
-           const SizedBox(width: 20,),
+          // const SizedBox(width: 20,),
      VsSmMpBlockContent(
        icon: AppImages.iconMultipleProf,
          item: AppTexts.multipleProfile,

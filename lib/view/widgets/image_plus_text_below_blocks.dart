@@ -42,7 +42,7 @@ class ImageplusText extends StatelessWidget {
                 Image.asset(AppImages.runPng,height: h*0.5,width: w*0.5,),
           ],),
            SizedBox(height: h*0.1,),
-          Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Image.asset(AppImages.creativeImg,height: h*0.5,width: w*0.5,),
                 SizedBox(width: w*0.3,
@@ -60,6 +60,7 @@ class ImageplusText extends StatelessWidget {
                       Wrap(children: [Text(AppTexts.hereWeProduce,style: font400_14Ts,)]),
                     ],
                   )),
+                  SizedBox(width: 20,)
                 
           ],),
           
