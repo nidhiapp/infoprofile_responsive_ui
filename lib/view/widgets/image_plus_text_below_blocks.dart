@@ -39,12 +39,12 @@ class ImageplusText extends StatelessWidget {
                       Wrap(children: [Text(AppTexts.domain,style: font400_14Ts,)]),
                     ],
                   )),
-                Image.asset(AppImages.runPng,height: h*0.4,width: w*0.4,),
+                Image.asset(AppImages.runPng,height: h*0.5,width: w*0.5,),
           ],),
            SizedBox(height: h*0.1,),
           Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Image.asset(AppImages.creativeImg,height: h*0.4,width: w*0.4,),
+              Image.asset(AppImages.creativeImg,height: h*0.5,width: w*0.5,),
                 SizedBox(width: w*0.3,
                   child: Column(crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

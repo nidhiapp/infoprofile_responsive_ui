@@ -19,38 +19,43 @@ class DesktopFooterSetUp extends StatelessWidget {
     return Stack(alignment: Alignment.bottomCenter,
       children: [
         SizedBox(width: double.infinity,
-      height: 350,
+      height: 400,
         child: Image.asset(AppImages.footerimg,fit: BoxFit.fill,)),
-        Positioned(
-          child: Padding(
-          padding: const EdgeInsets.only(top:120.0,
-          ),
-          child: Column(
-        
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              
-                children: [SizedBox(width: 10,),
-                  Expanded(flex:1,
-                    child: Column(crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        InfoProfileFooterLogo.desktopInfoProfileFooterLogo(),
-                        const NotNormalApp(),
-                        const SizedBox(height: 10,),
-                        SizedBox(width: w*0.13,
-                          child: Image.asset(AppImages.socilaMedia))
-                      ],
-                    ),
-                  ), 
-                    const SizedBox(width: 40,),
-                  Expanded(child: Feature_Footer()),
+        Padding(
+        padding: const EdgeInsets.only(
+        top:170.0,
+         left:60,
+         right: 60
+        ),
+        child: Column(
+            //mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+          
+            Row(crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            
+              children: [
+                Column(crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    InfoProfileFooterLogo.desktopInfoProfileFooterLogo(),
+                    const NotNormalApp(),
+                    const SizedBox(height: 10,),
+                    SizedBox(width: w*0.14,
+                      child: Image.asset(AppImages.socilaMedia))
+                  ],
+                ), 
+                const SizedBox(width: 200,),
+                Expanded(
+                  child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(child: Feature_Footer()),
                       SizedBox(width: 20,),
                    InBetweenConts(),
                       SizedBox(width: 20,),
-                Expanded(child: LinkFooter()),
-                 SizedBox(width: 20,),
+                              Expanded(child: LinkFooter()),
+                               SizedBox(width:20 ,),
                     InBetweenConts(),
                     SizedBox(width: 20,),
                   Expanded(child: CompanyFooter()),
@@ -59,34 +64,34 @@ class DesktopFooterSetUp extends StatelessWidget {
                     SizedBox(width: 20,),
                   Expanded(child: HelpNdSupport()),
                   SizedBox(width: 20,),
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left:20,right:20,bottom:8,top:30),
-                child: Container( height: 0.5,
-                  width: double.infinity,
-                  color: AppColors.inbetweenContCol,),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left:20.0,right: 20),
-                child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                
-                  children: [
-                 Row(
-                   children: [
-                    const Icon(Icons.copyright,color: AppColors.logincardColor,size: 13,),
-                     Text(AppTexts.copyright,style: font400_14_white_Ts,),
-                   ],
-                 ),
-                  Text(AppTexts.allRightsReserved,style: font400_14_white_Ts,),
-                
-                ],),
-              ),
-              SizedBox(height: 20,)
-            ],
-          ),
-              ),
-        ),]
+                    ],
+                  ),
+                ),
+                    
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.only(bottom:8,top:30),
+              child: Container( height: 0.5,
+                width: double.infinity,
+                color: AppColors.inbetweenContCol,),
+            ),
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            
+              children: [
+             Row(
+               children: [
+                const Icon(Icons.copyright,color: AppColors.logincardColor,size: 13,),
+                 Text(AppTexts.copyright,style: font400_14_white_Ts,),
+               ],
+             ),
+              Text(AppTexts.allRightsReserved,style: font400_14_white_Ts,),
+            
+            ],),
+            SizedBox(height: 20,)
+          ],
+        ),
+            ),]
     );
   }
 }

@@ -24,16 +24,16 @@ return Column(
        children: [
             Expanded(
               child: Align(alignment: Alignment.topLeft,
-                child: Image.asset(AppImages.leftdotrecbg,height: h*0.2,)),
+                child: Image.asset(AppImages.leftdotrecbg,height: 200,width: 230,fit: BoxFit.fill,)),
             )
           ],
         ),
-        SizedBox(height: h*0.12,),
+        SizedBox(height: h*0.04,),
          Row(
           children: [
             Expanded(
               child: Align(alignment: Alignment.bottomRight,
-                child: Image.asset(AppImages.rightdotrecbg,height: h*0.2,)),
+                child: Image.asset(AppImages.rightdotrecbg,height:200,width: 230,fit: BoxFit.fill,)),
             )
           ],
         )
@@ -50,16 +50,16 @@ return Column(
        children: [
             Expanded(
               child: Align(alignment: Alignment.topLeft,
-                child: Image.asset(AppImages.leftdotrecbg,height: h*0.2,)),
+                child: Image.asset(AppImages.leftdotrecbg,height: 250,width: 250,fit: BoxFit.fill,)),
             )
           ],
         ),
-        SizedBox(height: h*0.3,),
+        SizedBox(height: h*0.2,),
          Row(
           children: [
             Expanded(
               child: Align(alignment: Alignment.bottomRight,
-                child: Image.asset(AppImages.rightdotrecbg,height: h*0.2,)),
+                child: Image.asset(AppImages.rightdotrecbg,height: 250,width: 250,fit: BoxFit.fill,)),
             )
           ],
         )

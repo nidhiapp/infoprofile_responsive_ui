@@ -118,9 +118,9 @@ final ScrollController sc = ScrollController();
              children: [
               Column(
                 children: [
-                  SizedBox(
-                    height: h * 0.03,
-                  ),
+                  // SizedBox(
+                  //   height: h * 0.03,
+                  // ),
                   const DesktopFooterSetUp()
                 ],
               ),

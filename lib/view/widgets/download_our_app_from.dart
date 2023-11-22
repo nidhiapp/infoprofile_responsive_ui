@@ -78,7 +78,7 @@ class DownloadOurAppFrom extends StatelessWidget {
               height: h*0.45,width: h*0.45,),
               Text(AppTexts.downloadOurApp,style: font700_28Ts,),
                SizedBox(height: h*0.03,),
-                SizedBox(width: w*0.5,
+                SizedBox(width: w*0.9,
                   child: Image.asset(AppImages.wayimg)),
                  SizedBox(height: h*0.03,),
               ],
@@ -91,21 +91,22 @@ class DownloadOurAppFrom extends StatelessWidget {
   }
 
   static Widget mobileDownloadOurAppFrom(){
-     return Stack(
+     return Stack(alignment: Alignment.topCenter,
       children:[ Padding(
         padding: const EdgeInsets.symmetric(vertical:20.0),
         child: Container(
           width: double.infinity,
             color: AppColors.primaryColor,
             child: Column(crossAxisAlignment: CrossAxisAlignment.center,
+            
               children: [
                 Image.asset(AppImages.downloadapppersonimg,
               height: h*0.45,width: h*0.45,),
-              Text(AppTexts.downloadOurApp,style: font700_28Ts,),
+              Center(child: Text(AppTexts.downloadOurApp,style: font700_28Ts,)),
                SizedBox(height: h*0.03,),
-                SizedBox(width: w*0.5,
+               SizedBox(width: w*0.5,
                   child: Image.asset(AppImages.wayimg)),
-                 SizedBox(height: h*0.03,),
+                 SizedBox(height: h*0.05,),
               ],
             ),
         ),

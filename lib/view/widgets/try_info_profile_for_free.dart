@@ -93,8 +93,8 @@ class TryInfoProfileForFree extends StatelessWidget {
                       const SizedBox(
                         width: 15,
                       ),
-                      Container(padding: const EdgeInsets.all(3),
-                        height: 30,width: 100,
+                      Container(padding: const EdgeInsets.symmetric(horizontal:5,vertical: 3),
+                        height: 40,width: 100,
                         decoration: BoxDecoration(
                             color: AppColors.primaryColor,
                             borderRadius: BorderRadius.circular(8)),
@@ -295,7 +295,7 @@ class TryInfoProfileForFree extends StatelessWidget {
                   SizedBox(
                     width: w * 0.14,
                   ),
-                  Row(
+                  Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Text(
                         AppTexts.signin,
@@ -304,16 +304,16 @@ class TryInfoProfileForFree extends StatelessWidget {
                       const SizedBox(
                         width: 10,
                       ),
-                      Container(
-                        height: 30,
+                     Container(
+                      //  height: 30,
                         padding: const EdgeInsets.all(3),
                         decoration: BoxDecoration(
                             color: AppColors.primaryColor,
                             borderRadius: BorderRadius.circular(8)),
-                        child: const Center(
+                        child: Center(
                             child: Text(
                           AppTexts.signUp,
-                          style: TextStyle(fontSize: 10,color:AppColors.logincardColor),
+                          style: font600_18Ts,
                         )),
                       ),
                     ],

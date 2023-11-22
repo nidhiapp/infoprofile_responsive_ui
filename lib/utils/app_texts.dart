@@ -47,7 +47,7 @@ class AppTexts {
   static const String allRightsReserved = "All rights reserved.";
   static const String notANormal = "Not a  normal app, its unique!";
   static const String servicesAreProvided = "Services are provided everywhere.";
-  static const String featureHeadingFooter = "Feature";
+  static const String featureHeadingFooter = "Features";
   static const String viewFeedsFooter = "View Feeds";
   static const String makeConnectionFooter = "Make Connections";
   static const String createVisitingCardFooter = "Create Visiting Cards";

@@ -79,7 +79,7 @@ class _VsSmMpBlockContentState extends State<VsSmMpBlockContent> {
                 ),
                 Text(
                   widget.item,
-                 style: GoogleFonts.poppins(textStyle: TextStyle(color: contentColor,
+                 style: GoogleFonts.poppins(textStyle: TextStyle(color: headLineColor,
                 fontWeight: FontWeight.w700, fontSize: 22),),
                 ),
                 const SizedBox(

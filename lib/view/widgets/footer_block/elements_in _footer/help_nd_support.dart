@@ -18,7 +18,7 @@ class HelpNdSupport extends StatelessWidget {
           style: font600_20_white_Ts
         ),
         SizedBox(
-          height: 10,
+          height: 18,
         ),
         Text(
           AppTexts.gettingStartedFooter,

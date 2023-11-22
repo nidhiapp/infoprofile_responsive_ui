@@ -21,7 +21,7 @@ class OverlappingShapesBg extends StatelessWidget {
          children: [ Expanded(
           child: Align(alignment: Alignment.topLeft,
             child: Image.asset(
-              AppImages.doubleoverlapciclebg,height: h*0.6,
+              AppImages.doubleoverlapciclebg,height: h*0.7,width: w*0.2,fit: BoxFit.fill,
             
               ),
           )),
@@ -30,7 +30,7 @@ class OverlappingShapesBg extends StatelessWidget {
          children: [ Expanded(
           child: Align(alignment: Alignment.bottomRight,
             child: Image.asset(
-              AppImages.doblerecoverlapbg,height: h*0.6,
+              AppImages.doblerecoverlapbg,height: h*0.6,width: w*0.2,fit: BoxFit.fill,
             
               ),
           )),

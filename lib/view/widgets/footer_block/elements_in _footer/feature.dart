@@ -15,28 +15,28 @@ class Feature_Footer extends StatelessWidget {
           style: font600_20_white_Ts
         ),
         const SizedBox(
-          height: 10,
+          height: 18,
         ),
         Text(
           AppTexts.viewFeedsFooter,
           style: font400_14_white_Ts
         ),
         const SizedBox(
-          height: 5,
+          height: 10,
         ),
         Text(
         AppTexts.makeConnectionFooter,
           style: font400_14_white_Ts
         ),
         const SizedBox(
-          height: 5,
+          height: 10,
         ),
         Text(
          AppTexts.createCompanies,
           style:font400_14_white_Ts
         ),
-        const SizedBox(
-          height: 5,
+       const SizedBox(
+          height: 10,
         ),
         Text(
          AppTexts.mobileApp,

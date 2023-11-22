@@ -225,8 +225,8 @@ color: AppColors.logincardColor
 
 TextStyle font600_20_white_Ts = GoogleFonts.poppins(
   textStyle:  const TextStyle(
-  fontSize: 18,
-  fontWeight: FontWeight.w500,
+  fontSize: 20,
+  fontWeight: FontWeight.w600,
 color: AppColors.logincardColor
 ));
 

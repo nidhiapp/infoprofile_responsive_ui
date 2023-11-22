@@ -31,8 +31,8 @@ class UpperBgRectangles extends StatelessWidget {
      Expanded(
       child: Align(alignment: Alignment.topRight,
         child: Image.asset(
-          AppImages.rightrectangleimg,
-          height: h*0.95,
+          AppImages.rightrectangleimg,fit: BoxFit.cover,
+          height: 900,width:680
         
           
           ),

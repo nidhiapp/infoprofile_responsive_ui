@@ -28,8 +28,8 @@ class MakeFriendsByBuilding extends StatelessWidget {
         children: [
           Image.asset(
             AppImages.mapimg,
-            height: h * 0.5,
-            width: w * 0.5,
+            //height: h * 0.5,
+            width: w * 0.45,
           ),
           SizedBox(
               width: w * 0.3,
