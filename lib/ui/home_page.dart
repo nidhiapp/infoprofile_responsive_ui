@@ -10,14 +10,10 @@ import 'package:info_profile_ui/view/widgets/footer_block/tablet_footer_block.da
 import 'package:info_profile_ui/view/widgets/image_plus_text_below_blocks.dart';
 import 'package:info_profile_ui/view/widgets/info_profile_is_designed.dart';
 import 'package:info_profile_ui/view/widgets/infoprofile_logo.dart';
-import 'package:info_profile_ui/view/widgets/onboarding/forget_pass.dart';
 import 'package:info_profile_ui/view/widgets/onboarding/login_card.dart';
 import 'package:info_profile_ui/view/widgets/make_friends_building.dart';
 import 'package:info_profile_ui/view/widgets/meet_your_best.dart';
 import 'package:info_profile_ui/view/background_widgets.dart/upper_bg_rectangles.dart';
-import 'package:info_profile_ui/view/widgets/onboarding/login_phone_num.dart';
-import 'package:info_profile_ui/view/widgets/onboarding/otp_page.dart';
-import 'package:info_profile_ui/view/widgets/onboarding/reset_password.dart';
 import 'package:info_profile_ui/view/widgets/onboarding/sign_up_card.dart';
 import 'package:info_profile_ui/view/widgets/try_info_profile_for_free.dart';
 import 'package:info_profile_ui/view/widgets/visitingcrd_sharemedia_mltplpr.dart';
@@ -99,9 +95,11 @@ class CompleteSetUps extends StatelessWidget {
                   SizedBox(
                     width: w * 0.04,
                   ),
+
+                  /// All the Container are here [SignUpCard] [OtpPage] [ForgetPassword] [ResetPassword] [LoginUsingPhone]
                   Padding(
                     padding: const EdgeInsets.only(top: 112.0),
-                    child:isLogin? LoginCard.desktopLoginCard():SignUpCard(),
+                    child:isLogin? LoginCard.desktopLoginCard() : const SignUpCard(),
                    // child: OtpPage(),
                    //child: ForgetPassword(),
                    //child: ResetPassword(),
