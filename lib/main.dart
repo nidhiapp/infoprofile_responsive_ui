@@ -1,6 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:info_profile_ui/home_page.dart';
+import 'package:info_profile_ui/services/auth_services.dart';
+import 'package:info_profile_ui/ui/base_page.dart';
+import 'package:info_profile_ui/ui/home_page.dart';
 import 'package:info_profile_ui/view_model/onboarding_provider.dart';
 import 'package:info_profile_ui/view_model/provider.dart';
 import 'package:provider/provider.dart';
@@ -22,14 +24,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(providers: [
-      ChangeNotifierProvider(create: (_) => Providers()),
-       ChangeNotifierProvider(create: (_) => AuthProvider()),],
-       child: MaterialApp(
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => Providers()),
+        ChangeNotifierProvider(create: (_) => AuthProvider()),],
+         child: const MaterialApp(
             debugShowCheckedModeBanner: false,
             title: 'Infoprofile',
-            home: Scaffold(body: CompleteSetUps(
-              
-            ))));
+            home: Scaffold(
+              body:CompleteSetUps(),
+            ),
+       ),
+    );
   }
 }

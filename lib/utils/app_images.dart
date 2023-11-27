@@ -25,7 +25,7 @@ class AppImages {
   static const String wayimg = "assets/images/way.png";
   static const String circularbg = "assets/images/circle_bg.png";
   static const String copyRight =
-      "/Users/admin/Desktop/info_profile_ui/assets/images/copyright.png";
+      "assets/images/copyright.png";
   static const String rightcircularbg = "assets/images/right_circle_bg.png";
   static const String iconVisitingCard = "assets/images/vistingcardicon.png";
   static const String iconShareMedia = 'assets/images/sharemedia.png';
@@ -35,29 +35,29 @@ class AppImages {
   static const String doubleoverlapciclebg =
       "assets/images/doubleoverlapciclebg.png";
   static const String rightdotrecbg =
-      "/Users/admin/Desktop/info_profile_ui/assets/images/rightdotrec.png";
+      "assets/images/rightdotrec.png";
   static const String leftdotrecbg =
-      "/Users/admin/Desktop/info_profile_ui/assets/images/leftdotrec.png";
+      "assets/images/leftdotrec.png";
   static const String mapimg =
-      "/Users/admin/Desktop/info_profile_ui/assets/images/worldmap.png";
+      "assets/images/worldmap.png";
   static const String mapsecbg =
-      "/Users/admin/Desktop/info_profile_ui/assets/images/mapsecbg.png";
+      "assets/images/mapsecbg.png";
   static const String infoProfFooterLogo =
-      "/Users/admin/Desktop/info_profile_ui/assets/images/info.png";
+      "assets/images/info.png";
   static const String socilaMedia =
-      "/Users/admin/Desktop/info_profile_ui/assets/images/social.png";
+      "assets/images/social.png";
   static const String roundrec =
-      "/Users/admin/Desktop/info_profile_ui/assets/images/roundrec.png";
+      "assets/images/roundrec.png";
   static const String frame1 =
-      "/Users/admin/Desktop/info_profile_ui/assets/images/frame1.png";
+      "assets/images/frame1.png";
   static const String frame2 =
-      "/Users/admin/Desktop/info_profile_ui/assets/images/fram2.png";
+      "assets/images/fram2.png";
   static const String frame3 =
-      "/Users/admin/Desktop/info_profile_ui/assets/images/frame3.png";
+      "assets/images/frame3.png";
   static const String frame4 =
-      "/Users/admin/Desktop/info_profile_ui/assets/images/frame4.png";
+      "assets/images/frame4.png";
   static const String footerimg =
-      "/Users/admin/Desktop/info_profile_ui/assets/images/footerimg.png";
+      "assets/images/footerimg.png";
   static const String dounloadAppBg =
-      "/Users/admin/Desktop/info_profile_ui/assets/images/downloadourappbg.png";
+      "assets/images/downloadourappbg.png";
 }
