@@ -43,7 +43,7 @@ class TryInfoProfileForFree extends StatelessWidget {
                   children: [
                     Text(
                       AppTexts.tryInfoProfile,
-                      style: font600_30Ts,
+                      style: fontSixThreeZeroTs,
                     ),
                     SizedBox(
                       height: h * 0.01,
@@ -56,7 +56,7 @@ class TryInfoProfileForFree extends StatelessWidget {
                         ),
                         Text(
                           AppTexts.multipleProfiles,
-                          style: font500_12Ts,
+                          style: fontFiveOneTwoTs,
                         ),
                          SizedBox(width: 10,),
                         const Icon(
@@ -65,7 +65,7 @@ class TryInfoProfileForFree extends StatelessWidget {
                         ),
                         Text(
                           AppTexts.creative,
-                          style: font500_12Ts,
+                          style: fontFiveOneTwoTs,
                         ),
                          SizedBox(width: 10,),
                         const Icon(
@@ -74,7 +74,7 @@ class TryInfoProfileForFree extends StatelessWidget {
                         ),
                         Text(
                           AppTexts.buildConnections,
-                          style: font500_12Ts,
+                          style: fontFiveOneTwoTs,
                         )
                       ],
                     )
@@ -87,7 +87,7 @@ class TryInfoProfileForFree extends StatelessWidget {
                   children: [
                     Text(
                       AppTexts.signin,
-                      style: font500_18Ts,
+                      style: fontFiveOneEightTs ,
                     ),
                     const SizedBox(
                       width: 15,
@@ -100,7 +100,7 @@ class TryInfoProfileForFree extends StatelessWidget {
                       child: Center(
                           child: Text(
                         AppTexts.signupinfopro ,
-                        style: font600_18Ts,
+                        style: fontSixOneEightTs,
                       )),
                     ),
                   ],
@@ -137,7 +137,7 @@ class TryInfoProfileForFree extends StatelessWidget {
                 children: [
                   Text(
                     AppTexts.tryInfoProfile,
-                    style: font600_30Ts,
+                    style: fontSixThreeZeroTs,
                   ),
                   SizedBox(
                     height: h * 0.01,
@@ -151,7 +151,7 @@ class TryInfoProfileForFree extends StatelessWidget {
                             size: 20,
                           ),Text(
                         AppTexts.multipleProfiles,
-                        style: font500_12Ts,
+                        style: fontFiveOneTwoTs,
                       ),
                         ],
                       ),
@@ -163,7 +163,7 @@ class TryInfoProfileForFree extends StatelessWidget {
                             size: 20,
                           ), Text(
                         AppTexts.creative,
-                        style: font500_12Ts,
+                        style: fontFiveOneTwoTs,
                       ),
                         ],
                       ),
@@ -175,7 +175,7 @@ class TryInfoProfileForFree extends StatelessWidget {
                             size: 20,
                           ),Text(
                         AppTexts.buildConnections,
-                        style: font500_12Ts,
+                        style: fontFiveOneTwoTs,
                       )
                         ],
                       ),
@@ -189,7 +189,7 @@ class TryInfoProfileForFree extends StatelessWidget {
                     children: [
                       Text(
                         AppTexts.signin,
-                        style: font500_18Ts,
+                        style: fontFiveOneEightTs ,
                       ),
                       const SizedBox(
                         width: 15,
@@ -203,7 +203,7 @@ class TryInfoProfileForFree extends StatelessWidget {
                         child: Center(
                             child: Text(
                           AppTexts.signUp,
-                          style: font600_18Ts,
+                          style: fontSixOneEightTs,
                         )),
                       ),
                     ],
@@ -242,7 +242,7 @@ class TryInfoProfileForFree extends StatelessWidget {
                     children: [
                       Text(
                         AppTexts.tryInfoProfile,
-                        style: font600_30Ts,
+                        style: fontSixThreeZeroTs,
                       ),
                       SizedBox(
                         height: h * 0.01,
@@ -256,7 +256,7 @@ class TryInfoProfileForFree extends StatelessWidget {
                                 size: 20,
                               ), Text(
                             AppTexts.multipleProfiles,
-                            style: font500_12Ts,
+                            style: fontFiveOneTwoTs,
                           ),
                             ],
                           ),
@@ -269,7 +269,7 @@ class TryInfoProfileForFree extends StatelessWidget {
                               ),
                                Text(
                             AppTexts.creative,
-                            style: font500_12Ts,
+                            style:fontFiveOneTwoTs,
                           ),
                             ],
                           ),
@@ -282,7 +282,7 @@ class TryInfoProfileForFree extends StatelessWidget {
                               ),
                                Text(
                             AppTexts.buildConnections,
-                            style: font500_12Ts,
+                            style: fontFiveOneTwoTs,
                           )
                             ],
                           ),
@@ -298,7 +298,7 @@ class TryInfoProfileForFree extends StatelessWidget {
                     children: [
                       Text(
                         AppTexts.signin,
-                        style: font500_18Ts,
+                        style: fontFiveOneEightTs ,
                       ),
                       const SizedBox(
                         width: 10,
@@ -312,7 +312,7 @@ class TryInfoProfileForFree extends StatelessWidget {
                         child: Center(
                             child: Text(
                           AppTexts.signUp,
-                          style: font600_18Ts,
+                          style: fontSixOneEightTs,
                         )),
                       ),
                     ],

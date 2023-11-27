@@ -12,21 +12,21 @@ class LinkFooter extends StatelessWidget {
       children: [
         Text(
           AppTexts.linksFooter,
-          style: font600_20_white_Ts
+          style: fontSixTwoZeroWhiteTs 
         ),
         const SizedBox(
           height: 18,
         ),
         Text(
           AppTexts.privacyPolicyFooter,
-          style: font400_14_white_Ts
+          style: fontFourOneFourTs
         ),
         const SizedBox(
           height: 10,
         ),
         Text(
         AppTexts.termsConditionsFooter,
-          style: font400_14_white_Ts
+          style: fontFourOneFourTs
         ),
        
       ],

@@ -12,35 +12,35 @@ class Feature_Footer extends StatelessWidget {
       children: [
         Text(
           AppTexts.featureHeadingFooter,
-          style: font600_20_white_Ts
+          style: fontSixTwoZeroWhiteTs 
         ),
         const SizedBox(
           height: 18,
         ),
         Text(
           AppTexts.viewFeedsFooter,
-          style: font400_14_white_Ts
+          style: fontFourOneFourTs
         ),
         const SizedBox(
           height: 10,
         ),
         Text(
         AppTexts.makeConnectionFooter,
-          style: font400_14_white_Ts
+          style: fontFourOneFourTs
         ),
         const SizedBox(
           height: 10,
         ),
         Text(
          AppTexts.createCompanies,
-          style:font400_14_white_Ts
+          style:fontFourOneFourTs
         ),
        const SizedBox(
           height: 10,
         ),
         Text(
          AppTexts.mobileApp,
-          style: font400_14_white_Ts
+          style: fontFourOneFourTs
         ),
       ],
     );

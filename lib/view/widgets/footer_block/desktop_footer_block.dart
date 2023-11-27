@@ -85,10 +85,10 @@ class DesktopFooterSetUp extends StatelessWidget {
                Row(
                  children: [
                   const Icon(Icons.copyright,color: AppColors.logincardColor,size: 13,),
-                   Text(AppTexts.copyright,style: font400_14_white_Ts,),
+                   Text(AppTexts.copyright,style: fontFourOneFourTs,),
                  ],
                ),
-                Text(AppTexts.allRightsReserved,style: font400_14_white_Ts,),
+                Text(AppTexts.allRightsReserved,style: fontFourOneFourTs,),
               
               ],),
             ),

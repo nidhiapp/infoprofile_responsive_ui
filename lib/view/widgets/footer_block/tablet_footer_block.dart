@@ -110,7 +110,7 @@ class TabletFooter extends StatelessWidget {
                             ),
                             Text(
                               AppTexts.copyright,
-                              style: font400_14_white_Ts,
+                              style: fontFourOneFourTs,
                             ),
                           ],
                         ),
@@ -121,7 +121,7 @@ class TabletFooter extends StatelessWidget {
                             alignment: Alignment.bottomRight,
                             child: Text(
                               AppTexts.allRightsReserved,
-                              style: font400_14_white_Ts,
+                              style: fontFourOneFourTs,
                             )))
                   ],
                 ),

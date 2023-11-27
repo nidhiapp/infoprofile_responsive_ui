@@ -36,7 +36,7 @@ class ImageplusText extends StatelessWidget {
                         ],
                       ),
                       SizedBox(height: h*0.01,),
-                      Wrap(children: [Text(AppTexts.domain,style: font400_14Ts,)]),
+                      Wrap(children: [Text(AppTexts.domain,style: imgtextcol ,)]),
                     ],
                   )),
                 Image.asset(AppImages.runPng,height: h*0.5,width: w*0.5,),
@@ -57,7 +57,7 @@ class ImageplusText extends StatelessWidget {
                         ],
                       ),
                       SizedBox(height: h*0.01,),
-                      Wrap(children: [Text(AppTexts.hereWeProduce,style: font400_14Ts,)]),
+                      Wrap(children: [Text(AppTexts.hereWeProduce,style: imgtextcol,)]),
                     ],
                   )),
                   SizedBox(width: 20,)
@@ -93,7 +93,7 @@ class ImageplusText extends StatelessWidget {
                         ),
                           SizedBox(height: h*0.04,),
                          Wrap(children: [
-                          Text(AppTexts.domain,style: font400_14Ts,)]),
+                          Text(AppTexts.domain,style: imgtextcol,)]),
     
                          SizedBox(height: h*0.13,),
     
@@ -110,7 +110,7 @@ class ImageplusText extends StatelessWidget {
                           ],
                         ),
                         SizedBox(height: h*0.04,),
-                        Wrap(children: [Text(AppTexts.hereWeProduce,style: font400_14Ts,)]),
+                        Wrap(children: [Text(AppTexts.hereWeProduce,style: imgtextcol,)]),
                       ],
                     )),
                       ],
@@ -143,7 +143,7 @@ class ImageplusText extends StatelessWidget {
                         ),
                           SizedBox(height: h*0.04,),
                          Wrap(children: [
-                          Text(AppTexts.domain,style: font400_14Ts,)]),
+                          Text(AppTexts.domain,style: imgtextcol,)]),
    
                          SizedBox(height: h*0.05,),
    
@@ -160,7 +160,7 @@ class ImageplusText extends StatelessWidget {
                           ],
                         ),
                         SizedBox(height: h*0.04,),
-                        Wrap(children: [Text(AppTexts.hereWeProduce,style: font400_14Ts,)]),
+                        Wrap(children: [Text(AppTexts.hereWeProduce,style:imgtextcol,)]),
                       ],
                     )),
                       ],

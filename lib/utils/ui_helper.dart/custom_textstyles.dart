@@ -171,7 +171,7 @@ TextStyle font400_14Ts = GoogleFonts.poppins(
 
 
 ));
-TextStyle font700_28Ts = GoogleFonts.poppins(
+TextStyle fontSevenTwoSixTs = GoogleFonts.poppins(
   textStyle:  const TextStyle(
   fontSize: 26,
   fontWeight: FontWeight.w700,
@@ -180,7 +180,7 @@ TextStyle font700_28Ts = GoogleFonts.poppins(
 
 ));
 
-TextStyle font600_30Ts = GoogleFonts.poppins(
+TextStyle fontSixThreeZeroTs = GoogleFonts.poppins(
   textStyle:  const TextStyle(
   fontSize: 30,
   fontWeight: FontWeight.w600,
@@ -188,7 +188,7 @@ TextStyle font600_30Ts = GoogleFonts.poppins(
 
 
 ));
-TextStyle font500_12Ts = GoogleFonts.poppins(
+TextStyle fontFiveOneTwoTs = GoogleFonts.poppins(
   textStyle:  const TextStyle(
   fontSize: 12,
   fontWeight: FontWeight.w400,
@@ -196,13 +196,13 @@ TextStyle font500_12Ts = GoogleFonts.poppins(
 
 
 ));
-TextStyle font600_18Ts = GoogleFonts.poppins(
+TextStyle fontSixOneEightTs = GoogleFonts.poppins(
   textStyle:  const TextStyle(
   fontSize: 18,
   fontWeight: FontWeight.w600,
 color: AppColors.logincardColor
 ));
-TextStyle font500_18Ts = GoogleFonts.poppins(
+TextStyle fontFiveOneEightTs = GoogleFonts.poppins(
   textStyle:  const TextStyle(
   fontSize: 18,
   fontWeight: FontWeight.w500,
@@ -210,25 +210,38 @@ color: AppColors.primaryColor,
 decoration: TextDecoration.underline
 ));
 
-TextStyle font400_14_white_Ts = GoogleFonts.poppins(
+TextStyle fontFourOneFourTs = GoogleFonts.poppins(
   textStyle:  const TextStyle(
   fontSize: 14,
   fontWeight: FontWeight.w400,
 color: AppColors.logincardColor
 ));
 
-TextStyle font400_14_white_mob_Ts = GoogleFonts.poppins(
+TextStyle imgtextcol = GoogleFonts.poppins(
+  textStyle:  const TextStyle(
+  fontSize: 16,
+  fontWeight: FontWeight.w400,
+color: AppColors.muteCol
+));
+
+TextStyle fontFourOneFourWhitemobTs = GoogleFonts.poppins(
   textStyle:  const TextStyle(
   fontSize: 10,
   fontWeight: FontWeight.w400,
 color: AppColors.logincardColor
 ));
 
-TextStyle font600_20_white_Ts = GoogleFonts.poppins(
+TextStyle fontSixTwoZeroWhiteTs = GoogleFonts.poppins(
   textStyle:  const TextStyle(
   fontSize: 20,
   fontWeight: FontWeight.w600,
 color: AppColors.logincardColor
+));
+TextStyle termConTs = GoogleFonts.poppins(
+  textStyle:  const TextStyle(
+  fontSize: 14,
+  fontWeight: FontWeight.w700,
+
 ));
 
 

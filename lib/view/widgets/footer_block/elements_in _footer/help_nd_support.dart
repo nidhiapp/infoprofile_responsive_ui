@@ -15,14 +15,14 @@ class HelpNdSupport extends StatelessWidget {
       children: [
         Text(
           AppTexts.termsConditionsFooter,
-          style: font600_20_white_Ts
+          style:fontSixTwoZeroWhiteTs 
         ),
         SizedBox(
           height: 18,
         ),
         Text(
           AppTexts.gettingStartedFooter,
-          style: font400_14_white_Ts
+          style: fontFourOneFourTs
         ),
        
       ],

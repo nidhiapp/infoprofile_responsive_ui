@@ -8,8 +8,8 @@ class NotNormalApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-      Text(AppTexts.notANormal,style: font400_14_white_Ts,),
-      Text(AppTexts.servicesAreProvided,style: font400_14_white_Ts,)
+      Text(AppTexts.notANormal,style: fontFourOneFourTs,),
+      Text(AppTexts.servicesAreProvided,style: fontFourOneFourTs,)
     ]);
   }
 }

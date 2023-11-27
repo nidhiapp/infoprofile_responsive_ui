@@ -25,14 +25,14 @@ class DownloadOurAppFrom extends StatelessWidget {
       width: double.infinity,
      height: 400,
       child: Image.asset(
-        "/Users/admin/Desktop/info_profile_ui/assets/images/downloadourappbg.png",
+        AppImages.dounloadAppBg,
         fit: BoxFit.fill,
       ),
     ),
     Positioned(
-      top: 55, // Adjust the top position as needed
-      left: 100, // Adjust the left position as needed
-      right: 0.5, // Adjust the right position as needed
+      top: 55, 
+      left: 100, 
+      right: 0.5,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -42,7 +42,7 @@ class DownloadOurAppFrom extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(AppTexts.downloadOurApp, style: font700_28Ts),
+                Text(AppTexts.downloadOurApp, style: fontSevenTwoSixTs),
                 SizedBox(height: h * 0.03),
                 Image.asset(AppImages.wayimg, ),
               ],
@@ -76,7 +76,7 @@ class DownloadOurAppFrom extends StatelessWidget {
               children: [
                 Image.asset(AppImages.downloadapppersonimg,
               height: h*0.45,width: h*0.45,),
-              Text(AppTexts.downloadOurApp,style: font700_28Ts,),
+              Text(AppTexts.downloadOurApp,style: fontSevenTwoSixTs,),
                SizedBox(height: h*0.03,),
                 SizedBox(width: w*0.9,
                   child: Image.asset(AppImages.wayimg)),
@@ -102,7 +102,7 @@ class DownloadOurAppFrom extends StatelessWidget {
               children: [
                 Image.asset(AppImages.downloadapppersonimg,
               height: h*0.45,width: h*0.45,),
-              Center(child: Text(AppTexts.downloadOurApp,style: font700_28Ts,)),
+              Center(child: Text(AppTexts.downloadOurApp,style: fontSevenTwoSixTs,)),
                SizedBox(height: h*0.03,),
                SizedBox(width: w*0.5,
                   child: Image.asset(AppImages.wayimg)),

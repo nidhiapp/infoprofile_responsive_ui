@@ -5,9 +5,11 @@ import 'package:info_profile_ui/utils/app_texts.dart';
 import 'package:info_profile_ui/utils/constants.dart';
 import 'package:info_profile_ui/utils/ui_helper.dart/custom_textfield.dart';
 import 'package:info_profile_ui/utils/ui_helper.dart/custom_textstyles.dart';
+import 'package:info_profile_ui/view_model/onboarding_provider.dart';
+import 'package:provider/provider.dart';
 
 class LoginCard extends StatelessWidget {
-  const LoginCard({super.key});
+  LoginCard({super.key, });
 static TextEditingController emailCont=TextEditingController();
 static TextEditingController passCont=TextEditingController();
 
@@ -20,10 +22,11 @@ static TextEditingController passCont=TextEditingController();
             : mobileLoginCard();
   }
 
+
   static Widget desktopLoginCard() {
     return Container(
      padding: const EdgeInsets.symmetric(horizontal:17,vertical: 17),
-    width:500,
+    width:497,
      decoration: BoxDecoration(color: AppColors.logincardColor,
      borderRadius: BorderRadius.circular(12),
      boxShadow:const [BoxShadow(
@@ -262,10 +265,12 @@ static TextEditingController passCont=TextEditingController();
             ),
           ),
            SizedBox(height: h*0.02,),
-          Wrap(
-            children: [
-              Text(AppTexts.dontHaveAccount,style: forgetPassTs,),
-            Text(AppTexts.signUp,style: signupTs,)],),
+          Center(
+            child: Wrap(
+              children: [
+                Text(AppTexts.dontHaveAccount,style: forgetPassTs,),
+              Text(AppTexts.signUp,style: signupTs,)],),
+          ),
             SizedBox(height: h*0.02,),
 
 

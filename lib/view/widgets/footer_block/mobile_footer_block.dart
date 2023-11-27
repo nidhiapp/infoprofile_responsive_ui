@@ -67,7 +67,7 @@ class MobileFooter extends StatelessWidget {
                             SizedBox(width: w*0.3,
                               child: Text(
                                 AppTexts.copyright,
-                                style: font400_14_white_mob_Ts
+                                style: fontFourOneFourWhitemobTs
                               ),
                             ),
                           ],
@@ -80,7 +80,7 @@ class MobileFooter extends StatelessWidget {
                             child: SizedBox(width: w*0.3,
                               child: Text(
                                 AppTexts.allRightsReserved,
-                                style: font400_14_white_mob_Ts,
+                                style: fontFourOneFourWhitemobTs,
                               ),
                             )))
                   ],

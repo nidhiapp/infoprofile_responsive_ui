@@ -10,19 +10,24 @@ import 'package:info_profile_ui/view/widgets/footer_block/tablet_footer_block.da
 import 'package:info_profile_ui/view/widgets/image_plus_text_below_blocks.dart';
 import 'package:info_profile_ui/view/widgets/info_profile_is_designed.dart';
 import 'package:info_profile_ui/view/widgets/infoprofile_logo.dart';
-import 'package:info_profile_ui/view/widgets/login_card.dart';
+import 'package:info_profile_ui/view/widgets/onboarding/forget_pass.dart';
+import 'package:info_profile_ui/view/widgets/onboarding/login_card.dart';
 import 'package:info_profile_ui/view/widgets/make_friends_building.dart';
 import 'package:info_profile_ui/view/widgets/meet_your_best.dart';
 import 'package:info_profile_ui/view/background_widgets.dart/upper_bg_rectangles.dart';
+import 'package:info_profile_ui/view/widgets/onboarding/login_phone_num.dart';
+import 'package:info_profile_ui/view/widgets/onboarding/otp_page.dart';
+import 'package:info_profile_ui/view/widgets/onboarding/reset_password.dart';
+import 'package:info_profile_ui/view/widgets/onboarding/sign_up_card.dart';
 import 'package:info_profile_ui/view/widgets/try_info_profile_for_free.dart';
 import 'package:info_profile_ui/view/widgets/visitingcrd_sharemedia_mltplpr.dart';
 
 class CompleteSetUps extends StatelessWidget {
-   CompleteSetUps({super.key});
-final ScrollController sc = ScrollController();
+  CompleteSetUps({super.key});
+  final ScrollController sc = ScrollController();
+  bool isLogin = false;
   @override
   Widget build(BuildContext context) {
-    
     w = MediaQuery.of(context).size.width;
     h = MediaQuery.of(context).size.height;
     return (w > 960)
@@ -59,46 +64,48 @@ final ScrollController sc = ScrollController();
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                     
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            InfoProfileLogo.desktopInfoProfileLogo(),
-                            SizedBox(
-                              height: h * 0.16,
-                            ),
-                            MeetYourBestConnection.desktopMeetYrBestCon(),
-                            SizedBox(
-                              height: h * 0.02,
-                            ),
-                            AppleStorePlayStore.desktopAppleStorePlayStore(),
-                            SizedBox(
-                              height: h * 0.15,
-                            ),
-                          ],
-                        ),
-                      InkWell(onTap: (){
-                              sc.animateTo(
-                              
-                                MediaQuery.of(context).size.height - 60,
-                                duration: const Duration(milliseconds: 500),
-                                curve: Curves.easeInOut,
-                              );
-                         
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          InfoProfileLogo.desktopInfoProfileLogo(),
+                          SizedBox(
+                            height: h * 0.16,
+                          ),
+                          MeetYourBestConnection.desktopMeetYrBestCon(),
+                          SizedBox(
+                            height: h * 0.02,
+                          ),
+                          AppleStorePlayStore.desktopAppleStorePlayStore(),
+                          SizedBox(
+                            height: h * 0.15,
+                          ),
+                        ],
+                      ),
+                      InkWell(
+                          onTap: () {
+                            sc.animateTo(
+                              MediaQuery.of(context).size.height - 60,
+                              duration: const Duration(milliseconds: 500),
+                              curve: Curves.easeInOut,
+                            );
                           },
-                        child: const ScrollImage())
+                          child: const ScrollImage())
                     ],
                   ),
-                   SizedBox(
-                  width: w*0.04,
+                  SizedBox(
+                    width: w * 0.04,
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 112.0),
-                    child: LoginCard.desktopLoginCard(),
+                    child:isLogin? LoginCard.desktopLoginCard():SignUpCard(),
+                   // child: OtpPage(),
+                   //child: ForgetPassword(),
+                   //child: ResetPassword(),
+                   //child: LoginUsingPhone(),
                   )
                 ],
               ),
@@ -114,19 +121,7 @@ final ScrollController sc = ScrollController();
             ImageplusText.desktopImageplusText(),
             DownloadOurAppFrom.desktopDownloadOurAppFrom(),
             MakeFriendsByBuilding.desktopMakeFriendsByBuilding(),
-            // Stack(alignment: Alignment.topCenter,
-            //  children: [
-            //   Column(
-            //     children: [
-            //       SizedBox(
-            //         height: h * 0.03,
-            //       ),
-            //       const DesktopFooterSetUp()
-            //     ],
-            //   ),
-            
-            // ]),
-            DesktopFooterSetUp()
+            const DesktopFooterSetUp()
           ],
         ),
       ),

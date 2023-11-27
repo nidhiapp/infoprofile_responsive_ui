@@ -63,10 +63,28 @@ class AppTexts {
   static const String gettingStartedFooter = "Getting Started FAQ";
   static const String tryInfoProfile = "Try InfoProfile for free";
   static const String buildConnections = "Build Connections";
-  static const String createCompanies =  "Create Companies";
-  static const String mobileApp=  "Mobile App";
-  static const String signin =   "Sign In";
+  static const String createCompanies = "Create Companies";
+  static const String mobileApp = "Mobile App";
+  static const String signin = "Sign In";
   static const String copyright = " Copyright Infoprofile LTD.";
   static const String signupinfopro = "Sign Up";
-
+  static const String alreadyHvan = "Already have an account?";
+  static const String signupMessage =
+      "Enter email address, phone number and password to register yourself as a new user.";
+  static const String otpAuth = "OTP Authentication";
+  static const String enter4dig =
+      "Please enter 4-digit code sent to your mobile number +91-8272627234";
+  static const String continu = "Continue";
+  static const String forgetpassMsg =
+      "Please enter your registered email associated with the account to reset your password";
+  static const String forgetpas = "Forget Password";
+  static const String email = "Email";
+  static const String newpass = "New Password";
+  static const String confpass = "Confirm Password";
+  static const String phoneNumber = "Phone number";
+  static const String loginWithPass = "Log In with Password";
+  static const String loginwithPhMess =
+      "Enter your phone number so that we can send you OTP to login into the application.";
+  static const String termcon =
+      "By registering you are accepting “Privacy Policy” and “Terms of Use”.";
 }

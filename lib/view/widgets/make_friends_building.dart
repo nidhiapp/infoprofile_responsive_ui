@@ -22,7 +22,7 @@ class MakeFriendsByBuilding extends StatelessWidget {
   //for desktop
  static Widget desktopMakeFriendsByBuilding(){
  return   Stack(
-   children: [MapSectionBg(),
+   children: [const MapSectionBg(),
     Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
@@ -51,7 +51,7 @@ class MakeFriendsByBuilding extends StatelessWidget {
                   Wrap(children: [
                     Text(
                       AppTexts.theBestDomain,
-                      style: font400_14Ts,
+                      style: imgtextcol,
                     )
                   ]),
                 ],
@@ -98,7 +98,7 @@ class MakeFriendsByBuilding extends StatelessWidget {
                 Wrap(children: [
                   Text(
                     AppTexts.hereWeProduce,
-                    style: font400_14Ts,
+                    style: imgtextcol,
                   )
                 ]),
               ],
@@ -146,7 +146,7 @@ class MakeFriendsByBuilding extends StatelessWidget {
                 Wrap(children: [
                   Text(
                     AppTexts.hereWeProduce,
-                    style: font400_14Ts,
+                    style: imgtextcol,
                   )
                 ]),
               ],
