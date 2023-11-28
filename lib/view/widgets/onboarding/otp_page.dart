@@ -23,7 +23,12 @@ class _OtpPageState extends State<OtpPage> {
   Widget build(BuildContext context) {
     return Container(
         padding: const EdgeInsets.symmetric(horizontal: 17, vertical: 37),
-       width:497,
+         width: (w > 960)
+        ? 497
+        : (w > 450)
+            ? 500
+            :  w*0.9,
+      //  width:497,
      decoration: BoxDecoration(color: AppColors.logincardColor,
      borderRadius: BorderRadius.circular(12),
      boxShadow:const [BoxShadow(

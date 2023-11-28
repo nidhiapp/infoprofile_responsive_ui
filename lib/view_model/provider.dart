@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:info_profile_ui/ui/base_page.dart';
 
 import '../utils/global.dart';
 
@@ -55,6 +56,12 @@ class Providers with ChangeNotifier {
     index = 2;
     notifyListeners();
   }
+ basePage(){
+    index = 6;
+    notifyListeners();
+  }
+
+  
 
   showHidePassword() {
     isHide = !isHide;

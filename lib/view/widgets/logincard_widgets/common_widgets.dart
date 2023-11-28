@@ -1,11 +1,9 @@
-import 'package:flutter/material.dart';
-class LoginCardCommonWidgets extends StatelessWidget {
-  const LoginCardCommonWidgets({super.key});
+// import 'package:flutter/material.dart';
+// class LoginCardCommonWidgets extends StatelessWidget {
+//   const LoginCardCommonWidgets({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return 
+//   }
+// }

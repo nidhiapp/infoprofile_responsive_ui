@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:info_profile_ui/utils/app_colors.dart';
 import 'package:info_profile_ui/utils/app_texts.dart';
 import 'package:info_profile_ui/utils/constants.dart';
+import 'package:info_profile_ui/utils/global.dart';
 import 'package:info_profile_ui/utils/ui_helper.dart/custom_textfield.dart';
 import 'package:info_profile_ui/utils/ui_helper.dart/custom_textstyles.dart';
 import 'package:info_profile_ui/view_model/onboarding_provider.dart';
@@ -16,7 +17,12 @@ class ForgetPassword extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
          padding: const EdgeInsets.symmetric(horizontal: 17, vertical: 37),
-       width:497,
+         width: (w > 960)
+        ? 497
+        : (w > 450)
+            ? 500
+            :  w*0.9,
+      // width:497,
      decoration: BoxDecoration(color: AppColors.logincardColor,
      borderRadius: BorderRadius.circular(12),
      boxShadow:const [BoxShadow(
@@ -47,6 +53,11 @@ class ForgetPassword extends StatelessWidget {
               ),
 
                CustomTextField(
+                onFieldSubmitted: (String? val) {
+              Utils.changeFocus(context, authProvider.emailfocusNode,
+                    authProvider.buttonFocusNode);
+            },
+            focusNode: authProvider.emailfocusNode,
                 customController:authProvider.emailCont,
                // suffixicon: Icons.visibility,
               //  isPasswordField: true,

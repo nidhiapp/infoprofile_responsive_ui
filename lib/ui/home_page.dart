@@ -35,8 +35,6 @@ class CompleteSetUps extends StatefulWidget {
 class _CompleteSetUpsState extends State<CompleteSetUps> {
   final ScrollController sc = ScrollController();
 
-
-
   @override
   void initState() {
     super.initState();
@@ -44,13 +42,13 @@ class _CompleteSetUpsState extends State<CompleteSetUps> {
   }
 
   loadState() async {
-    await AuthServices().isUserAlreadyLogin().then((value){
-      if(value == true){
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const BasePage()));
+    await AuthServices().isUserAlreadyLogin().then((value) {
+      if (value == true) {
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => const BasePage()));
       }
-    }).onError((error, stackTrace){});
+    }).onError((error, stackTrace) {});
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -80,70 +78,72 @@ class _CompleteSetUpsState extends State<CompleteSetUps> {
           ),
         ),
         child: Consumer<Providers>(
-          builder: (context, provider, child){
+          builder: (context, provider, child) {
             return Column(
               children: [
-                Stack(
-                  children: [
-                    const UpperBgRectangles(),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const SizedBox(
-                                  height: 20,
-                                ),
-                                InfoProfileLogo.desktopInfoProfileLogo(),
-                                SizedBox(
-                                  height: h * 0.16,
-                                ),
-                                MeetYourBestConnection.desktopMeetYrBestCon(),
-                                SizedBox(
-                                  height: h * 0.02,
-                                ),
-                                AppleStorePlayStore.desktopAppleStorePlayStore(),
-                                SizedBox(
-                                  height: h * 0.15,
-                                ),
-                              ],
-                            ),
-                            InkWell(
-                                onTap: () {
-                                  sc.animateTo(
-                                    MediaQuery.of(context).size.height - 60,
-                                    duration: const Duration(milliseconds: 500),
-                                    curve: Curves.easeInOut,
-                                  );
-                                },
-                                child: const ScrollImage())
-                          ],
-                        ),
-                        SizedBox(
-                          width: w * 0.04,
-                        ),
-                        /// All the Container are here [SignUpCard] [OtpPage] [ForgetPassword] [ResetPassword] [LoginUsingPhone]
-                        Padding(
-                          padding: const EdgeInsets.only(top: 112.0),
-                          child: Column(
+                Stack(children: [
+                  const UpperBgRectangles(),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              if(provider.index == 0 ) LoginCard.desktopLoginCard(),
-                              if(provider.index == 1 )  const SignUpCard(),
-                              if(provider.index == 2 )  const OtpPage(),
-                              if(provider.index == 4 )  const ForgetPassword(),
-                              if(provider.index == 5 )  const ResetPassword(),
-                              if(provider.index == 3 )  LoginUsingPhone(),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              InfoProfileLogo.desktopInfoProfileLogo(),
+                              SizedBox(
+                                height: h * 0.16,
+                              ),
+                              MeetYourBestConnection.desktopMeetYrBestCon(),
+                              SizedBox(
+                                height: h * 0.02,
+                              ),
+                              AppleStorePlayStore.desktopAppleStorePlayStore(),
+                              SizedBox(
+                                height: h * 0.15,
+                              ),
                             ],
                           ),
-                        )
-                      ],
-                    ),
+                          InkWell(
+                              onTap: () {
+                                sc.animateTo(
+                                  MediaQuery.of(context).size.height - 60,
+                                  duration: const Duration(milliseconds: 500),
+                                  curve: Curves.easeInOut,
+                                );
+                              },
+                              child: const ScrollImage())
+                        ],
+                      ),
+                      SizedBox(
+                        width: w * 0.04,
+                      ),
+
+                      /// All the Container are here [SignUpCard] [OtpPage] [ForgetPassword] [ResetPassword] [LoginUsingPhone]
+                      Padding(
+                        padding: const EdgeInsets.only(top: 112.0),
+                        child: Column(
+                          children: [
+                            if (provider.index == 0)
+                              LoginCard.desktopLoginCard(),
+                            if (provider.index == 1) const SignUpCard(),
+                            if (provider.index == 2) const OtpPage(),
+                            if (provider.index == 4) const ForgetPassword(),
+                            if (provider.index == 5) const ResetPassword(),
+                            if (provider.index == 3) LoginUsingPhone(),
+                            if (provider.index == 6) BasePage(),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
                 ]),
                 SizedBox(
                   height: h * 0.07,
@@ -180,64 +180,75 @@ class _CompleteSetUpsState extends State<CompleteSetUps> {
             AppColors.bgGradientColor3
           ])),
       child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const SizedBox(
-              height: 20,
-            ),
-            Stack(
-              alignment: Alignment.topCenter,
+        child: Consumer<Providers>(
+          builder: (context, provider, child) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                UpperBgRectangles.tabletUpperBgRectangles(),
-                Column(
+                const SizedBox(
+                  height: 20,
+                ),
+                Stack(
+                  alignment: Alignment.topCenter,
                   children: [
-                    InfoProfileLogo.tabletInfoProfileLogo(),
-                    SizedBox(
-                      height: h * 0.03,
-                    ),
-                    MeetYourBestConnection.tabletMeetYrBestCon(),
-                    LoginCard.tabletLoginCard()
+                    UpperBgRectangles.tabletUpperBgRectangles(),
+                    Column(
+                      children: [
+                        InfoProfileLogo.tabletInfoProfileLogo(),
+                        SizedBox(
+                          height: h * 0.03,
+                        ),
+                        MeetYourBestConnection.tabletMeetYrBestCon(),
+                        //LoginCard.tabletLoginCard()
+                        if (provider.index == 0) LoginCard.tabletLoginCard(),
+                        if (provider.index == 1) const SignUpCard(),
+                        if (provider.index == 2) const OtpPage(),
+                        if (provider.index == 4) const ForgetPassword(),
+                        if (provider.index == 5) const ResetPassword(),
+                        if (provider.index == 3) LoginUsingPhone(),
+                        if (provider.index == 6) BasePage(),
+                      ],
+                    )
                   ],
-                )
-              ],
-            ),
-            SizedBox(
-              height: h * 0.07,
-            ),
-            AppleStorePlayStore.tabletAppleStorePlayStore(),
-            SizedBox(
-              height: h * 0.05,
-            ),
-            InfoProfileIsDesigned.tabletInfoProfileIsDesigned(),
-            SizedBox(
-              height: h * 0.06,
-            ),
-            const VisitingcrdSharemediaMltplprof(),
-            SizedBox(
-              height: h * 0.06,
-            ),
-            ImageplusText.tabletImageplusText(),
-            SizedBox(
-              height: h * 0.06,
-            ),
-            DownloadOurAppFrom.tabletDownloadOurAppFrom(),
-            MakeFriendsByBuilding.tabletMakeFriendsByBuilding(),
-            SizedBox(
-              height: h * 0.08,
-            ),
-            Stack(alignment: Alignment.topCenter, children: [
-              Column(
-                children: [
-                  SizedBox(
-                    height: h * 0.13,
+                ),
+                SizedBox(
+                  height: h * 0.07,
+                ),
+                AppleStorePlayStore.tabletAppleStorePlayStore(),
+                SizedBox(
+                  height: h * 0.05,
+                ),
+                InfoProfileIsDesigned.tabletInfoProfileIsDesigned(),
+                SizedBox(
+                  height: h * 0.06,
+                ),
+                const VisitingcrdSharemediaMltplprof(),
+                SizedBox(
+                  height: h * 0.06,
+                ),
+                ImageplusText.tabletImageplusText(),
+                SizedBox(
+                  height: h * 0.06,
+                ),
+                DownloadOurAppFrom.tabletDownloadOurAppFrom(),
+                MakeFriendsByBuilding.tabletMakeFriendsByBuilding(),
+                SizedBox(
+                  height: h * 0.08,
+                ),
+                Stack(alignment: Alignment.topCenter, children: [
+                  Column(
+                    children: [
+                      SizedBox(
+                        height: h * 0.13,
+                      ),
+                      const TabletFooter()
+                    ],
                   ),
-                  const TabletFooter()
-                ],
-              ),
-              TryInfoProfileForFree.tabletTryInfoProfileForFree(),
-            ]),
-          ],
+                  TryInfoProfileForFree.tabletTryInfoProfileForFree(),
+                ]),
+              ],
+            );
+          },
         ),
       ),
     );
@@ -258,64 +269,75 @@ class _CompleteSetUpsState extends State<CompleteSetUps> {
             AppColors.bgGradientColor3
           ])),
       child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const SizedBox(
-              height: 20,
-            ),
-            Stack(
-              alignment: Alignment.topCenter,
+        child: Consumer<Providers>(
+          builder: (context, provider, child) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                UpperBgRectangles.mobileUpperBgRectangles(),
-                Column(
+                const SizedBox(
+                  height: 20,
+                ),
+                Stack(
+                  alignment: Alignment.topCenter,
                   children: [
-                    InfoProfileLogo.mobileInfoProfileLogo(),
-                    SizedBox(
-                      height: h * 0.03,
-                    ),
-                    MeetYourBestConnection.mobileMeetYrBestCon(),
-                    LoginCard.mobileLoginCard(),
-                    SizedBox(
-                      height: h * 0.07,
-                    ),
+                    UpperBgRectangles.mobileUpperBgRectangles(),
+                    Column(
+                      children: [
+                        InfoProfileLogo.mobileInfoProfileLogo(),
+                        SizedBox(
+                          height: h * 0.03,
+                        ),
+                        MeetYourBestConnection.mobileMeetYrBestCon(),
+                       // LoginCard.mobileLoginCard(),
+                       if (provider.index == 0) LoginCard.mobileLoginCard(),
+                        if (provider.index == 1) const SignUpCard(),
+                        if (provider.index == 2) const OtpPage(),
+                        if (provider.index == 4) const ForgetPassword(),
+                        if (provider.index == 5) const ResetPassword(),
+                        if (provider.index == 3) LoginUsingPhone(),
+                        if (provider.index == 6) BasePage(),
+                        SizedBox(
+                          height: h * 0.07,
+                        ),
+                      ],
+                    )
                   ],
-                )
-              ],
-            ),
-            AppleStorePlayStore.mobileAppleStorePlayStore(),
-            SizedBox(
-              height: h * 0.05,
-            ),
-            InfoProfileIsDesigned.mobileInfoProfileIsDesigned(),
-            SizedBox(
-              height: h * 0.06,
-            ),
-            const VisitingcrdSharemediaMltplprof(),
-            SizedBox(
-              height: h * 0.06,
-            ),
-            ImageplusText.mobileImageplusText(),
-            SizedBox(
-              height: h * 0.06,
-            ),
-            DownloadOurAppFrom.mobileDownloadOurAppFrom(),
-            MakeFriendsByBuilding.mobileMakeFriendsByBuilding(),
-            SizedBox(
-              height: h * 0.05,
-            ),
-            Stack(children: [
-              Column(
-                children: [
-                  SizedBox(
-                    height: h * 0.15,
+                ),
+                AppleStorePlayStore.mobileAppleStorePlayStore(),
+                SizedBox(
+                  height: h * 0.05,
+                ),
+                InfoProfileIsDesigned.mobileInfoProfileIsDesigned(),
+                SizedBox(
+                  height: h * 0.06,
+                ),
+                const VisitingcrdSharemediaMltplprof(),
+                SizedBox(
+                  height: h * 0.06,
+                ),
+                ImageplusText.mobileImageplusText(),
+                SizedBox(
+                  height: h * 0.06,
+                ),
+                DownloadOurAppFrom.mobileDownloadOurAppFrom(),
+                MakeFriendsByBuilding.mobileMakeFriendsByBuilding(),
+                SizedBox(
+                  height: h * 0.05,
+                ),
+                Stack(children: [
+                  Column(
+                    children: [
+                      SizedBox(
+                        height: h * 0.15,
+                      ),
+                      const MobileFooter()
+                    ],
                   ),
-                  const MobileFooter()
-                ],
-              ),
-              TryInfoProfileForFree.mobileTryInfoProfileForFree()
-            ]),
-          ],
+                  TryInfoProfileForFree.mobileTryInfoProfileForFree()
+                ]),
+              ],
+            );
+          },
         ),
       ),
     );

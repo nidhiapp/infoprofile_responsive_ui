@@ -43,6 +43,8 @@ class CustomTextField extends StatelessWidget {
           obscuringCharacter: '*',
           autovalidateMode: AutovalidateMode.onUserInteraction,
           keyboardType: keyboardType,
+         
+           style: custompoppinNormalTs,
           decoration: InputDecoration(
             suffixIcon: isPasswordField
                 ? IconButton(
@@ -69,9 +71,10 @@ class CustomTextField extends StatelessWidget {
               borderSide: const BorderSide(color: Colors.blue),
               borderRadius: BorderRadius.circular(10.0),
             ),
+          
           ),
           onFieldSubmitted: onFieldSubmitted,
-          maxLines: isPasswordField && value.isHide ? 1 : null,
+          maxLines: isPasswordField && value.isHide ? 1 : 1,
         );
       },
     );

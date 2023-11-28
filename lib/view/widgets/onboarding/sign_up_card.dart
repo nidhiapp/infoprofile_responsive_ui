@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:info_profile_ui/utils/app_colors.dart';
 import 'package:info_profile_ui/utils/app_texts.dart';
 import 'package:info_profile_ui/utils/constants.dart';
+import 'package:info_profile_ui/utils/global.dart';
 import 'package:info_profile_ui/utils/ui_helper.dart/custom_textfield.dart';
 import 'package:info_profile_ui/utils/ui_helper.dart/custom_textstyles.dart';
 import 'package:info_profile_ui/view_model/onboarding_provider.dart';
@@ -22,7 +23,11 @@ class _SignUpCardState extends State<SignUpCard> {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 17, vertical: 37),
-      width: 497,
+      width: (w > 960)
+        ? 497
+        : (w > 450)
+            ? 500
+            :  w*0.9,
       decoration: BoxDecoration(
           color: AppColors.logincardColor,
           borderRadius: BorderRadius.circular(12),
@@ -54,6 +59,11 @@ class _SignUpCardState extends State<SignUpCard> {
                 height: h * 0.025,
               ),
               CustomTextField (
+                onFieldSubmitted: (String? val) {
+              Utils.changeFocus(context, authProvider.emailfocusNode,
+                    authProvider.phoneNumberFocusNode);
+            },
+            focusNode: authProvider.emailfocusNode,
                 customController:authProvider.emailCont ,
                 prefixicon: Icons.email_outlined,
                 hintext: AppTexts.usernameEmail,
@@ -62,6 +72,11 @@ class _SignUpCardState extends State<SignUpCard> {
                 height: h * 0.02,
               ),
               CustomTextField(
+                onFieldSubmitted: (String? val) {
+              Utils.changeFocus(context, authProvider.phoneNumberFocusNode,
+                    authProvider.passwordFocusNode);
+            },
+            focusNode: authProvider.phoneNumberFocusNode,
                 customController: authProvider.phoneNumber,
                // suffixicon: Icons.visibility,
               //  isPasswordField: true,
@@ -72,6 +87,11 @@ class _SignUpCardState extends State<SignUpCard> {
                 height: h * 0.02,
               ),
               CustomTextField(
+                onFieldSubmitted: (String? val) {
+              Utils.changeFocus(context, authProvider.passwordFocusNode,
+                    authProvider.buttonFocusNode);
+            },
+            focusNode: authProvider.passwordFocusNode,
                 customController: authProvider.passCont,
                 suffixicon: Icons.visibility,
                 isPasswordField: true,
