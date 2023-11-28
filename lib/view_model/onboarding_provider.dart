@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:info_profile_ui/repository/firebase_api.dart';
 import 'package:info_profile_ui/utils/app_colors.dart';
+import 'package:info_profile_ui/utils/global.dart';
 import '../services/auth_services.dart';
 import '../ui/home_page.dart';
 
@@ -50,18 +51,20 @@ class AuthProvider extends ChangeNotifier {
 
   Future createAccount(BuildContext context) async {
     setLoading(true);
-
     String email = emailCont.text.toString().trim();
     String pass = passCont.text.toString().trim();
     // if(Utils.isValidEmail(email) || Utils.isValidPass(pass)) return;
     debugPrint("Email is $email password is $pass");
     await _api.registerUserWithEmailPassword(email, pass).then((value) {
-      debugPrint("Login Success");
+      debugPrint("Register Success");
+        emailCont.text = "";
+        passCont.text = "";
     }).onError((error, stackTrace) {
-      debugPrint("Login Failed!");
+      debugPrint("Register Failed!");
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text("Create Account Error $error")));
     });
+    setLoading(false);
   }
 
   getEmail() async {
@@ -73,7 +76,6 @@ class AuthProvider extends ChangeNotifier {
     setLoading(true);
     await _api.logOut().then((value) {
       if (value == true) {
-        setLoading(false);
         // Navigator.pushReplacement(
         //     context,
         //     MaterialPageRoute(
@@ -85,6 +87,7 @@ class AuthProvider extends ChangeNotifier {
     }).onError((error, stackTrace) {
       debugPrint("Error $error");
     });
+    setLoading(false);
   }
 
   static String? verificationCode;
@@ -92,10 +95,12 @@ class AuthProvider extends ChangeNotifier {
   Future<bool?> sendOtp() async {
     String phoneN = phoneNumber.text.toString().trim();
     bool? res;
+    setLoading(true);
     await _api.sendOtp(phoneN).then((value) {
       verificationCode = value;
       res = true;
     }).onError((error, stackTrace) {});
+    setLoading(false);
     return res;
   }
 
@@ -103,13 +108,14 @@ class AuthProvider extends ChangeNotifier {
     bool? res;
     String otp = otpController.text.toString().trim();
     setLoading(true);
+    debugPrint("Verify OTP");
     if (otp.length < 6) return res;
     await _api.matchOtp(verificationCode ?? "", otp).then((value) {
-      res = true;
-      setLoading(false);
+      res = value;
     }).onError((error, stackTrace) {
       debugPrint("Error while verify otp $error");
     });
+    setLoading(false);
     return res;
   }
 
@@ -120,19 +126,21 @@ class AuthProvider extends ChangeNotifier {
     await _api.forgetPassword(email).then((value) {
       res = true;
       debugPrint("Success in sending otp to the mail for forget password");
-      setLoading(false);
     }).onError((error, stackTrace) {
       debugPrint("Error while sending forget Password otp send");
     });
+    setLoading(false);
     return res;
   }
 
-  loginUsingEmailAndPassword(BuildContext context) async {
+  Future<bool?> loginUsingEmailAndPassword(BuildContext context) async {
     setLoading(true);
-  
     String email = emailCont.text.toString().trim();
     String password = passCont.text.toString().trim();
-
+    if (!Utils.isValidEmail(email) || !Utils.isValidPass(password)) {
+      setLoading(false);
+      return false;
+    }
     bool? res;
     await _api
         .loginUsingEmailAndPassword(
@@ -140,21 +148,31 @@ class AuthProvider extends ChangeNotifier {
       password,
     )
         .then((value) {
+      res = value;
       if (value == true) {
         debugPrint("Login Success Using Email and Password");
-        setLoading(false);
+        emailCont.text = "";
+        passCont.text = "";
       } else {
         debugPrint("Login failed! Using Email and Password");
       }
     }).onError((error, stackTrace) {});
+    setLoading(false);
+    return res;
   }
 
   GoogleAuthService service = GoogleAuthService();
-  googleLogin() async {
+  Future<bool?> googleLogin() async {
+    bool? res;
     await service.signInWithGoogle().then((value) {
       debugPrint("Google Login Success");
+        emailCont.text = "";
+        passCont.text = "";
+      res = true;
     }).onError((error, stackTrace) {
       debugPrint("Google Login Failed!");
+      res = false;
     });
+    return res;
   }
 }

@@ -12,12 +12,9 @@ import 'package:provider/provider.dart';
 import '../../../view_model/provider.dart';
 
 class LoginUsingPhone extends StatelessWidget {
-  LoginUsingPhone({
+  const LoginUsingPhone({
     super.key,
   });
-
-  final TextEditingController emailCont = TextEditingController();
-  final TextEditingController passCont = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +82,9 @@ class LoginUsingPhone extends StatelessWidget {
                   borderRadius: BorderRadius.circular(14),
                 ),
                 child: Center(
-                    child: Text(
+                    child: (authProvider.loading)
+                        ? const CircularProgressIndicator(color: AppColors.logincardColor,)
+                        : Text(
                   AppTexts.continu,
                   style: loginButtonTs,
                 )),

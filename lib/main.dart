@@ -11,6 +11,7 @@ void main() async {
   await  Firebase.initializeApp(options:
   const FirebaseOptions(
       apiKey: "AIzaSyA5a8rxTDtxPWUGen6TyN1he6vpLb8lEaU",
+      authDomain: "infoprofile-6b660.firebaseapp.com",
       projectId: "infoprofile-6b660",
       messagingSenderId: "19539703423",
       appId: "1:19539703423:web:74622f4dae41ccf911f14a",

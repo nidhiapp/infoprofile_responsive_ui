@@ -37,7 +37,20 @@ class BasePage extends StatelessWidget {
               authProvider.logout(context);
               provider.desktopLogin();
             },
-            child: Center(child: Text("Logout")),
+            child: Center(
+                child: FutureBuilder(
+                    future: authProvider.getEmail(),
+                    builder: (context, snap) {
+                      if (snap.hasData) {
+                        return Column(
+                          children: [
+                            Text(snap.data.toString()),
+                            const Text("Logout")
+                          ],
+                        );
+                      }
+                      return const Text("Logout..");
+                    })),
           );
         },
       ),

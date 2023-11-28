@@ -85,7 +85,9 @@ class ForgetPassword extends StatelessWidget {
                     borderRadius: BorderRadius.circular(14),
                   ),
                   child: Center(
-                      child: Text(
+                      child: (authProvider.loading)
+                        ? const CircularProgressIndicator(color: AppColors.logincardColor,)
+                        :  Text(
                     AppTexts.continu ,
                     style: loginButtonTs,
                   )),

@@ -73,7 +73,7 @@ class AppTexts {
       "Enter email address, phone number and password to register yourself as a new user.";
   static const String otpAuth = "OTP Authentication";
   static const String enter4dig =
-      "Please enter 4-digit code sent to your mobile number +91-8272627234";
+      "Please enter 4-digit code sent to your mobile number.";
   static const String continu = "Continue";
   static const String forgetpassMsg =
       "Please enter your registered email associated with the account to reset your password";

@@ -69,7 +69,10 @@ class FirebaseApi {
     await auth.signInWithCredential(credential).then((value) {
       debugPrint("OTP Matched response is $value");
       res = true;
-    }).onError((error, stackTrace) {});
+    }).onError((error, stackTrace) {
+      debugPrint("Failed Matching OTP $error");
+      res = false;  
+    });
     return res;
   }
 
@@ -89,7 +92,8 @@ class FirebaseApi {
         .signInWithEmailAndPassword(
       email: email,
       password: password,
-    ).then((value) {
+    )
+        .then((value) {
       debugPrint("Response is $value");
       res = true;
     }).onError((error, stackTrace) {

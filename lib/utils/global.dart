@@ -51,7 +51,7 @@ class Utils {
    static String? isValidPassnull(String? value) {
     // RegExp regex =
     //    RegExp(r'^(?=.?[A-Z])(?=.?[a-z])(?=.?[0-9])(?=.?[!@#\$&*~]).{6,}$');
-    if (value!.isEmpty) {
+    if (value!.isNotEmpty) {
       return null;
     }
     //  else {

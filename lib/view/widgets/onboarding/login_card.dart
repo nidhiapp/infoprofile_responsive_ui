@@ -27,7 +27,11 @@ class LoginCard extends StatelessWidget {
   static Widget desktopLoginCard() {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 17, vertical: 17),
-      width: 497,
+      width: (w > 960)
+          ? 497
+          : (w > 450)
+              ? 500
+              : w * 0.9,
       decoration: BoxDecoration(
           color: AppColors.logincardColor,
           borderRadius: BorderRadius.circular(12),
@@ -85,29 +89,33 @@ class LoginCard extends StatelessWidget {
               prefixicon: Icons.lock_outlined,
               hintext: AppTexts.password,
             ),
-            SizedBox(
-              height: h * 0.012,
-            ),
-            InkWell(
-              onTap: () {
-                authProvider.loading;
-                provider.forgetPassword();
-              },
-              child: Align(
-                  alignment: Alignment.bottomRight,
+            Align(
+                alignment: Alignment.bottomRight,
+                child: InkWell(
+                  onTap: () {
+                    authProvider.loading;
+                    provider.forgetPassword();
+                  },
                   child: Text(
                     AppTexts.forgetpass,
                     style: forgetPassTs,
-                  )),
+                  ),
+                )),
+            SizedBox(
+              height: h * 0.012,
             ),
             SizedBox(
               height: h * 0.03,
             ),
             InkWell(
-              onTap: () {
-                authProvider.loginUsingEmailAndPassword(context);
-               
-                provider.basePage();
+              onTap: () async {
+                await authProvider
+                    .loginUsingEmailAndPassword(context)
+                    .then((value) {
+                  if (value == true) {
+                    provider.basePage();
+                  }
+                }).onError((error, stackTrace) {});
               },
               child: Container(
                 height: h * 0.054,
@@ -116,10 +124,14 @@ class LoginCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(14),
                 ),
                 child: Center(
-                    child: Text(
-                  AppTexts.login,
-                  style: loginButtonTs,
-                )),
+                    child: (authProvider.loading)
+                        ? const CircularProgressIndicator(
+                            color: AppColors.logincardColor,
+                          )
+                        : Text(
+                            AppTexts.login,
+                            style: loginButtonTs,
+                          )),
               ),
             ),
             Padding(
@@ -178,9 +190,13 @@ class LoginCard extends StatelessWidget {
                     Expanded(
                         child: InkWell(
                       onTap: () async {
-                        authProvider.loading;
-                        await authProvider.googleLogin();
-                        provider.basePage();
+                        await authProvider.googleLogin().then((value) {
+                          if (value == true) {
+                            provider.basePage();
+                          }
+                        }).onError((error, stackTrace) {
+                          debugPrint("Error while Login");
+                        });
                       },
                       child: Image.asset(
                         AppImages.googly,
@@ -316,9 +332,14 @@ class LoginCard extends StatelessWidget {
                 height: h * 0.03,
               ),
               InkWell(
-                onTap: () {
-                  authProvider.loginUsingEmailAndPassword(context);
-                  provider.basePage();
+                onTap: () async {
+                  await authProvider
+                      .loginUsingEmailAndPassword(context)
+                      .then((value) {
+                    if (value == true) {
+                      provider.basePage();
+                    }
+                  }).onError((error, stackTrace) {});
                 },
                 child: Container(
                   height: h * 0.054,
@@ -327,10 +348,14 @@ class LoginCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(14),
                   ),
                   child: Center(
-                    child: Text(
-                      AppTexts.login,
-                      style: loginButtonTs,
-                    ),
+                    child: (authProvider.loading)
+                        ? const CircularProgressIndicator(
+                            color: AppColors.logincardColor,
+                          )
+                        : Text(
+                            AppTexts.login,
+                            style: loginButtonTs,
+                          ),
                   ),
                 ),
               ),
@@ -387,8 +412,13 @@ class LoginCard extends StatelessWidget {
                       Expanded(
                         child: InkWell(
                           onTap: () async {
-                            await authProvider.googleLogin();
-                            provider.basePage();
+                            await authProvider.googleLogin().then((value) {
+                              if (value == true) {
+                                provider.basePage();
+                              }
+                            }).onError((error, stackTrace) {
+                              debugPrint("Error while Login");
+                            });
                           },
                           child: Image.asset(
                             AppImages.googly,
@@ -526,10 +556,14 @@ class LoginCard extends StatelessWidget {
                 height: h * 0.02,
               ),
               InkWell(
-                onTap: () {
-                  authProvider.loginUsingEmailAndPassword(context);
-
-                  provider.basePage();
+                onTap: () async {
+                  await authProvider
+                      .loginUsingEmailAndPassword(context)
+                      .then((value) {
+                    if (value == true) {
+                    provider.basePage();
+                  }
+                  }).onError((error, stackTrace) {});
                 },
                 child: Container(
                   height: h * 0.054,
@@ -538,10 +572,14 @@ class LoginCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(14),
                   ),
                   child: Center(
-                    child: Text(
-                      AppTexts.login,
-                      style: loginButtonTs,
-                    ),
+                    child: (authProvider.loading)
+                        ? const CircularProgressIndicator(
+                            color: AppColors.logincardColor,
+                          )
+                        : Text(
+                            AppTexts.login,
+                            style: loginButtonTs,
+                          ),
                   ),
                 ),
               ),
@@ -598,8 +636,11 @@ class LoginCard extends StatelessWidget {
                       Expanded(
                           child: InkWell(
                         onTap: () async {
-                          await authProvider.googleLogin();
-                          provider.basePage();
+                          await authProvider.googleLogin().then((value) {
+                            (value == true)
+                                ? provider.basePage()
+                                : debugPrint("Failed login");
+                          });
                         },
                         child: Image.asset(
                           AppImages.googly,
