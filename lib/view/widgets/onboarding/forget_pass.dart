@@ -57,6 +57,7 @@ class ForgetPassword extends StatelessWidget {
               Utils.changeFocus(context, authProvider.emailfocusNode,
                     authProvider.buttonFocusNode);
             },
+            customValidator: Utils.isValidEmailNull,
             focusNode: authProvider.emailfocusNode,
                 customController:authProvider.emailCont,
                // suffixicon: Icons.visibility,

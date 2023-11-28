@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:info_profile_ui/ui/base_page.dart';
 import 'package:info_profile_ui/utils/app_colors.dart';
 import 'package:info_profile_ui/utils/app_images.dart';
 import 'package:info_profile_ui/utils/app_texts.dart';
@@ -73,7 +72,7 @@ class _OtpPageState extends State<OtpPage> {
               child: Center(
                   child: InkWell(onTap: () async {
                     await authProvider.verifyOtp().then((value){
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => const BasePage()));
+                  
                     });
                   }, child: Text(AppTexts.login,style: loginButtonTs,))),
               ),

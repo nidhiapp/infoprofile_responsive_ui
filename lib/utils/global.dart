@@ -22,6 +22,16 @@ class Utils {
     }
   }
 
+   static String? isValidEmailNull(String? email) {
+    if (RegExp(
+        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+        .hasMatch(email!)) {
+      return null;
+    } else {
+      return "Enter Valid mail!";
+    }
+  }
+
   static bool isValidPass(String? value) {
     // RegExp regex =
     //    RegExp(r'^(?=.?[A-Z])(?=.?[a-z])(?=.?[0-9])(?=.?[!@#\$&*~]).{6,}$');
@@ -37,11 +47,27 @@ class Utils {
     }
   }
 
-  static String? isValidName(String? value) {
+
+   static String? isValidPassnull(String? value) {
+    // RegExp regex =
+    //    RegExp(r'^(?=.?[A-Z])(?=.?[a-z])(?=.?[0-9])(?=.?[!@#\$&*~]).{6,}$');
     if (value!.isEmpty) {
-      return 'Enter Your Name';
+      return null;
+    }
+    //  else {
+    //   if (!regex.hasMatch(value)) {
+    //     return 'Enter valid password';
+    //   } }
+    else {
+      return "enter password";
+    }
+  }
+
+  static String? isValidph(String? value) {
+    if (value!.isEmpty) {
+      return null;
     } else if (value.length < 3) {
-      return 'Enter a Valid Name';
+      return 'Enter a phonenumber';
     }
     return null;
   }

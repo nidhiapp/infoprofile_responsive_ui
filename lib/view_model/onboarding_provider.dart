@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:info_profile_ui/repository/firebase_api.dart';
-import 'package:info_profile_ui/ui/base_page.dart';
 import '../services/auth_services.dart';
 import '../ui/home_page.dart';
 
@@ -41,7 +40,7 @@ class AuthProvider extends ChangeNotifier {
     debugPrint("Email is $email password is $pass");
     await _api.registerUserWithEmailPassword(email, pass).then((value){
         debugPrint("Login Success");
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> const BasePage()));
+     
       }).onError((error, stackTrace){
         debugPrint("Login Failed!");
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Create Account Error $error")));
@@ -108,8 +107,9 @@ class AuthProvider extends ChangeNotifier {
   loginUsingEmailAndPassword(BuildContext context) async {
      String email = emailCont.text.toString().trim();
      String password = passCont.text.toString().trim();
+      
      bool? res;
-     await _api.loginUsingEmailAndPassword(email, password).then((value){
+     await _api.loginUsingEmailAndPassword(email, password,).then((value){
        if(value == true){
          debugPrint("Login Success Using Email and Password");
        }

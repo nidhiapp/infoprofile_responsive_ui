@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:info_profile_ui/ui/base_page.dart';
 import 'package:info_profile_ui/utils/app_colors.dart';
 import 'package:info_profile_ui/utils/constants.dart';
 import 'package:info_profile_ui/view/widgets/appstore_playstore.dart';
+import 'package:info_profile_ui/view/widgets/base_page.dart';
 import 'package:info_profile_ui/view/widgets/download_our_app_from.dart';
 import 'package:info_profile_ui/view/widgets/footer_block/mobile_footer_block.dart';
 import 'package:info_profile_ui/view/widgets/footer_block/tablet_footer_block.dart';
@@ -44,8 +44,7 @@ class _CompleteSetUpsState extends State<CompleteSetUps> {
   loadState() async {
     await AuthServices().isUserAlreadyLogin().then((value) {
       if (value == true) {
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => const BasePage()));
+       
       }
     }).onError((error, stackTrace) {});
   }
@@ -138,7 +137,8 @@ class _CompleteSetUpsState extends State<CompleteSetUps> {
                             if (provider.index == 4) const ForgetPassword(),
                             if (provider.index == 5) const ResetPassword(),
                             if (provider.index == 3) LoginUsingPhone(),
-                            if (provider.index == 6) BasePage(),
+                             if (provider.index == 6) BasePage(),
+                          
                           ],
                         ),
                       )
@@ -206,7 +206,8 @@ class _CompleteSetUpsState extends State<CompleteSetUps> {
                         if (provider.index == 4) const ForgetPassword(),
                         if (provider.index == 5) const ResetPassword(),
                         if (provider.index == 3) LoginUsingPhone(),
-                        if (provider.index == 6) BasePage(),
+                          if (provider.index == 6) BasePage(),
+                       
                       ],
                     )
                   ],
@@ -296,6 +297,7 @@ class _CompleteSetUpsState extends State<CompleteSetUps> {
                         if (provider.index == 5) const ResetPassword(),
                         if (provider.index == 3) LoginUsingPhone(),
                         if (provider.index == 6) BasePage(),
+                      
                         SizedBox(
                           height: h * 0.07,
                         ),

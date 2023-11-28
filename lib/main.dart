@@ -1,7 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:info_profile_ui/services/auth_services.dart';
-import 'package:info_profile_ui/ui/base_page.dart';
 import 'package:info_profile_ui/ui/home_page.dart';
 import 'package:info_profile_ui/view_model/onboarding_provider.dart';
 import 'package:info_profile_ui/view_model/provider.dart';

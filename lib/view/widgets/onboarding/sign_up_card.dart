@@ -63,6 +63,7 @@ class _SignUpCardState extends State<SignUpCard> {
               Utils.changeFocus(context, authProvider.emailfocusNode,
                     authProvider.phoneNumberFocusNode);
             },
+            customValidator: Utils.isValidEmailNull,
             focusNode: authProvider.emailfocusNode,
                 customController:authProvider.emailCont ,
                 prefixicon: Icons.email_outlined,
@@ -76,6 +77,7 @@ class _SignUpCardState extends State<SignUpCard> {
               Utils.changeFocus(context, authProvider.phoneNumberFocusNode,
                     authProvider.passwordFocusNode);
             },
+            customValidator: Utils.isValidph,
             focusNode: authProvider.phoneNumberFocusNode,
                 customController: authProvider.phoneNumber,
                // suffixicon: Icons.visibility,
@@ -92,6 +94,7 @@ class _SignUpCardState extends State<SignUpCard> {
                     authProvider.buttonFocusNode);
             },
             focusNode: authProvider.passwordFocusNode,
+            customValidator: Utils.isValidph,
                 customController: authProvider.passCont,
                 suffixicon: Icons.visibility,
                 isPasswordField: true,

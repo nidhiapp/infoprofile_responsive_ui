@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:info_profile_ui/ui/base_page.dart';
-
 import '../utils/global.dart';
 
 
