@@ -323,9 +323,14 @@ class LoginCard extends StatelessWidget {
               ),
               Align(
                 alignment: Alignment.bottomRight,
-                child: Text(
-                  AppTexts.forgetpass,
-                  style: forgetPassTs,
+                child: InkWell(onTap: () {
+                   authProvider.loading;
+                    provider.forgetPassword();
+                },
+                  child: Text(
+                    AppTexts.forgetpass,
+                    style: forgetPassTs,
+                  ),
                 ),
               ),
               SizedBox(
@@ -547,9 +552,14 @@ class LoginCard extends StatelessWidget {
               ),
               Align(
                 alignment: Alignment.bottomRight,
-                child: Text(
-                  AppTexts.forgetpass,
-                  style: forgetPassTs,
+                child: InkWell(onTap: () {
+                   authProvider.loading;
+                    provider.forgetPassword();
+                },
+                  child: Text(
+                    AppTexts.forgetpass,
+                    style: forgetPassTs,
+                  ),
                 ),
               ),
               SizedBox(
