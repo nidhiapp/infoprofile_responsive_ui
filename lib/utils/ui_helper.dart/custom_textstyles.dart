@@ -241,6 +241,7 @@ TextStyle termConTs = GoogleFonts.poppins(
   textStyle:  const TextStyle(
   fontSize: 14,
   fontWeight: FontWeight.w700,
+  color: AppColors.primaryColor
 
 ));
 

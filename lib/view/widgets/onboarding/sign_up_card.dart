@@ -128,7 +128,7 @@ class _SignUpCardState extends State<SignUpCard> {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Checkbox(  value: _acceptPrivacyPolicy,
+                  Checkbox(value: _acceptPrivacyPolicy,
                       onChanged: (value) {
                         setState(() {
                           _acceptPrivacyPolicy = value!;
@@ -136,7 +136,15 @@ class _SignUpCardState extends State<SignUpCard> {
                       },
                       shape: const CircleBorder(),
                     ),
-                  Expanded(child: Text(AppTexts.termcon,style:  termConTs,)),
+                  Expanded(child: Wrap(
+                    children: [
+                      Text(AppTexts.termcon,style:fontFiveOneTwoTs,),
+                        Text(AppTexts.privacy,style:termConTs,),
+                        Text(AppTexts.and,style:fontFiveOneTwoTs,),
+
+                          Text(AppTexts.termsOfUses,style:termConTs,),
+                    ],
+                  )),
                 ],
               ),
               SizedBox(

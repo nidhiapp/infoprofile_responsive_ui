@@ -86,5 +86,11 @@ class AppTexts {
   static const String loginwithPhMess =
       "Enter your phone number so that we can send you OTP to login into the application.";
   static const String termcon =
-      "By registering you are accepting “Privacy Policy” and “Terms of Use”.";
+      "By registering you are accepting ";
+        static const String privacy =   " “Privacy Policy” ";
+   
+        static const String termsOfUses =
+      " “Terms of Use”. ";
+              static const String and=
+      " and. ";
 }

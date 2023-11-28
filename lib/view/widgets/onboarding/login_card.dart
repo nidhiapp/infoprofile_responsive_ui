@@ -149,7 +149,7 @@ class LoginCard extends StatelessWidget {
             InkWell(
                 onTap: () {
                   provider.loginUsingPhone();
-                  provider.basePage();
+                 // provider.basePage();
                 },
                 child: Center(
                     child: Text(
@@ -524,6 +524,7 @@ class LoginCard extends StatelessWidget {
               InkWell(
                 onTap: () {
                   authProvider.loginUsingEmailAndPassword(context);
+                  
                    provider.basePage();
                 },
                 child: Container(
@@ -565,7 +566,7 @@ class LoginCard extends StatelessWidget {
               InkWell(
                 onTap: () {
                   provider.loginUsingPhone();
-                   provider.basePage();
+                 //  provider.basePage();
                 },
                 child: Center(
                   child: Text(
