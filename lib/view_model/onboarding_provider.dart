@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:info_profile_ui/repository/firebase_api.dart';
+import 'package:info_profile_ui/utils/app_colors.dart';
 import '../services/auth_services.dart';
 import '../ui/home_page.dart';
 
@@ -14,6 +15,21 @@ class AuthProvider extends ChangeNotifier {
 
   FocusNode buttonFocusNode = FocusNode();
   FocusNode phoneNumberFocusNode = FocusNode();
+
+  @override
+  void dispose() {
+    emailCont.dispose();
+    passCont.dispose();
+    phoneNumber.dispose();
+    otpController.dispose();
+    emailfocusNode.dispose();
+    passwordFocusNode.dispose();
+    passwordFocusNode.dispose();
+    buttonFocusNode.dispose();
+    phoneNumberFocusNode.dispose();
+    // TODO: implement dispose
+    super.dispose();
+  }
 
   int get authStateIndex => _authStateIndex;
 
@@ -34,36 +50,40 @@ class AuthProvider extends ChangeNotifier {
 
   Future createAccount(BuildContext context) async {
     setLoading(true);
+
     String email = emailCont.text.toString().trim();
     String pass = passCont.text.toString().trim();
     // if(Utils.isValidEmail(email) || Utils.isValidPass(pass)) return;
     debugPrint("Email is $email password is $pass");
-    await _api.registerUserWithEmailPassword(email, pass).then((value){
-        debugPrint("Login Success");
-     
-      }).onError((error, stackTrace){
-        debugPrint("Login Failed!");
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Create Account Error $error")));
-      });
-   }
-
-
+    await _api.registerUserWithEmailPassword(email, pass).then((value) {
+      debugPrint("Login Success");
+    }).onError((error, stackTrace) {
+      debugPrint("Login Failed!");
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text("Create Account Error $error")));
+    });
+  }
 
   getEmail() async {
     return await _api.getEmail();
   }
 
-   logout (BuildContext context) async {
-     debugPrint("Going to logout Provider");
-    await _api.logOut().then((value){
-        if(value == true){
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => CompleteSetUps(),));
-        }
-        else{
-          debugPrint("Error -->$value");
-        }
-      }).onError((error, stackTrace){
-        debugPrint("Error $error");
+  logout(BuildContext context) async {
+    debugPrint("Going to logout Provider");
+    setLoading(true);
+    await _api.logOut().then((value) {
+      if (value == true) {
+        setLoading(false);
+        // Navigator.pushReplacement(
+        //     context,
+        //     MaterialPageRoute(
+        //       builder: (context) => CompleteSetUps(),
+        //     ));
+      } else {
+        debugPrint("Error -->$value");
+      }
+    }).onError((error, stackTrace) {
+      debugPrint("Error $error");
     });
   }
 
@@ -82,9 +102,11 @@ class AuthProvider extends ChangeNotifier {
   Future<bool?> verifyOtp() async {
     bool? res;
     String otp = otpController.text.toString().trim();
+    setLoading(true);
     if (otp.length < 6) return res;
     await _api.matchOtp(verificationCode ?? "", otp).then((value) {
       res = true;
+      setLoading(false);
     }).onError((error, stackTrace) {
       debugPrint("Error while verify otp $error");
     });
@@ -94,40 +116,45 @@ class AuthProvider extends ChangeNotifier {
   Future<bool?> forgetPassword() async {
     bool? res;
     String email = emailCont.text.toString().trim();
+    setLoading(true);
     await _api.forgetPassword(email).then((value) {
       res = true;
       debugPrint("Success in sending otp to the mail for forget password");
+      setLoading(false);
     }).onError((error, stackTrace) {
       debugPrint("Error while sending forget Password otp send");
     });
     return res;
   }
 
-
   loginUsingEmailAndPassword(BuildContext context) async {
-     String email = emailCont.text.toString().trim();
-     String password = passCont.text.toString().trim();
-      
-     bool? res;
-     await _api.loginUsingEmailAndPassword(email, password,).then((value){
-       if(value == true){
-         debugPrint("Login Success Using Email and Password");
-       }
-       else{
-                 debugPrint("Login failed! Using Email and Password");
-       }
-     }).onError((error, stackTrace){
-
-     });
-  }
+    setLoading(true);
   
+    String email = emailCont.text.toString().trim();
+    String password = passCont.text.toString().trim();
+
+    bool? res;
+    await _api
+        .loginUsingEmailAndPassword(
+      email,
+      password,
+    )
+        .then((value) {
+      if (value == true) {
+        debugPrint("Login Success Using Email and Password");
+        setLoading(false);
+      } else {
+        debugPrint("Login failed! Using Email and Password");
+      }
+    }).onError((error, stackTrace) {});
+  }
+
   GoogleAuthService service = GoogleAuthService();
   googleLogin() async {
-    await service.signInWithGoogle().then((value){
+    await service.signInWithGoogle().then((value) {
       debugPrint("Google Login Success");
-    }).onError((error, stackTrace){
+    }).onError((error, stackTrace) {
       debugPrint("Google Login Failed!");
     });
   }
-
 }

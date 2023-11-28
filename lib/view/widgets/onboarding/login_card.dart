@@ -63,7 +63,7 @@ class LoginCard extends StatelessWidget {
                 Utils.changeFocus(context, authProvider.emailfocusNode,
                     authProvider.passwordFocusNode);
               },
-              customValidator:Utils.isValidEmailNull,
+              customValidator: Utils.isValidEmailNull,
               focusNode: authProvider.emailfocusNode,
               customController: authProvider.emailCont,
               prefixicon: Icons.email_outlined,
@@ -90,6 +90,7 @@ class LoginCard extends StatelessWidget {
             ),
             InkWell(
               onTap: () {
+                authProvider.loading;
                 provider.forgetPassword();
               },
               child: Align(
@@ -105,6 +106,7 @@ class LoginCard extends StatelessWidget {
             InkWell(
               onTap: () {
                 authProvider.loginUsingEmailAndPassword(context);
+               
                 provider.basePage();
               },
               child: Container(
@@ -148,8 +150,9 @@ class LoginCard extends StatelessWidget {
             ),
             InkWell(
                 onTap: () {
+                  authProvider.loading;
                   provider.loginUsingPhone();
-                 // provider.basePage();
+                  // provider.basePage();
                 },
                 child: Center(
                     child: Text(
@@ -175,8 +178,9 @@ class LoginCard extends StatelessWidget {
                     Expanded(
                         child: InkWell(
                       onTap: () async {
+                        authProvider.loading;
                         await authProvider.googleLogin();
-                         provider.basePage();
+                        provider.basePage();
                       },
                       child: Image.asset(
                         AppImages.googly,
@@ -291,7 +295,7 @@ class LoginCard extends StatelessWidget {
                   );
                 },
                 focusNode: authProvider.passwordFocusNode,
-                  customValidator: Utils.isValidPassnull,
+                customValidator: Utils.isValidPassnull,
                 customController: authProvider.passCont,
                 prefixicon: Icons.lock_outlined,
                 suffixicon: Icons.visibility,
@@ -484,7 +488,7 @@ class LoginCard extends StatelessWidget {
                   );
                 },
                 focusNode: authProvider.emailfocusNode,
-                  customValidator: Utils.isValidEmailNull,
+                customValidator: Utils.isValidEmailNull,
                 customController: authProvider.emailCont,
                 prefixicon: Icons.email_outlined,
                 hintext: AppTexts.usernameEmail,
@@ -501,7 +505,7 @@ class LoginCard extends StatelessWidget {
                   );
                 },
                 focusNode: authProvider.passwordFocusNode,
-                  customValidator: Utils.isValidPassnull,
+                customValidator: Utils.isValidPassnull,
                 customController: authProvider.passCont,
                 suffixicon: Icons.visibility,
                 isPasswordField: true,
@@ -524,8 +528,8 @@ class LoginCard extends StatelessWidget {
               InkWell(
                 onTap: () {
                   authProvider.loginUsingEmailAndPassword(context);
-                  
-                   provider.basePage();
+
+                  provider.basePage();
                 },
                 child: Container(
                   height: h * 0.054,
@@ -566,7 +570,7 @@ class LoginCard extends StatelessWidget {
               InkWell(
                 onTap: () {
                   provider.loginUsingPhone();
-                 //  provider.basePage();
+                  //  provider.basePage();
                 },
                 child: Center(
                   child: Text(
@@ -595,7 +599,7 @@ class LoginCard extends StatelessWidget {
                           child: InkWell(
                         onTap: () async {
                           await authProvider.googleLogin();
-                           provider.basePage();
+                          provider.basePage();
                         },
                         child: Image.asset(
                           AppImages.googly,
