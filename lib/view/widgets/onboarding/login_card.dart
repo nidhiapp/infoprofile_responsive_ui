@@ -70,7 +70,7 @@ class LoginCard extends StatelessWidget {
               SizedBox(height: h*0.03,),
               InkWell(
                 onTap: (){
-                  authProvider.createAccount(context);
+                  authProvider.loginUsingEmailAndPassword(context);
                 },
                 child: Container(
                   height: h*0.054,
@@ -178,13 +178,20 @@ class LoginCard extends StatelessWidget {
                 alignment: Alignment.bottomRight,
                 child: Text(AppTexts.forgetpass,style: forgetPassTs,)),
                 SizedBox(height: h*0.03,),
-              Container(
-                //width: w*462/1440,
-                height: h*0.054,
-                decoration: BoxDecoration(color: AppColors.primaryColor,
-                borderRadius: BorderRadius.circular(14),
-              ),
-              child: Center(child: Text(AppTexts.login,style: loginButtonTs,)),
+              InkWell(
+                onTap: (){
+                  authProvider.loginUsingEmailAndPassword(context);
+                },
+                child: Container(
+                  //width: w*462/1440,
+                  height: h*0.054,
+                  decoration: BoxDecoration(color: AppColors.primaryColor,
+                  borderRadius: BorderRadius.circular(14),
+                ),
+                child: Center(child: InkWell(onTap: () async {
+                  await authProvider.googleLogin();
+                }, child: Text(AppTexts.login,style: loginButtonTs,))),
+                ),
               ),
               Padding(padding: const EdgeInsets.symmetric(vertical: 30),
                 child: Row(mainAxisAlignment: MainAxisAlignment.center,
@@ -199,7 +206,10 @@ class LoginCard extends StatelessWidget {
                 ],),
               ),
 
-              Center(child: Text(AppTexts.loginWith,style: loginwithOTPTs,)),
+              Center(child: InkWell(onTap: () {
+                provider.loginUsingPhone();
+
+              }, child: Text(AppTexts.loginWith,style: loginwithOTPTs,))),
               SizedBox(height: h*0.032,),
 
               Center(
@@ -208,7 +218,9 @@ class LoginCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                     Expanded(child: Image.asset(AppImages.fbimg,height: h*0.04, width: w*0.057,)),
-                     Expanded(child: Image.asset(AppImages.googly,height: h*0.04, width: w*0.057,)),
+                     Expanded(child: InkWell(onTap: () async {
+                       await authProvider.googleLogin();
+                     }, child: Image.asset(AppImages.googly, height: h*0.04, width: w*0.057,))),
                      Expanded(child: Image.asset(AppImages.linkimg,height: h*0.04, width: w*0.057,)),
                     Expanded(child: Image.asset(AppImages.appleimg,height: h*0.04, width: w*0.057,))
 
@@ -218,7 +230,9 @@ class LoginCard extends StatelessWidget {
               ),
                SizedBox(height: h*0.02,),
                InkWell(
-                 onTap: (){},
+                 onTap: (){
+                   provider.signUpCard();
+                 },
                  child: Row(mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(AppTexts.dontHaveAccount,style: forgetPassTs,),
@@ -273,14 +287,23 @@ class LoginCard extends StatelessWidget {
 
               Align(
                 alignment: Alignment.bottomRight,
-                child: Text(AppTexts.forgetpass, style: forgetPassTs,),
+                child: InkWell(onTap: () async {
+                  await authProvider.forgetPassword();
+                }, child: Text(AppTexts.forgetpass, style: forgetPassTs,)),
               ),
               SizedBox(height: h*0.03,),
-              Container(height: h*0.054,
-                decoration: BoxDecoration(color: AppColors.primaryColor,
-                borderRadius: BorderRadius.circular(14),
-              ),
-              child: Center(child: Text(AppTexts.login,style: loginButtonTs,)),
+              InkWell(
+                onTap: (){
+                  authProvider.loginUsingEmailAndPassword(context);
+                },
+                child: Container(
+                  height: h*0.054,
+                  decoration: BoxDecoration(color: AppColors.primaryColor,
+                  borderRadius: BorderRadius.circular(14),
+                ),
+                  child: Center(
+                    child: Text(AppTexts.login,style: loginButtonTs,)),
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 30),
@@ -298,7 +321,11 @@ class LoginCard extends StatelessWidget {
                 ),
               ),
 
-              Center(child: Text(AppTexts.loginWith,style: loginwithOTPTs,)),
+              InkWell(
+                onTap: (){
+                  provider.loginUsingPhone();
+                },
+                child: Center(child: Text(AppTexts.loginWith,style: loginwithOTPTs,))),
               SizedBox(height: h*0.032,),
 
               Center(
@@ -307,20 +334,27 @@ class LoginCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                     Expanded(child: Image.asset(AppImages.fbimg,height: h*0.04, width: w*0.057,)),
-                     Expanded(child: Image.asset(AppImages.googly,height: h*0.04, width: w*0.057,)),
+                     Expanded(child: InkWell(
+                        onTap: () async {
+                          await authProvider.googleLogin();
+                        },
+                         child: Image.asset(AppImages.googly,height: h*0.04, width: w*0.057,))),
                      Expanded(child: Image.asset(AppImages.linkimg,height: h*0.04, width: w*0.057,)),
                     Expanded(child: Image.asset(AppImages.appleimg,height: h*0.04, width: w*0.057,))
-
-
                   ],),
                 ),
               ),
               SizedBox(height: h*0.02,),
-              Center(
-                child: Wrap(
-                  children: [
+              InkWell(
+                onTap: (){
+                  provider.signUpCard();
+                },
+                child: Center(
+                  child: Wrap(
+                    children: [
                     Text(AppTexts.dontHaveAccount,style: forgetPassTs,),
-                  Text(AppTexts.signUp,style: signupTs,)],),
+                    Text(AppTexts.signUp,style: signupTs,)],),
+                ),
               ),
               SizedBox(height: h*0.02,),
 

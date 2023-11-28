@@ -79,4 +79,14 @@ class FirebaseApi {
     }).onError((error, stackTrace){});
     return res;
   }
+
+  Future<bool?> loginUsingEmailAndPassword(String email, String password) async {
+    bool? res;
+    await auth.signInWithEmailAndPassword(email: email, password: password).then((value) {
+      res = true;
+    }).onError((error, stackTrace){
+      res = false;
+    });
+    return res;
+  }
 }

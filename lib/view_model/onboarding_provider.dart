@@ -1,6 +1,9 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:info_profile_ui/repository/firebase_api.dart';
 import 'package:info_profile_ui/ui/base_page.dart';
+import '../services/auth_services.dart';
 import '../ui/home_page.dart';
 
 class AuthProvider extends ChangeNotifier {
@@ -25,10 +28,10 @@ class AuthProvider extends ChangeNotifier {
     // if(Utils.isValidEmail(email) || Utils.isValidPass(pass)) return;
     debugPrint("Email is $email password is $pass");
     await _api.registerUserWithEmailPassword(email, pass).then((value){
-        debugPrint("Login Success");
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> const BasePage()));
+        debugPrint("Sign Up Success");
+
       }).onError((error, stackTrace){
-        debugPrint("Login Failed!");
+        debugPrint("Sign Up Failed!");
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Create Account Error $error")));
       });
    }
@@ -43,7 +46,7 @@ class AuthProvider extends ChangeNotifier {
      debugPrint("Going to logout Provider");
     await _api.logOut().then((value){
         if(value == true){
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => CompleteSetUps(),));
+          debugPrint("Logout Success");
         }
         else{
           debugPrint("Error -->$value");
@@ -90,6 +93,26 @@ class AuthProvider extends ChangeNotifier {
       debugPrint("Error while sending forget Password otp send");
     });
     return res;
+  }
+
+  loginUsingEmailAndPassword(BuildContext context) async {
+     String email = emailCont.text.toString().trim();
+     String password = passCont.text.toString().trim();
+     bool? res;
+     await _api.loginUsingEmailAndPassword(email, password).then((value){
+       if(value == true){
+         debugPrint("Login Success Using Email and Password");
+       }
+       else{}
+     }).onError((error, stackTrace){});
+  }
+  GoogleAuthService service = GoogleAuthService();
+  googleLogin() async {
+    await service.signInWithGoogle().then((value){
+      debugPrint("Google Login Success");
+    }).onError((error, stackTrace){
+      debugPrint("Google Login Failed!");
+    });
   }
 
 }
