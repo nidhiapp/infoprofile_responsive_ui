@@ -31,9 +31,7 @@ class MyApp extends StatelessWidget {
          child: const MaterialApp(
             debugShowCheckedModeBanner: false,
             title: 'Infoprofile',
-            home: Scaffold(
-              body:CompleteSetUps(),
-            ),
+            home: CompleteSetUps(),
        ),
     );
   }

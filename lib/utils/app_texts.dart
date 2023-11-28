@@ -93,4 +93,7 @@ class AppTexts {
       " “Terms of Use”. ";
               static const String and=
       " and. ";
+
+    static const String logout =  "Log out";
+      static const String areYouSure = "Are you sure you want to logout?";
 }

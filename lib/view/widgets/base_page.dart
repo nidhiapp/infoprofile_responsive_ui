@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:info_profile_ui/main.dart';
 import 'package:info_profile_ui/utils/app_colors.dart';
+import 'package:info_profile_ui/utils/app_texts.dart';
 import 'package:info_profile_ui/utils/constants.dart';
+import 'package:info_profile_ui/utils/ui_helper.dart/custom_textstyles.dart';
 import 'package:info_profile_ui/view_model/onboarding_provider.dart';
 import 'package:info_profile_ui/view_model/provider.dart';
 import 'package:provider/provider.dart';
@@ -34,9 +37,48 @@ class BasePage extends StatelessWidget {
         builder: (context, authProvider, provider, child) {
           return InkWell(
             onTap: () {
-              authProvider.logout(context);
-              provider.desktopLogin();
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    backgroundColor: AppColors.logincardColor,
+                    title: const Text(
+                      AppTexts.logout,
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                    ),
+                    content:
+                        Text(AppTexts.areYouSure, style: custompoppinNormalTs),
+                    actions: [
+                      TextButton(
+                        child: const Text("No", style: TextStyle(color: Colors.black)),
+                        onPressed: () {
+                          Navigator.pop(context); // Close the dialog
+                        },
+                      ),
+                      TextButton(
+                        child: const Text(
+                          "Yes",
+                          style: TextStyle(color: Colors.black),
+                        ),
+                        onPressed: () async {
+                           Navigator.pop(context);
+                           await authProvider.logout(provider.desktopLogin()).then((value) {
+                            // if (value == true) {
+                            //   provider.desktopLogin();
+                            // }
+                          });
+                        },
+                      ),
+                    ],
+                  );
+                },
+              );
             },
+            // onTap: () {
+
+            //   provider.desktopLogin();
+            // },
             child: Center(
                 child: FutureBuilder(
                     future: authProvider.getEmail(),
@@ -49,7 +91,7 @@ class BasePage extends StatelessWidget {
                           ],
                         );
                       }
-                      return const Text("Logout..");
+                      return provider.desktopLogin();
                     })),
           );
         },

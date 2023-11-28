@@ -57,8 +57,8 @@ class AuthProvider extends ChangeNotifier {
     debugPrint("Email is $email password is $pass");
     await _api.registerUserWithEmailPassword(email, pass).then((value) {
       debugPrint("Register Success");
-        emailCont.text = "";
-        passCont.text = "";
+      emailCont.text = "";
+      passCont.text = "";
     }).onError((error, stackTrace) {
       debugPrint("Register Failed!");
       ScaffoldMessenger.of(context)
@@ -71,16 +71,14 @@ class AuthProvider extends ChangeNotifier {
     return await _api.getEmail();
   }
 
-  logout(BuildContext context) async {
+  Future<bool?> logout(VoidCallback? onTap) async {
+    bool? res;
     debugPrint("Going to logout Provider");
     setLoading(true);
     await _api.logOut().then((value) {
       if (value == true) {
-        // Navigator.pushReplacement(
-        //     context,
-        //     MaterialPageRoute(
-        //       builder: (context) => CompleteSetUps(),
-        //     ));
+        res = value;
+        if (onTap != null) onTap();
       } else {
         debugPrint("Error -->$value");
       }
@@ -88,6 +86,7 @@ class AuthProvider extends ChangeNotifier {
       debugPrint("Error $error");
     });
     setLoading(false);
+    return res;
   }
 
   static String? verificationCode;
@@ -166,8 +165,8 @@ class AuthProvider extends ChangeNotifier {
     bool? res;
     await service.signInWithGoogle().then((value) {
       debugPrint("Google Login Success");
-        emailCont.text = "";
-        passCont.text = "";
+      emailCont.text = "";
+      passCont.text = "";
       res = true;
     }).onError((error, stackTrace) {
       debugPrint("Google Login Failed!");

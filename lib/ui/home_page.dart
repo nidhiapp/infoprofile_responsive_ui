@@ -53,11 +53,13 @@ class _CompleteSetUpsState extends State<CompleteSetUps> {
   Widget build(BuildContext context) {
     w = MediaQuery.of(context).size.width;
     h = MediaQuery.of(context).size.height;
-    return (w > 960)
+    return Scaffold(
+      body: (w > 960)
         ? desktopCompleteSetUp(context)
         : (w > 450)
             ? tabletCompleteSetUp()
-            : mobileCompleteSetUp();
+            : mobileCompleteSetUp(),
+    );
   }
 
   Widget desktopCompleteSetUp(BuildContext context) {
