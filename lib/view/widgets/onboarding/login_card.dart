@@ -189,7 +189,7 @@ class LoginCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(14),
                 ),
                 child: Center(child: InkWell(onTap: () async {
-                  await authProvider.googleLogin();
+                  await authProvider.loginUsingEmailAndPassword(context);
                 }, child: Text(AppTexts.login,style: loginButtonTs,))),
                 ),
               ),
