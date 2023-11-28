@@ -18,6 +18,7 @@ class Providers with ChangeNotifier {
   // Login Using Phone = 3
   // Forget Password = 4
   // Reset Password = 5
+  //basepage=6
 
   int index = AppGlobal.index;
 

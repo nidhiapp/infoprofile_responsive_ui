@@ -144,11 +144,21 @@ class LoginUsingPhone extends StatelessWidget {
                       width: w * 0.057,
                     )),
                     Expanded(
-                        child: Image.asset(
-                      AppImages.googly,
-                      height: h * 0.04,
-                      width: w * 0.057,
-                    )),
+                        child: InkWell( onTap: () async {
+                            await authProvider.googleLogin().then((value) {
+                              if (value == true) {
+                                provider.basePage();
+                              }
+                            }).onError((error, stackTrace) {
+                              debugPrint("Error while Login");
+                            });
+                          },
+                          child: Image.asset(
+                                              AppImages.googly,
+                                              height: h * 0.04,
+                                              width: w * 0.057,
+                                            ),
+                        )),
                     Expanded(
                         child: Image.asset(
                       AppImages.linkimg,
@@ -193,10 +203,6 @@ class LoginUsingPhone extends StatelessWidget {
         );
       }),
     );
-    // return (w > 960)
-    //     ? desktopLoginCard()
-    //     : (w > 450)
-    //         ? tabletLoginCard()
-    //         : mobileLoginCard();
+ 
   }
 }

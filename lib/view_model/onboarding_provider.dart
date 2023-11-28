@@ -11,11 +11,10 @@ class AuthProvider extends ChangeNotifier {
   final TextEditingController passCont = TextEditingController();
   final TextEditingController phoneNumber = TextEditingController();
   final TextEditingController otpController = TextEditingController();
-  FocusNode emailfocusNode = FocusNode();
-  FocusNode passwordFocusNode = FocusNode();
-
-  FocusNode buttonFocusNode = FocusNode();
-  FocusNode phoneNumberFocusNode = FocusNode();
+ final FocusNode emailfocusNode = FocusNode();
+ final FocusNode passwordFocusNode = FocusNode();
+final FocusNode buttonFocusNode = FocusNode();
+ final FocusNode phoneNumberFocusNode = FocusNode();
 
   @override
   void dispose() {
@@ -24,7 +23,6 @@ class AuthProvider extends ChangeNotifier {
     phoneNumber.dispose();
     otpController.dispose();
     emailfocusNode.dispose();
-    passwordFocusNode.dispose();
     passwordFocusNode.dispose();
     buttonFocusNode.dispose();
     phoneNumberFocusNode.dispose();

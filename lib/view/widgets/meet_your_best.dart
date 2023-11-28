@@ -43,11 +43,12 @@ class MeetYourBestConnection extends StatelessWidget {
   }
   static Widget mobileMeetYrBestCon(){
      return Column(crossAxisAlignment: CrossAxisAlignment.center,
+     mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(AppTexts.meetYourBest,style:meetYourbestmobTs,),
         Text(AppTexts.connections,style: connectionsmobTs,),
              SizedBox(height: h * 0.02,),
-        Text(AppTexts.buildFast,style: buildfastTs,),
+        Text(AppTexts.buildFast,style: buildfastTs,textAlign: TextAlign.center,),
         SizedBox(height: h * 0.07,),
     
       ],
