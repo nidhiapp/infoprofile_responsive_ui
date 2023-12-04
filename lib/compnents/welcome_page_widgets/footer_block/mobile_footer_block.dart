@@ -4,12 +4,12 @@ import 'package:info_profile_ui/utils/app_images.dart';
 import 'package:info_profile_ui/utils/app_texts.dart';
 import 'package:info_profile_ui/utils/constants.dart';
 import 'package:info_profile_ui/utils/ui_helper.dart/custom_textstyles.dart';
-import 'package:info_profile_ui/view/widgets/footer_block/elements_in%20_footer/company.dart';
-import 'package:info_profile_ui/view/widgets/footer_block/elements_in%20_footer/feature.dart';
-import 'package:info_profile_ui/view/widgets/footer_block/elements_in%20_footer/help_nd_support.dart';
-import 'package:info_profile_ui/view/widgets/footer_block/elements_in%20_footer/info_profile_footer_logo.dart';
-import 'package:info_profile_ui/view/widgets/footer_block/elements_in%20_footer/link.dart';
-import 'package:info_profile_ui/view/widgets/footer_block/elements_in%20_footer/not_normal_app.dart';
+import 'package:info_profile_ui/compnents/welcome_page_widgets/footer_block/elements_in%20_footer/company.dart';
+import 'package:info_profile_ui/compnents/welcome_page_widgets/footer_block/elements_in%20_footer/feature.dart';
+import 'package:info_profile_ui/compnents/welcome_page_widgets/footer_block/elements_in%20_footer/help_nd_support.dart';
+import 'package:info_profile_ui/compnents/welcome_page_widgets/footer_block/elements_in%20_footer/info_profile_footer_logo.dart';
+import 'package:info_profile_ui/compnents/welcome_page_widgets/footer_block/elements_in%20_footer/link.dart';
+import 'package:info_profile_ui/compnents/welcome_page_widgets/footer_block/elements_in%20_footer/not_normal_app.dart';
 class MobileFooter extends StatelessWidget {
   const MobileFooter({super.key});
 

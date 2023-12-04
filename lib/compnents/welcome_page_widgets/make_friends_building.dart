@@ -3,7 +3,7 @@ import 'package:info_profile_ui/utils/app_images.dart';
 import 'package:info_profile_ui/utils/app_texts.dart';
 import 'package:info_profile_ui/utils/constants.dart';
 import 'package:info_profile_ui/utils/ui_helper.dart/custom_textstyles.dart';
-import 'package:info_profile_ui/view/background_widgets.dart/map_section_bg.dart';
+import 'package:info_profile_ui/compnents/background_widgets.dart/map_section_bg.dart';
 
 class MakeFriendsByBuilding extends StatelessWidget {
   const MakeFriendsByBuilding({super.key});

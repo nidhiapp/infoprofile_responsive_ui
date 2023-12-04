@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:info_profile_ui/utils/app_colors.dart';
 import 'package:info_profile_ui/utils/app_images.dart';
 import 'package:info_profile_ui/utils/app_texts.dart';
 import 'package:info_profile_ui/utils/constants.dart';
+import 'package:info_profile_ui/utils/custom_validation.dart';
 import 'package:info_profile_ui/utils/global.dart';
+import 'package:info_profile_ui/utils/routes/app_routes_constants.dart';
 import 'package:info_profile_ui/utils/ui_helper.dart/custom_textfield.dart';
 import 'package:info_profile_ui/utils/ui_helper.dart/custom_textstyles.dart';
 import 'package:info_profile_ui/view_model/onboarding_provider.dart';
@@ -109,11 +112,12 @@ class LoginCard extends StatelessWidget {
             ),
             InkWell(
               onTap: () async {
-                await authProvider
-                    .loginUsingEmailAndPassword(context)
-                    .then((value) {
+                await authProvider.loginUsingEmailAndPassword(context, () {
+                  context.goNamed(MyAppRouteConstants.homePageRoute);
+                }).then((value) {
                   if (value == true) {
-                    provider.basePage();
+                    // GoRouter.of(context) .pushNamed(MyAppRouteConstants.homePageRoute);
+                    //  provider.basePage();
                   }
                 }).onError((error, stackTrace) {});
               },
@@ -192,7 +196,9 @@ class LoginCard extends StatelessWidget {
                       onTap: () async {
                         await authProvider.googleLogin().then((value) {
                           if (value == true) {
-                            provider.basePage();
+                            GoRouter.of(context)
+                                .pushNamed(MyAppRouteConstants.homePageRoute);
+                            // provider.basePage();
                           }
                         }).onError((error, stackTrace) {
                           debugPrint("Error while Login");
@@ -323,10 +329,11 @@ class LoginCard extends StatelessWidget {
               ),
               Align(
                 alignment: Alignment.bottomRight,
-                child: InkWell(onTap: () {
-                   authProvider.loading;
+                child: InkWell(
+                  onTap: () {
+                    authProvider.loading;
                     provider.forgetPassword();
-                },
+                  },
                   child: Text(
                     AppTexts.forgetpass,
                     style: forgetPassTs,
@@ -338,12 +345,9 @@ class LoginCard extends StatelessWidget {
               ),
               InkWell(
                 onTap: () async {
-                  await authProvider
-                      .loginUsingEmailAndPassword(context)
-                      .then((value) {
-                    if (value == true) {
-                      provider.basePage();
-                    }
+                  await authProvider.loginUsingEmailAndPassword(context, () {
+                    provider.basePage();
+                  }).then((value) {
                   }).onError((error, stackTrace) {});
                 },
                 child: Container(
@@ -552,10 +556,11 @@ class LoginCard extends StatelessWidget {
               ),
               Align(
                 alignment: Alignment.bottomRight,
-                child: InkWell(onTap: () {
-                   authProvider.loading;
+                child: InkWell(
+                  onTap: () {
+                    authProvider.loading;
                     provider.forgetPassword();
-                },
+                  },
                   child: Text(
                     AppTexts.forgetpass,
                     style: forgetPassTs,
@@ -568,11 +573,10 @@ class LoginCard extends StatelessWidget {
               InkWell(
                 onTap: () async {
                   await authProvider
-                      .loginUsingEmailAndPassword(context)
+                      .loginUsingEmailAndPassword(context, () {
+                        provider.basePage();
+                      })
                       .then((value) {
-                    if (value == true) {
-                    provider.basePage();
-                  }
                   }).onError((error, stackTrace) {});
                 },
                 child: Container(

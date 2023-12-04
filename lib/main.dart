@@ -1,21 +1,21 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:info_profile_ui/services/auth_services.dart';
-import 'package:info_profile_ui/ui/home_page.dart';
+import 'package:info_profile_ui/credentials.dart';
+import 'package:info_profile_ui/utils/routes/app_routes_configue.dart';
 import 'package:info_profile_ui/view_model/onboarding_provider.dart';
 import 'package:info_profile_ui/view_model/provider.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await  Firebase.initializeApp(options:
-  const FirebaseOptions(
-      apiKey: "AIzaSyA5a8rxTDtxPWUGen6TyN1he6vpLb8lEaU",
-      authDomain: "infoprofile-6b660.firebaseapp.com",
-      projectId: "infoprofile-6b660",
-      messagingSenderId: "19539703423",
-      appId: "1:19539703423:web:74622f4dae41ccf911f14a",
-    ));
+  await Firebase.initializeApp(
+    options: const FirebaseOptions(
+    apiKey: Cred.apiKey,
+    authDomain: Cred.authDomain,
+    projectId: Cred.projectId,
+    messagingSenderId: Cred.messagingSenderId,
+    appId: Cred.appId,
+  ));
   runApp(const MyApp());
 }
 
@@ -27,12 +27,17 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => Providers()),
-        ChangeNotifierProvider(create: (_) => AuthProvider()),],
-         child: const MaterialApp(
-            debugShowCheckedModeBanner: false,
-            title: 'Infoprofile',
-            home: CompleteSetUps(),
-       ),
+        ChangeNotifierProvider(create: (_) => AuthProvider()),
+      ],
+      child:MaterialApp.router(
+        debugShowCheckedModeBanner: false,
+        title: 'Infoprofile',
+     // home: WelcomePage(),
+        routeInformationParser: MyAppRouter.router.routeInformationParser,
+        routerDelegate: MyAppRouter.router.routerDelegate ,
+        routeInformationProvider: MyAppRouter.router.routeInformationProvider,
+      
+      ),
     );
   }
 }

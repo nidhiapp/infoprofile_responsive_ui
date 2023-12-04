@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:info_profile_ui/repository/firebase_api.dart';
-import 'package:info_profile_ui/utils/app_colors.dart';
-import 'package:info_profile_ui/utils/global.dart';
+import 'package:info_profile_ui/utils/custom_validation.dart';
+import 'package:info_profile_ui/utils/ui_helper.dart/custom_toast.dart';
 import '../services/auth_services.dart';
-import '../ui/home_page.dart';
 
 class AuthProvider extends ChangeNotifier {
   int _authStateIndex = 0;
@@ -11,10 +10,10 @@ class AuthProvider extends ChangeNotifier {
   final TextEditingController passCont = TextEditingController();
   final TextEditingController phoneNumber = TextEditingController();
   final TextEditingController otpController = TextEditingController();
- final FocusNode emailfocusNode = FocusNode();
- final FocusNode passwordFocusNode = FocusNode();
-final FocusNode buttonFocusNode = FocusNode();
- final FocusNode phoneNumberFocusNode = FocusNode();
+  final FocusNode emailfocusNode = FocusNode();
+  final FocusNode passwordFocusNode = FocusNode();
+  final FocusNode buttonFocusNode = FocusNode();
+  final FocusNode phoneNumberFocusNode = FocusNode();
 
   @override
   void dispose() {
@@ -26,7 +25,6 @@ final FocusNode buttonFocusNode = FocusNode();
     passwordFocusNode.dispose();
     buttonFocusNode.dispose();
     phoneNumberFocusNode.dispose();
-    // TODO: implement dispose
     super.dispose();
   }
 
@@ -51,16 +49,18 @@ final FocusNode buttonFocusNode = FocusNode();
     setLoading(true);
     String email = emailCont.text.toString().trim();
     String pass = passCont.text.toString().trim();
-    // if(Utils.isValidEmail(email) || Utils.isValidPass(pass)) return;
     debugPrint("Email is $email password is $pass");
-    await _api.registerUserWithEmailPassword(email, pass).then((value) {
-      debugPrint("Register Success");
-      emailCont.text = "";
-      passCont.text = "";
+    await _api
+        .registerUserWithEmailPassword(email, pass, context)
+        .then((value) {
+      if (value == true) {
+        debugPrint("Register Success");
+        emailCont.text = "";
+        passCont.text = "";
+      }
     }).onError((error, stackTrace) {
       debugPrint("Register Failed!");
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text("Create Account Error $error")));
+      CustomToast(context: context, message: "Create Account Error $error");
     });
     setLoading(false);
   }
@@ -130,7 +130,7 @@ final FocusNode buttonFocusNode = FocusNode();
     return res;
   }
 
-  Future<bool?> loginUsingEmailAndPassword(BuildContext context) async {
+  Future<bool?> loginUsingEmailAndPassword(BuildContext context, onTap) async {
     setLoading(true);
     String email = emailCont.text.toString().trim();
     String password = passCont.text.toString().trim();
@@ -147,9 +147,16 @@ final FocusNode buttonFocusNode = FocusNode();
         .then((value) {
       res = value;
       if (value == true) {
+        debugPrint("why not navigating");
+        // context.goNamed(MyAppRouteConstants.homePageRoute);
         debugPrint("Login Success Using Email and Password");
+        try {
+        onTap();
         emailCont.text = "";
         passCont.text = "";
+        } catch (e) {
+          debugPrint("Error is $e");
+        }
       } else {
         debugPrint("Login failed! Using Email and Password");
       }

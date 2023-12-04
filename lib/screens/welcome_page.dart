@@ -1,38 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:info_profile_ui/utils/app_colors.dart';
 import 'package:info_profile_ui/utils/constants.dart';
-import 'package:info_profile_ui/view/widgets/appstore_playstore.dart';
-import 'package:info_profile_ui/view/widgets/base_page.dart';
-import 'package:info_profile_ui/view/widgets/download_our_app_from.dart';
-import 'package:info_profile_ui/view/widgets/footer_block/mobile_footer_block.dart';
-import 'package:info_profile_ui/view/widgets/footer_block/tablet_footer_block.dart';
-import 'package:info_profile_ui/view/widgets/image_plus_text_below_blocks.dart';
-import 'package:info_profile_ui/view/widgets/info_profile_is_designed.dart';
-import 'package:info_profile_ui/view/widgets/infoprofile_logo.dart';
-import 'package:info_profile_ui/view/widgets/onboarding/login_card.dart';
-import 'package:info_profile_ui/view/widgets/make_friends_building.dart';
-import 'package:info_profile_ui/view/widgets/meet_your_best.dart';
-import 'package:info_profile_ui/view/background_widgets.dart/upper_bg_rectangles.dart';
-import 'package:info_profile_ui/view/widgets/onboarding/otp_page.dart';
-import 'package:info_profile_ui/view/widgets/try_info_profile_for_free.dart';
-import 'package:info_profile_ui/view/widgets/visitingcrd_sharemedia_mltplpr.dart';
+import 'package:info_profile_ui/compnents/welcome_page_widgets/appstore_playstore.dart';
+import 'package:info_profile_ui/compnents/welcome_page_widgets/base_page.dart';
+import 'package:info_profile_ui/compnents/welcome_page_widgets/download_our_app_from.dart';
+import 'package:info_profile_ui/compnents/welcome_page_widgets/footer_block/mobile_footer_block.dart';
+import 'package:info_profile_ui/compnents/welcome_page_widgets/footer_block/tablet_footer_block.dart';
+import 'package:info_profile_ui/compnents/welcome_page_widgets/image_plus_text_below_blocks.dart';
+import 'package:info_profile_ui/compnents/welcome_page_widgets/info_profile_is_designed.dart';
+import 'package:info_profile_ui/compnents/welcome_page_widgets/infoprofile_logo.dart';
+import 'package:info_profile_ui/compnents/welcome_page_widgets/onboarding/login_card.dart';
+import 'package:info_profile_ui/compnents/welcome_page_widgets/make_friends_building.dart';
+import 'package:info_profile_ui/compnents/welcome_page_widgets/meet_your_best.dart';
+import 'package:info_profile_ui/compnents/background_widgets.dart/upper_bg_rectangles.dart';
+import 'package:info_profile_ui/compnents/welcome_page_widgets/onboarding/otp_page.dart';
+import 'package:info_profile_ui/compnents/welcome_page_widgets/try_info_profile_for_free.dart';
+import 'package:info_profile_ui/compnents/welcome_page_widgets/visitingcrd_sharemedia_mltplpr.dart';
 import 'package:provider/provider.dart';
 import '../services/auth_services.dart';
-import '../view/background_widgets.dart/scroll_image.dart';
-import '../view/widgets/footer_block/desktop_footer_block.dart';
-import '../view/widgets/onboarding/forget_pass.dart';
-import '../view/widgets/onboarding/login_phone_num.dart';
-import '../view/widgets/onboarding/reset_password.dart';
-import '../view/widgets/onboarding/sign_up_card.dart';
+import '../compnents/background_widgets.dart/scroll_image.dart';
+import '../compnents/welcome_page_widgets/footer_block/desktop_footer_block.dart';
+import '../compnents/welcome_page_widgets/onboarding/forget_pass.dart';
+import '../compnents/welcome_page_widgets/onboarding/login_phone_num.dart';
+import '../compnents/welcome_page_widgets/onboarding/reset_password.dart';
+import '../compnents/welcome_page_widgets/onboarding/sign_up_card.dart';
 import '../view_model/provider.dart';
 
-class CompleteSetUps extends StatefulWidget {
-  const CompleteSetUps({super.key});
+class WelcomePage extends StatefulWidget {
+  const WelcomePage({super.key});
   @override
-  State<CompleteSetUps> createState() => _CompleteSetUpsState();
+  State<WelcomePage> createState() => _WelcomePageState();
 }
 
-class _CompleteSetUpsState extends State<CompleteSetUps> {
+class _WelcomePageState extends State<WelcomePage> {
   final ScrollController sc = ScrollController();
 
   @override
@@ -43,9 +43,7 @@ class _CompleteSetUpsState extends State<CompleteSetUps> {
 
   loadState() async {
     await AuthServices().isUserAlreadyLogin().then((value) {
-      if (value == true) {
-       
-      }
+      if (value == true) {}
     }).onError((error, stackTrace) {});
   }
 
@@ -55,10 +53,10 @@ class _CompleteSetUpsState extends State<CompleteSetUps> {
     h = MediaQuery.of(context).size.height;
     return Scaffold(
       body: (w > 960)
-        ? desktopCompleteSetUp(context)
-        : (w > 450)
-            ? tabletCompleteSetUp()
-            : mobileCompleteSetUp(),
+          ? desktopCompleteSetUp(context)
+          : (w > 450)
+              ? tabletCompleteSetUp()
+              : mobileCompleteSetUp(),
     );
   }
 
@@ -138,9 +136,8 @@ class _CompleteSetUpsState extends State<CompleteSetUps> {
                             if (provider.index == 2) const OtpPage(),
                             if (provider.index == 4) const ForgetPassword(),
                             if (provider.index == 5) const ResetPassword(),
-                            if (provider.index == 3) LoginUsingPhone(),
-                             if (provider.index == 6) BasePage(),
-                          
+                            if (provider.index == 3) const LoginUsingPhone(),
+                            if (provider.index == 6) const BasePage(),
                           ],
                         ),
                       )
@@ -208,8 +205,7 @@ class _CompleteSetUpsState extends State<CompleteSetUps> {
                         if (provider.index == 4) const ForgetPassword(),
                         if (provider.index == 5) const ResetPassword(),
                         if (provider.index == 3) LoginUsingPhone(),
-                          if (provider.index == 6) BasePage(),
-                       
+                        if (provider.index == 6) BasePage(),
                       ],
                     )
                   ],
@@ -291,15 +287,15 @@ class _CompleteSetUpsState extends State<CompleteSetUps> {
                           height: h * 0.03,
                         ),
                         MeetYourBestConnection.mobileMeetYrBestCon(),
-                       // LoginCard.mobileLoginCard(),
-                       if (provider.index == 0) LoginCard.mobileLoginCard(),
+                        // LoginCard.mobileLoginCard(),
+                        if (provider.index == 0) LoginCard.mobileLoginCard(),
                         if (provider.index == 1) const SignUpCard(),
                         if (provider.index == 2) const OtpPage(),
                         if (provider.index == 4) const ForgetPassword(),
                         if (provider.index == 5) const ResetPassword(),
                         if (provider.index == 3) LoginUsingPhone(),
                         if (provider.index == 6) BasePage(),
-                      
+
                         SizedBox(
                           height: h * 0.07,
                         ),

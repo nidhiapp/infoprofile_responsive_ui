@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:info_profile_ui/utils/app_colors.dart';
 import 'package:info_profile_ui/utils/app_texts.dart';
 import 'package:info_profile_ui/utils/constants.dart';
-import 'package:info_profile_ui/utils/global.dart';
+import 'package:info_profile_ui/utils/custom_validation.dart';
 import 'package:info_profile_ui/utils/ui_helper.dart/custom_textfield.dart';
 import 'package:info_profile_ui/utils/ui_helper.dart/custom_textstyles.dart';
 import 'package:info_profile_ui/view_model/onboarding_provider.dart';
@@ -108,7 +108,11 @@ class _SignUpCardState extends State<SignUpCard> {
               onTap: () async {
                 if (_acceptPrivacyPolicy) {
                   await authProvider.createAccount(context).then((value) {
-                    provider.desktopLogin();
+                    if (value == true) {
+                      provider.desktopLogin();
+                    } else {
+                      
+                    }
                   });
                 }
               },
@@ -120,7 +124,9 @@ class _SignUpCardState extends State<SignUpCard> {
                 ),
                 child: Center(
                     child: (authProvider.loading)
-                        ? const CircularProgressIndicator(color: AppColors.logincardColor,)
+                        ? const CircularProgressIndicator(
+                            color: AppColors.logincardColor,
+                          )
                         : Text(
                             AppTexts.signUp,
                             style: loginButtonTs,

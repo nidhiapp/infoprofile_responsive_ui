@@ -4,7 +4,7 @@ import 'package:info_profile_ui/utils/app_images.dart';
 import 'package:info_profile_ui/utils/app_texts.dart';
 import 'package:info_profile_ui/utils/constants.dart';
 import 'package:info_profile_ui/utils/ui_helper.dart/custom_textstyles.dart';
-import 'package:info_profile_ui/view/background_widgets.dart/dot_dot_rectangle.dart';
+import 'package:info_profile_ui/compnents/background_widgets.dart/dot_dot_rectangle.dart';
 
 class DownloadOurAppFrom extends StatelessWidget {
   const DownloadOurAppFrom({super.key});

@@ -1,10 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class FirebaseApi {
   FirebaseAuth auth = FirebaseAuth.instance;
   Future<bool?> registerUserWithEmailPassword(
-      String email, String password) async {
+      String email, String password, BuildContext context) async {
     bool? res;
 
     debugPrint("Register Using email --> $email and password --> $password");
@@ -15,6 +16,10 @@ class FirebaseApi {
       debugPrint("Success SignUp");
     }).onError((error, stackTrace) {
       debugPrint("Error While SignUp $error");
+
+        ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text("Create Account Error: $error")));
+
     });
     return res;
   }
