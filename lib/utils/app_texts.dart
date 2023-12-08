@@ -85,15 +85,19 @@ class AppTexts {
   static const String loginWithPass = "Log In with Password";
   static const String loginwithPhMess =
       "Enter your phone number so that we can send you OTP to login into the application.";
-  static const String termcon =
-      "By registering you are accepting ";
-        static const String privacy =   " “Privacy Policy” ";
-   
-        static const String termsOfUses =
-      " “Terms of Use”. ";
-              static const String and=
-      " and. ";
+  static const String termcon = "By registering you are accepting ";
+  static const String privacy = " “Privacy Policy” ";
 
-    static const String logout =  "Log out";
-      static const String areYouSure = "Are you sure you want to logout?";
+  static const String termsOfUses = " “Terms of Use”. ";
+  static const String and = " and. ";
+
+  static const String logout = "Log out";
+  static const String areYouSure = "Are you sure you want to logout?";
+  static const String viewAll = "View All";
+  static const String follower = "Follower";
+  static const String following = "Following";
+  static const String updateYourActivity = "Update Your Activity";
+  static const String startWriting = "start writing your post here";
+    static const String post = "Post";
+    static const String blog= "Blog";
 }

@@ -69,14 +69,14 @@ class AuthProvider extends ChangeNotifier {
     return await _api.getEmail();
   }
 
-  Future<bool?> logout(VoidCallback? onTap) async {
+  Future<bool?> logout() async {
     bool? res;
     debugPrint("Going to logout Provider");
     setLoading(true);
     await _api.logOut().then((value) {
       if (value == true) {
         res = value;
-        if (onTap != null) onTap();
+        //if (onTap != null) onTap();
       } else {
         debugPrint("Error -->$value");
       }
@@ -147,8 +147,6 @@ class AuthProvider extends ChangeNotifier {
         .then((value) {
       res = value;
       if (value == true) {
-        debugPrint("why not navigating");
-        // context.goNamed(MyAppRouteConstants.homePageRoute);
         debugPrint("Login Success Using Email and Password");
         try {
         onTap();

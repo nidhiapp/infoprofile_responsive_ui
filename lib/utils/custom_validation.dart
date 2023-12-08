@@ -67,6 +67,15 @@ class Utils {
     return null;
   }
 
+  static String? isValidName(String? value) {
+    if (value!.isEmpty) {
+      return null;
+    } else if (value.length < 3) {
+      return 'Enter a name';
+    }
+    return null;
+  }
+
   static hideKeyboard(context) {
     FocusScopeNode currentFocus = FocusScope.of(context);
     if (!currentFocus.hasPrimaryFocus && currentFocus.focusedChild != null) {

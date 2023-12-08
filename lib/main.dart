@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:info_profile_ui/credentials.dart';
+import 'package:info_profile_ui/screens/home_page.dart';
 import 'package:info_profile_ui/utils/routes/app_routes_configue.dart';
 import 'package:info_profile_ui/view_model/onboarding_provider.dart';
 import 'package:info_profile_ui/view_model/provider.dart';
@@ -29,6 +30,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => Providers()),
         ChangeNotifierProvider(create: (_) => AuthProvider()),
       ],
+      // child: MaterialApp(
+      //   home: HomePage(),
+      // ),
       child:MaterialApp.router(
         debugShowCheckedModeBanner: false,
         title: 'Infoprofile',
@@ -37,7 +41,7 @@ class MyApp extends StatelessWidget {
         routerDelegate: MyAppRouter.router.routerDelegate ,
         routeInformationProvider: MyAppRouter.router.routeInformationProvider,
       
-      ),
+    ),
     );
   }
 }
