@@ -21,11 +21,11 @@ class HomePageFooter extends StatelessWidget {
           children: [
          Wrap(spacing: 50,runSpacing: 5,
            children: [
-            Text("Privacy Policy",style:AppStyle.fourOneFourUnderLineTs,),
-            Text("About Us",style:AppStyle.fourOneFourUnderLineTs,),
-            Text("Contact Us",style:AppStyle.fourOneFourUnderLineTs,),
-            Text("Terms & Conditions",style:AppStyle.fourOneFourUnderLineTs,),
-            Text("FAQs",style:AppStyle.fourOneFourUnderLineTs,)
+            Text(AppTexts.privacyPolicyFooter,style:AppStyle.fourOneFourUnderLineTs,),
+            Text(AppTexts.aboutFooter,style:AppStyle.fourOneFourUnderLineTs,),
+            Text(AppTexts.contactFooter,style:AppStyle.fourOneFourUnderLineTs,),
+            Text(AppTexts.termsConditionsFooter,style:AppStyle.fourOneFourUnderLineTs,),
+            Text(AppTexts.faq,style:AppStyle.fourOneFourUnderLineTs,)
            ],
          ),
          SizedBox(height: 10,),
@@ -75,7 +75,7 @@ class HomePageFooter extends StatelessWidget {
           ),
           child: Image.asset(AppImages.infoProfFooterLogo,)),
         SizedBox(height: 8,),
-        Text("Not a  normal app, its unique!",
+        Text(AppTexts.notANormal,
         style: GoogleFonts.poppins(
         textStyle:TextStyle(
         color: Color.fromRGBO(255, 255, 255, 1) ,
@@ -84,14 +84,15 @@ class HomePageFooter extends StatelessWidget {
     
           ), 
           ),),
-        Text("Services are provided everywhere.",
+        Text(AppTexts.servicesAreProvided,
         style: GoogleFonts.poppins(
         textStyle:TextStyle(
         color: Color.fromRGBO(255, 255, 255, 1) ,
           fontSize: 10,
           fontWeight: FontWeight.w400,
     
-          ), ),),
+          ), ),
+          ),
           SizedBox(height: 20,),
           Container(
             constraints: BoxConstraints(

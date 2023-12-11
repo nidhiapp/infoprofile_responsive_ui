@@ -46,7 +46,7 @@ class LoginCard extends StatelessWidget {
               spreadRadius: 2,
             ),
           ]),
-      child: Consumer2<Providers, AuthProvider>(
+      child: Consumer2<Providers, AuthProviders>(
           builder: (context, provider, authProvider, ch) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -80,10 +80,22 @@ class LoginCard extends StatelessWidget {
               height: h * 0.02,
             ),
             CustomTextField(
-              onFieldSubmitted: (String? val) {
+              onFieldSubmitted: (String? val)async {
+
                 Utils.changeFocus(context, authProvider.passwordFocusNode,
                     authProvider.buttonFocusNode);
+                     await authProvider.loginUsingEmailAndPassword(context, () {
+                 
+                }).then((value) {
+                  if (value == true) {
+                     context.goNamed(MyAppRouteConstants.homePageRoute);
+                    // GoRouter.of(context) .pushNamed(MyAppRouteConstants.homePageRoute);
+                    //  provider.basePage();
+                  }
+                }).onError((error, stackTrace) {});
+
               },
+              
               customValidator: Utils.isValidPassnull,
               focusNode: authProvider.passwordFocusNode,
               customController: authProvider.passCont,
@@ -91,6 +103,7 @@ class LoginCard extends StatelessWidget {
               isPasswordField: true,
               prefixicon: Icons.lock_outlined,
               hintext: AppTexts.password,
+              
             ),
             Align(
                 alignment: Alignment.bottomRight,
@@ -101,7 +114,7 @@ class LoginCard extends StatelessWidget {
                   },
                   child: Text(
                     AppTexts.forgetpass,
-                    style: AppStyle. forgetPassTs,
+                    style: AppStyle.fiveOneFourBlack,
                   ),
                 )),
             SizedBox(
@@ -135,7 +148,7 @@ class LoginCard extends StatelessWidget {
                           )
                         : Text(
                             AppTexts.login,
-                            style:  AppStyle.loginButtonTs,
+                            style:  AppStyle.sevenOneSixWhite,
                           )),
               ),
             ),
@@ -153,7 +166,7 @@ class LoginCard extends StatelessWidget {
                   ),
                   Text(
                     AppTexts.or,
-                    style:  AppStyle.orTs,
+                    style:  AppStyle.sixOneFourBlack,
                   ),
                   Expanded(
                     child: Container(
@@ -239,11 +252,11 @@ class LoginCard extends StatelessWidget {
                 children: [
                   Text(
                     AppTexts.dontHaveAccount,
-                    style:  AppStyle.forgetPassTs,
+                    style:  AppStyle.fiveOneFourBlack,
                   ),
                   Text(
                     AppTexts.signUp,
-                    style:  AppStyle.signupTs,
+                    style:  AppStyle.sixOneTwoBlueUl,
                   )
                 ],
               ),
@@ -273,7 +286,7 @@ class LoginCard extends StatelessWidget {
               spreadRadius: 2,
             ),
           ]),
-      child: Consumer2<Providers, AuthProvider>(
+      child: Consumer2<Providers, AuthProviders>(
         builder: (context, provider, authProvider, ch) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -337,7 +350,7 @@ class LoginCard extends StatelessWidget {
                   },
                   child: Text(
                     AppTexts.forgetpass,
-                    style:  AppStyle.forgetPassTs,
+                    style:  AppStyle.fiveOneFourBlack,
                   ),
                 ),
               ),
@@ -364,7 +377,7 @@ class LoginCard extends StatelessWidget {
                           )
                         : Text(
                             AppTexts.login,
-                            style:  AppStyle.loginButtonTs,
+                            style:  AppStyle.sevenOneSixWhite,
                           ),
                   ),
                 ),
@@ -381,7 +394,7 @@ class LoginCard extends StatelessWidget {
                     ),
                     Text(
                       AppTexts.or,
-                      style:  AppStyle.orTs,
+                      style:  AppStyle.sixOneFourBlack,
                     ),
                     Container(
                       height: 1.5,
@@ -467,11 +480,11 @@ class LoginCard extends StatelessWidget {
                   children: [
                     Text(
                       AppTexts.dontHaveAccount,
-                      style:  AppStyle.forgetPassTs,
+                      style:  AppStyle.fiveOneFourBlack,
                     ),
                     Text(
                       AppTexts.signUp,
-                      style: AppStyle.signupTs,
+                      style: AppStyle.sixOneTwoBlueUl,
                     ),
                   ],
                 ),
@@ -500,7 +513,7 @@ class LoginCard extends StatelessWidget {
           ),
         ],
       ),
-      child: Consumer2<Providers, AuthProvider>(
+      child: Consumer2<Providers, AuthProviders>(
         builder: (context, provider, authProvider, ch) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -564,7 +577,7 @@ class LoginCard extends StatelessWidget {
                   },
                   child: Text(
                     AppTexts.forgetpass,
-                    style:  AppStyle.forgetPassTs,
+                    style:  AppStyle.fiveOneFourBlack,
                   ),
                 ),
               ),
@@ -593,7 +606,7 @@ class LoginCard extends StatelessWidget {
                           )
                         : Text(
                             AppTexts.login,
-                            style:  AppStyle.loginButtonTs,
+                            style:  AppStyle.sevenOneSixWhite,
                           ),
                   ),
                 ),
@@ -610,7 +623,7 @@ class LoginCard extends StatelessWidget {
                     ),
                     Text(
                       AppTexts.or,
-                      style:  AppStyle.orTs,
+                      style:  AppStyle.sixOneFourBlack,
                     ),
                     Container(
                       height: 1.5,
@@ -687,7 +700,7 @@ class LoginCard extends StatelessWidget {
                   children: [
                     Text(
                       AppTexts.dontHaveAccount,
-                      style:  AppStyle.forgetPassTs,
+                      style:  AppStyle.fiveOneFourBlack,
                     ),
                     InkWell(
                       onTap: () {
@@ -695,7 +708,7 @@ class LoginCard extends StatelessWidget {
                       },
                       child: Text(
                         AppTexts.signUp,
-                        style:  AppStyle.signupTs,
+                        style:  AppStyle.sixOneTwoBlueUl,
                       ),
                     ),
                   ],

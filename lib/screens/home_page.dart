@@ -1,7 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:info_profile_ui/components/connections_list.dart';
 import 'package:info_profile_ui/components/create_post.dart';
-import 'package:info_profile_ui/components/custom_app_bar.dart';
+import 'package:info_profile_ui/models/user_post_model.dart';
+import 'package:info_profile_ui/repository/profile_repo.dart';
+import 'package:info_profile_ui/utils/ui_helper.dart/app_link.dart';
+import 'package:info_profile_ui/utils/ui_helper.dart/custom_app_bar.dart';
 import 'package:info_profile_ui/components/home_page_footer.dart';
 import 'package:info_profile_ui/components/user_posts.dart';
 import 'package:info_profile_ui/utils/app_colors.dart';
@@ -9,6 +13,8 @@ import 'package:info_profile_ui/utils/app_images.dart';
 import 'package:info_profile_ui/utils/app_texts.dart';
 import 'package:info_profile_ui/utils/global.dart';
 import 'package:info_profile_ui/utils/ui_helper.dart/custom_textstyles.dart';
+import 'package:info_profile_ui/view_model/base_provider.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -30,7 +36,7 @@ class _HomePageState extends State<HomePage> {
             top: -20,
             child: Image.asset(
               AppImages.homePageBg,
-              width: w*1,
+              width: w * 1,
               fit: BoxFit.fill,
             ),
           ),
@@ -69,12 +75,42 @@ class _HomePageState extends State<HomePage> {
                                   Text(AppTexts.follower,
                                       style: AppStyle.connectionHeader),
                                   Expanded(
-                                    child: ListView.builder(
-                                        itemCount: 4,
-                                        itemBuilder: (context, index) {
-                                          return const ConnectionsListBox();
-                                        }),
-                                  ),
+                                      child: StreamBuilder(
+                                    stream: FirebaseProfileRepository()
+                                        .getCurrentUserProfile(FirebaseAuth
+                                            .instance.currentUser!.uid),
+                                    builder: (context, snapshot) {
+                                      if (snapshot.hasData &&
+                                          snapshot.data != null) {
+                                        if (snapshot
+                                                .data!.followerList?.isEmpty ??
+                                            true) {
+                                          debugPrint(
+                                              "Called **********************${snapshot.data!.followerList!.length}**************************");
+                                          return Image.asset(
+                                              AppImages.emptyImg);
+                                        } else {
+                                          return ListView.builder(
+                                              itemCount: snapshot
+                                                  .data!.followerList?.length,
+                                              itemBuilder: (context, index) {
+                                                return ConnectionsList(
+                                                  imageLink:
+                                                      AppLink.defaultFemaleImg,
+                                                  uid: snapshot.data!.followerList?[index] ??
+                                                      "",
+                                                  name: snapshot.data!.email!,
+                                                  removeOnTap: () {
+                                                    FirebaseProfileRepository().removeFollower(uid: snapshot.data!.followerList![index].toString());
+                                                  },
+                                                );
+                                              });
+                                        }
+                                      } else {
+                                        return Text("no follower found");
+                                      }
+                                    },
+                                  )),
                                   Center(
                                       child: InkWell(
                                           onTap: () {},
@@ -108,14 +144,51 @@ class _HomePageState extends State<HomePage> {
                                   Text(AppTexts.following,
                                       style: AppStyle.connectionHeader),
                                   Expanded(
-                                    child:
-                                        //   EmptyConnectionsListBox()
-                                        ListView.builder(
-                                            itemCount: 4,
+                                      child:
+                                          //   EmptyConnectionsListBox()
+                                          StreamBuilder(
+                                    stream: FirebaseProfileRepository()
+                                        .getCurrentUserProfile(FirebaseAuth
+                                            .instance.currentUser!.uid),
+                                    builder: (context, snapshot) {
+                                      if (snapshot.hasData &&
+                                          snapshot.data != null) {
+                                        if (snapshot
+                                                .data!.followingList!.length ==
+                                            0) {
+                                          return Image.asset(
+                                              AppImages.emptyImg);
+                                        }
+                                        return ListView.builder(
+                                            itemCount: snapshot.data!
+                                                    .followingList!.length ??
+                                                0,
                                             itemBuilder: (context, index) {
-                                              return const ConnectionsListBox();
-                                            }),
-                                  ),
+                                              return Consumer<BaseProvider>(
+                                                builder:
+                                                    (context, value, child) {
+                                                  return ConnectionsList(
+                                                    imageLink: AppLink
+                                                        .defaultFemaleImg,
+                                                    uid: snapshot.data!
+                                                        .followingList![index],
+                                                    name: snapshot.data!.email!,
+                                                    removeOnTap: () {
+                                                      debugPrint("remove user");
+                                                      FirebaseProfileRepository().removeFollowing(uid:
+                                                          snapshot.data!
+                                                        .followingList![index]);
+                                                    },
+                                                  );
+                                                },
+                                              );
+                                            });
+                                      } else {
+                                        debugPrint("show empty image ");
+                                        return Image.asset(AppImages.emptyImg);
+                                      }
+                                    },
+                                  )),
                                   Center(
                                       child: InkWell(
                                           onTap: () {},
@@ -136,18 +209,52 @@ class _HomePageState extends State<HomePage> {
                   ),
                   Expanded(
                     flex: 4,
-                    child: Column(
-                      children: [
-                        Expanded(
-                            child: SingleChildScrollView(
-                                child: Column(
-                          children: [
-                            const CreatePosts(),
-                            ...List.generate(
-                                10, (index) => const userPostConatiner()),
-                          ],
-                        )))
-                      ],
+                    child: Consumer<BaseProvider>(
+                      builder: (context, baseProvider, child) {
+                        return StreamBuilder<List<PostModel?>>(
+                          stream: baseProvider.getUserFeed(),
+                          builder: (context, snapshot) {
+                            if (snapshot.hasError) {
+                              debugPrint("Error State ${snapshot.error}");
+                              return Container();
+                            } else if (snapshot.hasData &&
+                                snapshot.data != null) {
+                              List<PostModel?> posts = snapshot.data!;
+                              return Column(
+                                children: [
+                                  Expanded(
+                                      child: SingleChildScrollView(
+                                          child: Column(
+                                    children: [
+                                      const CreatePosts(),
+                                      ...List.generate(
+                                          posts.length,
+                                          (index) => userPostConatiner(
+                                                post: posts[index]!,
+                                              )),
+                                    ],
+                                  )))
+                                ],
+                              );
+                            } else if (snapshot.connectionState ==
+                                    ConnectionState.waiting ||
+                                snapshot.data == null ||
+                                !snapshot.hasData) {
+                              debugPrint("Waiting State");
+                              return const Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Expanded(
+                                    child: CreatePosts(),
+                                  ),
+                                ],
+                              );
+                            } else {
+                              return SizedBox();
+                            }
+                          },
+                        );
+                      },
                     ),
                   ),
                   const SizedBox(
@@ -175,10 +282,52 @@ class _HomePageState extends State<HomePage> {
                                   Text(AppTexts.follower,
                                       style: AppStyle.connectionHeader),
                                   Expanded(
-                                    child: ListView.builder(
-                                        itemCount: 4,
-                                        itemBuilder: (context, index) {
-                                          return const ConnectionsListBox();
+                                    child: StreamBuilder(
+                                        stream: FirebaseProfileRepository()
+                                            .getCurrentUserProfile(FirebaseAuth
+                                                .instance.currentUser!.uid),
+                                        builder: (context, snapshot) {
+                                          if (snapshot.hasData &&
+                                              snapshot.data != null) {
+                                            List<String> list =
+                                                snapshot.data!.followerList ??
+                                                    [];
+                                            debugPrint(
+                                                "========================================================================================================");
+                                            if (list.isEmpty) {
+                                              return Image.asset(
+                                                  AppImages.emptyImg);
+                                            }
+                                            return ListView.builder(
+                                              itemCount: snapshot.data!
+                                                      .followerList?.length ??
+                                                  0,
+                                              itemBuilder: (context, index) {
+                                                debugPrint("Got Count $index");
+                                                return Consumer<BaseProvider>(
+                                                  builder:
+                                                      (context, value, child) {
+                                                    return ConnectionsList(
+                                                      imageLink: AppLink
+                                                          .defaultFemaleImg,
+                                                      uid: snapshot.data!
+                                                          .followerList![index],
+                                                      name:
+                                                          snapshot.data!.email!,
+                                                      removeOnTap: () {
+                                                        value.removeFollower(
+                                                            uid: snapshot.data!
+                                                          .followerList![index],);
+                                                      },
+                                                    );
+                                                  },
+                                                );
+                                              },
+                                            );
+                                          } else {
+                                            return Text(
+                                                "no follower found------");
+                                          }
                                         }),
                                   ),
                                   Center(

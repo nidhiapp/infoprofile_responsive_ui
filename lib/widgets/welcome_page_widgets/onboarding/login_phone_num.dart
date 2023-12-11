@@ -38,7 +38,7 @@ class LoginUsingPhone extends StatelessWidget {
               spreadRadius: 2,
             ),
           ]),
-      child: Consumer2<Providers, AuthProvider>(
+      child: Consumer2<Providers, AuthProviders>(
           builder: (context, provider, authProvider, child) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -87,7 +87,7 @@ class LoginUsingPhone extends StatelessWidget {
                         ? const CircularProgressIndicator(color: AppColors.logincardColor,)
                         : Text(
                   AppTexts.continu,
-                  style:  AppStyle.loginButtonTs,
+                  style:  AppStyle.sevenOneSixWhite,
                 )),
               ),
             ),
@@ -105,7 +105,7 @@ class LoginUsingPhone extends StatelessWidget {
                   ),
                   Text(
                     AppTexts.or,
-                    style:  AppStyle.orTs,
+                    style:  AppStyle.sixOneFourBlack,
                   ),
                   Expanded(
                     child: Container(
@@ -188,11 +188,11 @@ class LoginUsingPhone extends StatelessWidget {
                 children: [
                   Text(
                     AppTexts.dontHaveAccount,
-                    style:  AppStyle.forgetPassTs,
+                    style:  AppStyle.fiveOneFourBlack,
                   ),
                   Text(
                     AppTexts.signUp,
-                    style:  AppStyle.signupTs,
+                    style:  AppStyle.sixOneTwoBlueUl,
                   )
                 ],
               ),

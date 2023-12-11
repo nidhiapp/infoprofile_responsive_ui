@@ -23,6 +23,7 @@ class AppColors {
   static const Color borderCol = Color.fromRGBO(7, 99, 198, 0.15);
   static const Color lightGreyCol = Color.fromRGBO(239, 239, 239, 0.6);
   static const Color profileTextGreyCol = Color.fromRGBO(165, 167, 169, 1);
-    static const Color bluishGrey = Color.fromRGBO(160, 168, 175, 1);
+  static const Color bluishGrey = Color.fromRGBO(160, 168, 175, 1);
+  static const Color azureCol =   Color.fromRGBO(114, 178, 249, 1);
 
 }

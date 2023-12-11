@@ -8,21 +8,24 @@ import 'package:info_profile_ui/utils/global.dart';
 import 'package:info_profile_ui/utils/ui_helper.dart/app_link.dart';
 import 'package:info_profile_ui/utils/ui_helper.dart/circular_network_img.dart';
 import 'package:info_profile_ui/utils/ui_helper.dart/custom_textstyles.dart';
+import 'package:info_profile_ui/view_model/base_provider.dart';
 import 'package:info_profile_ui/view_model/provider.dart';
 import 'package:provider/provider.dart';
 
 class CreatePosts extends StatelessWidget {
   const CreatePosts({super.key});
+ 
 
   @override
   Widget build(BuildContext context) {
+     bool isEmpty=true;
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
+      padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
       decoration: BoxDecoration(
           color: AppColors.logincardColor,
           border: Border.all(width: 1, color: AppColors.borderCol),
           boxShadow: [
-            BoxShadow(
+            const BoxShadow(
               offset: Offset(0, 1),
               color: Color.fromRGBO(0, 0, 0, 0.02),
               blurRadius: 21,
@@ -40,7 +43,7 @@ class CreatePosts extends StatelessWidget {
               Text(
                 AppTexts.updateYourActivity,
                 style: GoogleFonts.poppins(
-                  textStyle: TextStyle(
+                  textStyle: const TextStyle(
                     color: AppColors.blackNormalTextColor,
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
@@ -50,7 +53,7 @@ class CreatePosts extends StatelessWidget {
               Row(
                 children: [
                   Container(
-                    padding: EdgeInsets.all(2),
+                    padding: const EdgeInsets.all(2),
                     height: 25,
                     width: 54,
                     decoration: BoxDecoration(
@@ -61,7 +64,7 @@ class CreatePosts extends StatelessWidget {
                       child: Text(
                         AppTexts.post,
                         style: GoogleFonts.poppins(
-                          textStyle: TextStyle(
+                          textStyle: const TextStyle(
                             color: AppColors.blackNormalTextColor,
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
@@ -70,13 +73,13 @@ class CreatePosts extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   Text(
                     AppTexts.blog,
                     style: GoogleFonts.poppins(
-                      textStyle: TextStyle(
+                      textStyle: const TextStyle(
                         color: AppColors.bluishGrey,
                         fontSize: 12,
                         fontWeight: FontWeight.w500,
@@ -87,13 +90,13 @@ class CreatePosts extends StatelessWidget {
               )
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
-          Consumer<Providers>(
-            builder: (context, value, child) {
+          Consumer2<Providers, BaseProvider>(
+            builder: (context, providers, baseProvider, child) {
               return Container(
-                padding: EdgeInsets.all(10),
+                padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   border: Border.all(color: AppColors.borderCol, width: 1),
@@ -115,9 +118,10 @@ class CreatePosts extends StatelessWidget {
                         ),
                         Expanded(
                           child: TextFormField(
+                            controller:baseProvider.postDescriptionController ,
                             style: AppStyle.custompoppinNormalTs,
                             decoration: InputDecoration(
-                              contentPadding: EdgeInsets.all(10),
+                              contentPadding: const EdgeInsets.all(10),
                               hintStyle: AppStyle.sixOnezeroTs,
                               hintText: AppTexts.startWriting,
                               border: InputBorder.none,
@@ -127,37 +131,40 @@ class CreatePosts extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
-                    value.isPicked
+                    baseProvider.isPicked
                         ? Stack(
                             children: [
                               Container(
-                                padding: EdgeInsets.all(10),
-                                width: w*0.3,
+                                padding: const EdgeInsets.all(10),
+                                width: w * 0.3,
                                 child: ClipRRect(
                                     borderRadius: BorderRadius.circular(20),
                                     child: kIsWeb
                                         ? Image.memory(
-                                            value.webImage!,
+                                            baseProvider.webImage!,
                                             fit: BoxFit.cover,
                                           )
-                                        : Image.file(value.pickedImage)),
+                                        : Image.file(baseProvider.pickedImage)),
                               ),
                               Positioned(
                                 right: 3,
                                 top: 3,
                                 child: InkWell(
                                   onTap: () {
-                                    value.resetImage();
+                                    baseProvider.resetImage();
                                   },
-                                  child: Container(padding: EdgeInsets.all(5),
-                                   decoration: BoxDecoration(shape: BoxShape.circle,
-                                   color: AppColors.logincardColor,
-                                   border: Border.all(width: 2,
-                                    color: AppColors.borderCol)),
-                                    child: Icon(
+                                  child: Container(
+                                    padding: const EdgeInsets.all(5),
+                                    decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: AppColors.logincardColor,
+                                        border: Border.all(
+                                            width: 2,
+                                            color: AppColors.borderCol)),
+                                    child: const Icon(
                                       Icons.close,
                                       size: 18,
                                     ),
@@ -166,39 +173,39 @@ class CreatePosts extends StatelessWidget {
                               )
                             ],
                           )
-                        : SizedBox(),
+                        : const SizedBox(),
                   ],
                 ),
               );
             },
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Consumer<Providers>(
+              Consumer<BaseProvider>(
                 builder: (context, value, child) {
                   return Row(
                     children: [
                       InkWell(
-                        onTap: value.pickImage,
-                        child: Icon(Icons.image_sharp,
+                        onTap: value.pickImageFromDevice,
+                        child: const Icon(Icons.image_sharp,
                             color: Color.fromRGBO(114, 178, 249, 1)),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 6,
                       ),
-                      Icon(
+                      const Icon(
                         Icons.video_call_outlined,
                         color: Color.fromRGBO(114, 178, 249, 1),
                         size: 30,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 6,
                       ),
-                      Icon(
+                      const Icon(
                         Icons.link,
                         color: Color.fromRGBO(114, 178, 249, 1),
                         size: 30,
@@ -207,29 +214,33 @@ class CreatePosts extends StatelessWidget {
                   );
                 },
               ),
-              InkWell(
-                onTap: () {},
-                child: Container(
-                  padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
-                  decoration: BoxDecoration(
-                      color: Color.fromRGBO(114, 178, 249, 1),
-                      borderRadius: BorderRadius.circular(10)),
-                  child: Center(
-                      child: Text(
-                    AppTexts.post,
-                    style: GoogleFonts.poppins(
-                      textStyle: TextStyle(
-                        color: Color.fromRGBO(255, 255, 255, 1),
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                      ),
+              Consumer<BaseProvider>(
+                builder: (context, baseProvider, child) {
+                  return InkWell(
+                    onTap: baseProvider.createPost,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 5.0, horizontal: 20),
+                      decoration: BoxDecoration(
+                          color:baseProvider.postDescriptionController.text.toString().isEmpty? AppColors.azureCol:AppColors.primaryColor,
+                          borderRadius: BorderRadius.circular(10)),
+                      child: Center(
+                          child: Text(
+                        AppTexts.post,
+                        style: GoogleFonts.poppins(
+                          textStyle: const TextStyle(
+                            color: Color.fromRGBO(255, 255, 255, 1),
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      )),
                     ),
-                  )),
-                ),
+                  );
+                },
               )
             ],
           ),
-          
         ],
       ),
     );

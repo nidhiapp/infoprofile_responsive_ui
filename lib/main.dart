@@ -1,8 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:info_profile_ui/credentials.dart';
-import 'package:info_profile_ui/screens/home_page.dart';
 import 'package:info_profile_ui/utils/routes/app_routes_configue.dart';
+import 'package:info_profile_ui/view_model/base_provider.dart';
+import 'package:info_profile_ui/view_model/edit_profile.dart';
 import 'package:info_profile_ui/view_model/onboarding_provider.dart';
 import 'package:info_profile_ui/view_model/provider.dart';
 import 'package:provider/provider.dart';
@@ -16,6 +17,7 @@ void main() async {
     projectId: Cred.projectId,
     messagingSenderId: Cred.messagingSenderId,
     appId: Cred.appId,
+    storageBucket: Cred.storageBucket
   ));
   runApp(const MyApp());
 }
@@ -28,7 +30,9 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => Providers()),
-        ChangeNotifierProvider(create: (_) => AuthProvider()),
+        ChangeNotifierProvider(create: (_) => AuthProviders()),
+           ChangeNotifierProvider(create: (_) => BaseProvider()),
+          ChangeNotifierProvider(create: (_) =>  EditProfileAndProfile())
       ],
       // child: MaterialApp(
       //   home: HomePage(),

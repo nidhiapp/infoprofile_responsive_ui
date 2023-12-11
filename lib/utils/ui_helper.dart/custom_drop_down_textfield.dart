@@ -118,12 +118,12 @@ class _CustomDropdownFormFieldState<T>
         }).toList(),
         decoration: InputDecoration(
           suffixIcon:Icon(widget.suffIcon),
-          // prefixIcon:Padding(
-          //   padding: const EdgeInsets.all(8.0),
-          //   child: ImageIcon(AssetImage(AppImages.genderIcon,),
-          //   color: AppColors.primaryColor,),
-          // ),
-         prefixIcon: Icon(widget.prefIcon,color: AppColors.primaryColor,),
+          prefixIcon:Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ImageIcon(AssetImage(AppImages.genderIcon,),
+            color: AppColors.primaryColor,),
+          ),
+        // prefixIcon: Icon(widget.prefIcon,color: AppColors.primaryColor,),
           hintText: widget.hintText,
           hintStyle: AppStyle.custompoppinGreyNormalTs,
           errorText: widget.errorText,

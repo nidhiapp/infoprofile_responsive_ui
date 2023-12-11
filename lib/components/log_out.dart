@@ -12,7 +12,7 @@ class LogoutButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer2<AuthProvider, Providers>(
+    return Consumer2<AuthProviders, Providers>(
                 builder: (context, authProvider, provider, child) {
                   return ElevatedButton(
                       onPressed: () {
@@ -56,7 +56,7 @@ class LogoutButton extends StatelessWidget {
                           },
                         );
                       },
-                      child: Text("logout"));
+                      child: Text(AppTexts.logout));
                 },
               );
   }

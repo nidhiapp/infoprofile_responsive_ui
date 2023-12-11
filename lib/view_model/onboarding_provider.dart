@@ -1,10 +1,14 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:info_profile_ui/models/user_profile.dart';
 import 'package:info_profile_ui/repository/firebase_api.dart';
+import 'package:info_profile_ui/repository/profile_repo.dart';
 import 'package:info_profile_ui/utils/custom_validation.dart';
+import 'package:info_profile_ui/utils/ui_helper.dart/app_link.dart';
 import 'package:info_profile_ui/utils/ui_helper.dart/custom_toast.dart';
 import '../services/auth_services.dart';
 
-class AuthProvider extends ChangeNotifier {
+class AuthProviders extends ChangeNotifier {
   int _authStateIndex = 0;
   final TextEditingController emailCont = TextEditingController();
   final TextEditingController passCont = TextEditingController();
@@ -44,25 +48,43 @@ class AuthProvider extends ChangeNotifier {
   }
 
   final FirebaseApi _api = FirebaseApi();
+  final FirebaseProfileRepository _profileRepository = FirebaseProfileRepository();
 
-  Future createAccount(BuildContext context) async {
+   Future<bool?> createAccount(BuildContext context) async {
     setLoading(true);
     String email = emailCont.text.toString().trim();
     String pass = passCont.text.toString().trim();
     debugPrint("Email is $email password is $pass");
-    await _api
-        .registerUserWithEmailPassword(email, pass, context)
-        .then((value) {
-      if (value == true) {
-        debugPrint("Register Success");
-        emailCont.text = "";
-        passCont.text = "";
+    String time = DateTime.now().millisecondsSinceEpoch.toString();
+    bool? res;
+    await _api.registerUserWithEmailPassword(email, pass, context).then((userCred)  async {
+      res = (userCred != null);
+      if (userCred != null) {
+        await _profileRepository.registerUser(UserProfileModel(
+          uid: FirebaseAuth.instance.currentUser!.uid,
+          image: AppLink.defaultFemaleImg,
+          name: "Your Name", 
+          email: FirebaseAuth.instance.currentUser!.email,
+          pass: "",
+          joinDate: time,
+          postList: [], 
+          followerList: [], 
+          followingList: [],
+          username:"User Name",
+          gender: "Not Specified", 
+          mobile: "")).then((value) {
+          debugPrint("Register Success");
+          CustomToast(context: context, message: "Register Success");
+        }).onError((error, stackTrace) {
+          debugPrint("Register Failed Error $error");
+        });
       }
     }).onError((error, stackTrace) {
       debugPrint("Register Failed!");
       CustomToast(context: context, message: "Create Account Error $error");
     });
     setLoading(false);
+    return res;
   }
 
   getEmail() async {
@@ -73,7 +95,7 @@ class AuthProvider extends ChangeNotifier {
     bool? res;
     debugPrint("Going to logout Provider");
     setLoading(true);
-    await _api.logOut().then((value) {
+    await FirebaseApi.logOut().then((value) {
       if (value == true) {
         res = value;
         //if (onTap != null) onTap();

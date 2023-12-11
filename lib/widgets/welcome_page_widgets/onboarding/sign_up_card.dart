@@ -40,7 +40,7 @@ class _SignUpCardState extends State<SignUpCard> {
               spreadRadius: 2,
             ),
           ]),
-      child: Consumer2<Providers, AuthProvider>(
+      child: Consumer2<Providers, AuthProviders>(
           builder: (context, provider, authProvider, child) {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -130,7 +130,7 @@ class _SignUpCardState extends State<SignUpCard> {
                           )
                         : Text(
                             AppTexts.signUp,
-                            style:  AppStyle.loginButtonTs,
+                            style:  AppStyle.sevenOneSixWhite,
                           )),
               ),
             ),
@@ -186,7 +186,7 @@ class _SignUpCardState extends State<SignUpCard> {
                 children: [
                   Text(
                     AppTexts.alreadyHvan,
-                    style:  AppStyle.forgetPassTs,
+                    style:  AppStyle.fiveOneFourBlack,
                   ),
                   InkWell(
                       onTap: () {
@@ -194,7 +194,7 @@ class _SignUpCardState extends State<SignUpCard> {
                       },
                       child: Text(
                         AppTexts.login,
-                        style:  AppStyle.signupTs,
+                        style:  AppStyle.sixOneTwoBlueUl,
                       ))
                 ],
               ),

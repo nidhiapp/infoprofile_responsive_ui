@@ -51,4 +51,5 @@ class AppImages {
   static const String homeIcon= "assets/images/home.png";
   static const String editButton= "assets/images/editbutton.png";
   static const String homePageBg='assets/images/homepagebg.png';
+   static const String emptyImg="assets/images/Empty.png";
 }

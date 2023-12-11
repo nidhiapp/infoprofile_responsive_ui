@@ -19,12 +19,12 @@ class InfoProfileIsDesigned extends StatelessWidget {
     return Column(
     crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Text(AppTexts.infoprofile,style: AppStyle.infoprofileTs,),
+        Text(AppTexts.infoprofile,style: AppStyle.fiveTwoFiveBlack,),
         Row(mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(AppTexts.what,style: AppStyle.infoprofileTs,),
+            Text(AppTexts.what,style: AppStyle.fiveTwoFiveBlack,),
             Text(AppTexts.provide,style: AppStyle.providesTs,),
-            Text(AppTexts.you,style: AppStyle.infoprofileTs,)
+            Text(AppTexts.you,style: AppStyle.fiveTwoFiveBlack,)
           ],
         )
       ],
@@ -36,12 +36,12 @@ class InfoProfileIsDesigned extends StatelessWidget {
     return Column(
     crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Text(AppTexts.infoprofile,style: AppStyle.tabinfoprofileTs,),
+        Text(AppTexts.infoprofile,style: AppStyle. fiveTwoZeroBlack,),
         Row(mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(AppTexts.what,style: AppStyle.tabinfoprofileTs,),
-            Text(AppTexts.provide,style: AppStyle.tabinfoprofileblueTs ,),
-            Text(AppTexts.you,style: AppStyle.tabinfoprofileTs,)
+            Text(AppTexts.what,style: AppStyle. fiveTwoZeroBlack,),
+            Text(AppTexts.provide,style: AppStyle.fiveTwoZeroBlue ,),
+            Text(AppTexts.you,style: AppStyle. fiveTwoZeroBlack,)
           ],
         )
       ],
@@ -54,12 +54,12 @@ class InfoProfileIsDesigned extends StatelessWidget {
    return Column(
     crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Text(AppTexts.infoprofile,style: AppStyle.mobinfoprofileTs,),
+        Text(AppTexts.infoprofile,style: AppStyle.fiveOneFiveBlack,),
         Row(mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(AppTexts.what,style: AppStyle.mobinfoprofileTs,),
-            Text(AppTexts.provide,style: AppStyle.mobinfoprofileblueTs ,),
-            Text(AppTexts.you,style: AppStyle.mobinfoprofileTs,)
+            Text(AppTexts.what,style: AppStyle.fiveOneFiveBlack,),
+            Text(AppTexts.provide,style: AppStyle.fiveOneFiveBlue ,),
+            Text(AppTexts.you,style: AppStyle.fiveOneFiveBlack,)
           ],
         )
       ],

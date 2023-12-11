@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 
 class FirebaseApi {
   FirebaseAuth auth = FirebaseAuth.instance;
+
+  
   Future<bool?> registerUserWithEmailPassword(
       String email, String password, BuildContext context) async {
     bool? res;
@@ -34,8 +36,9 @@ class FirebaseApi {
     return auth.currentUser!.email ?? "";
   }
 
-  Future<bool?> logOut() async {
+ static Future<bool?> logOut() async {
     bool? res;
+     FirebaseAuth auth = FirebaseAuth.instance;
     await auth.signOut().then((value) {
       debugPrint("Logout Success");
       res = true;

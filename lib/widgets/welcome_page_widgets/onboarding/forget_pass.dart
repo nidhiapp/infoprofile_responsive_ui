@@ -33,7 +33,7 @@ class ForgetPassword extends StatelessWidget {
         spreadRadius: 2,
       ),]
      ),
-        child: Consumer2<Providers, AuthProvider>(
+        child: Consumer2<Providers, AuthProviders>(
           builder: (context, provider, authProvider, child) {
             return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -90,7 +90,7 @@ class ForgetPassword extends StatelessWidget {
                         ? const CircularProgressIndicator(color: AppColors.logincardColor,)
                         :  Text(
                     AppTexts.continu ,
-                    style:  AppStyle.loginButtonTs,
+                    style:  AppStyle.sevenOneSixWhite,
                   )),
                 ),
               ),

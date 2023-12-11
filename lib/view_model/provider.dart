@@ -1,8 +1,5 @@
-import 'dart:io';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import '../utils/global.dart';
 
 class Providers with ChangeNotifier {
@@ -77,43 +74,43 @@ class Providers with ChangeNotifier {
     notifyListeners();
   }
 
-  bool isPicked = false;
-  File? _pickedImage;
-  get pickedImage => _pickedImage;
-  Uint8List? webImage = Uint8List(8);
-  Future<void> pickImage() async {
-    if (!kIsWeb) {
-      final ImagePicker _picker = ImagePicker();
-      XFile? image = await _picker.pickImage(source: ImageSource.gallery);
-      if (image != null) {
-        var selected = File(image.path);
-        _pickedImage = selected;
-        // debugPrint("Image Picked path is ${image.path}");
-        isPicked = true;
-        notifyListeners();
-      } else {
-        debugPrint("No image selected");
-        isPicked = false;
-      }
-    } else if (kIsWeb) {
-      final ImagePicker _picker = ImagePicker();
-      XFile? image = await _picker.pickImage(source: ImageSource.gallery);
-      if (image != null) {
-        var webSelectedImageBytes = await image.readAsBytes();
-        webImage = webSelectedImageBytes;
-        _pickedImage = File('a');
-        // debugPrint("Image Picked path is ----> ${webImage}");
-        isPicked = true;
-        notifyListeners();
-      } else {
-        isPicked = false;
-      }
-    }
-  }
+  // bool isPicked = false;
+  // File? _pickedImage;
+  // get pickedImage => _pickedImage;
+  // Uint8List? webImage = Uint8List(8);
+  // Future<void> pickImage() async {
+  //   if (!kIsWeb) {
+  //     final ImagePicker _picker = ImagePicker();
+  //     XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+  //     if (image != null) {
+  //       var selected = File(image.path);
+  //       _pickedImage = selected;
+  //       // debugPrint("Image Picked path is ${image.path}");
+  //       isPicked = true;
+  //       notifyListeners();
+  //     } else {
+  //       debugPrint("No image selected");
+  //       isPicked = false;
+  //     }
+  //   } else if (kIsWeb) {
+  //     final ImagePicker _picker = ImagePicker();
+  //     XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+  //     if (image != null) {
+  //       var webSelectedImageBytes = await image.readAsBytes();
+  //       webImage = webSelectedImageBytes;
+  //       _pickedImage = File('a');
+  //       // debugPrint("Image Picked path is ----> ${webImage}");
+  //       isPicked = true;
+  //       notifyListeners();
+  //     } else {
+  //       isPicked = false;
+  //     }
+  //   }
+  // }
 
-  resetImage() {
-    isPicked = false;
-    webImage = null;
-    notifyListeners();
-  }
+  // resetImage() {
+  //   isPicked = false;
+  //   webImage = null;
+  //   notifyListeners();
+  // }
 }

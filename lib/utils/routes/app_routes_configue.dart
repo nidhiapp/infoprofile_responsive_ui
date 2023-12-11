@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:info_profile_ui/screens/edit_profile_page.dart';
 import 'package:info_profile_ui/screens/error_page.dart';
 import 'package:info_profile_ui/screens/home_page.dart';
 import 'package:info_profile_ui/screens/profile_page.dart';
@@ -9,7 +10,7 @@ import 'package:info_profile_ui/utils/routes/app_routes_constants.dart';
 
 class MyAppRouter {
   static GoRouter router = GoRouter(
-    navigatorKey: navigatorKey,
+      navigatorKey: navigatorKey,
       routes: [
         GoRoute(
           name: MyAppRouteConstants.welcomePageRoute,
@@ -25,11 +26,20 @@ class MyAppRouter {
             return const HomePage();
           },
         ),
-           GoRoute(
+        GoRoute(
           name: MyAppRouteConstants.profilePageRoute,
-          path: MyAppRouteConstants.profilePageRoute,
+          path: '${MyAppRouteConstants.profilePageRoute + '/:uid'}',
           builder: (context, state) {
-            return const ProfilePage();
+            return ProfilePage(
+              uid: state.pathParameters['uid']!,
+            );
+          },
+        ),
+        GoRoute(
+          name: MyAppRouteConstants.editProfilePageRoute,
+          path: '${MyAppRouteConstants.editProfilePageRoute+ '/:uid'}',
+          builder: (context, state) {
+            return  EditProfilePage(uid: state.pathParameters['uid']!);
           },
         )
       ],

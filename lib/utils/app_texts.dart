@@ -98,6 +98,23 @@ class AppTexts {
   static const String following = "Following";
   static const String updateYourActivity = "Update Your Activity";
   static const String startWriting = "start writing your post here";
-    static const String post = "Post";
-    static const String blog= "Blog";
+  static const String post = "Post";
+  static const String blog = "Blog";
+  static const String selectGender = 'Select Gender';
+  static const String genderOption1 = "Male";
+  static const String genderOption2 = "Female";
+  static const String genderOption3 = "Other";
+  static const String selectDate = 'Select Date';
+  static const String profile = "Profile";
+  static const String enterName = "Enter your name";
+  static const String tagLine = "Tagline";
+  static const String writeDes = "Write description";
+  static const String contactInfo = "Contact Information";
+  static const String enterMobNum = "Enter mobile number";
+  static const String save ="Save";
+  static const String writeYourComment = "write your comments here";
+  static const String faq ="FAQs";
+  static const String about = "About";
+  static const String home = 'Home';
+    static const String feeds = "Feeds";
 }
