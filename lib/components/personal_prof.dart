@@ -5,6 +5,7 @@ import 'package:info_profile_ui/repository/profile_repo.dart';
 import 'package:info_profile_ui/utils/app_colors.dart';
 import 'package:info_profile_ui/utils/app_images.dart';
 import 'package:info_profile_ui/utils/app_texts.dart';
+import 'package:info_profile_ui/utils/custom_image_dialog_box.dart';
 import 'package:info_profile_ui/utils/global.dart';
 import 'package:info_profile_ui/utils/ui_helper.dart/app_link.dart';
 import 'package:info_profile_ui/utils/ui_helper.dart/circular_network_img.dart';
@@ -36,11 +37,11 @@ class PersonalProfile extends StatelessWidget {
               padding: EdgeInsets.symmetric(vertical: 25, horizontal: 10),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: AppColors.borderCol, width: 1.5)),
+             border: Border.all(color: AppColors.borderCol,width: 2),),
               child: StreamBuilder(
                 stream: FirebaseProfileRepository().getCurrentUserProfile(uid),
                 builder: (context, snapshot) {
-                  if (snapshot.hasData && snapshot != null) {
+                  if (snapshot.hasData && snapshot.data != null) {
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -175,7 +176,10 @@ class PersonalProfile extends StatelessWidget {
                                           width: 10,
                                         ),
                                         Text(
-                                          formatMillisecondsSinceEpoch(int.parse( snapshot.data!.joinDate!,)),
+                                          formatMillisecondsSinceEpoch(
+                                              int.parse(
+                                            snapshot.data!.joinDate!,
+                                          )),
                                           style: AppStyle.fontSixOneSixBlackTs(
                                               context),
                                         )
@@ -198,7 +202,7 @@ class PersonalProfile extends StatelessWidget {
                                               context),
                                         ),
                                         Text(
-                                          "      Follower",
+                                          "    Follower",
                                           style: AppStyle.fontSixOneSixBlackTs(
                                               context),
                                         )
@@ -221,7 +225,7 @@ class PersonalProfile extends StatelessWidget {
                                               context),
                                         ),
                                         Text(
-                                          "       Following",
+                                          "    Following",
                                           style: AppStyle.fontSixOneSixBlackTs(
                                               context),
                                         )
@@ -256,13 +260,14 @@ class PersonalProfile extends StatelessWidget {
                                         ),
                                       ],
                                     ),
-                                     Row(
+                                    Row(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        ImageIcon(AssetImage(AppImages.genderIcon),
-                                        color: AppColors.primaryColor,),
-                                       
+                                        ImageIcon(
+                                          AssetImage(AppImages.genderIcon),
+                                          color: AppColors.primaryColor,
+                                        ),
                                         SizedBox(
                                           width: 10,
                                         ),
@@ -273,7 +278,9 @@ class PersonalProfile extends StatelessWidget {
                                         ),
                                       ],
                                     ),
-                                    SizedBox(height: 30,)
+                                    SizedBox(
+                                      height: 30,
+                                    )
                                   ],
                                 ),
                               )
@@ -292,15 +299,36 @@ class PersonalProfile extends StatelessWidget {
               stream: FirebaseProfileRepository().getCurrentUserProfile(uid),
               builder: (context, snapshot) {
                 if (snapshot.hasData && snapshot.data != null) {
-                  return CircularNetworkImage(
-                      imageUrl: snapshot.data!.image.toString(),
-                      height: 120,
-                      width: 120);
+                  return InkWell(
+                    onTap: () {
+                      showDialog(
+                          context: context,
+                          builder: ((BuildContext context) {
+                            return ProfileDialog(
+                              imageUrl: snapshot.data!.image!,
+                            );
+                          }));
+                    },
+                    child: CircularNetworkImage(
+                        imageUrl: snapshot.data!.image!,
+                        height: 120,
+                        width: 120),
+                  );
                 } else {
-                  return CircularNetworkImage(
-                      imageUrl: AppLink.defaultFemaleImg,
-                      height: 120,
-                      width: 120);
+                  return InkWell(onTap: () {
+                      showDialog(
+                          context: context,
+                          builder: ((BuildContext context) {
+                            return ProfileDialog(
+                              imageUrl: AppLink.defaultFemaleImg,
+                            );
+                          }));
+                  },
+                    child: CircularNetworkImage(
+                        imageUrl: AppLink.defaultFemaleImg,
+                        height: 120,
+                        width: 120),
+                  );
                 }
               },
             ),
@@ -314,7 +342,9 @@ class PersonalProfile extends StatelessWidget {
           //width: 1000,
           padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
           decoration: BoxDecoration(
+              border: Border.all(color: AppColors.borderCol,width: 2),
             color: AppColors.logincardColor,
+
             borderRadius: BorderRadius.circular(10),
           ),
           child: Column(
@@ -345,7 +375,6 @@ class PersonalProfile extends StatelessWidget {
                 stream: FirebaseProfileRepository().getCurrentUserProfile(uid),
                 builder: (context, snapshot) {
                   if (snapshot.hasData && snapshot.data != null) {
-                   
                     return Container(
                       // height: 300,width: 1000,
                       margin:
@@ -368,7 +397,7 @@ class PersonalProfile extends StatelessWidget {
                             width: 10,
                           ),
                           Text(
-                          snapshot.data!.about??"0000",
+                            snapshot.data!.about ?? "null",
                             style: AppStyle.fontSixOneSixBlackTs(context),
                           ),
                         ],

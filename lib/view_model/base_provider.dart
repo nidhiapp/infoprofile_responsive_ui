@@ -4,15 +4,18 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:info_profile_ui/models/comment_model.dart';
 import 'package:info_profile_ui/models/user_post_model.dart';
 import 'package:info_profile_ui/models/user_profile.dart';
 import 'package:info_profile_ui/repository/feed/feed_apis.dart';
 import 'package:info_profile_ui/utils/ui_helper.dart/app_link.dart';
+import 'package:info_profile_ui/utils/ui_helper.dart/custom_toast.dart';
 import 'package:info_profile_ui/utils/ui_helper.dart/keys.dart';
 
 class BaseProvider extends ChangeNotifier {
-   final storeRef = FirebaseFirestore.instance.collection(FirebaseKey.userKey);
+  final storeRef = FirebaseFirestore.instance.collection(FirebaseKey.userKey);
   TextEditingController postDescriptionController = TextEditingController();
+  TextEditingController updateCont = TextEditingController();
 
   String? desc;
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -31,7 +34,7 @@ class BaseProvider extends ChangeNotifier {
   get pickedImage => _pickedImage;
   Uint8List? webImage = Uint8List(8);
 
-  final FirebaseFeedApi _api = FirebaseFeedApi();
+  final FirebaseFeedRepo _api = FirebaseFeedRepo();
 
   void pickImageFromDevice() async {
     final ImagePicker picker = ImagePicker();
@@ -48,9 +51,9 @@ class BaseProvider extends ChangeNotifier {
     }
   }
 
-  String? _imgUrl =
-      "https://www.pmindia.gov.in/wp-content/uploads/2022/12/Modi-Ji-Photo-02-e1647325936821.jpg";
-  String get imgUrl => _imgUrl!;
+  // String? _imgUrl =
+  //     "https://www.pmindia.gov.in/wp-content/uploads/2022/12/Modi-Ji-Photo-02-e1647325936821.jpg";
+  // String get imgUrl => _imgUrl!;
 
   // Future<PermissionStatus?> requestPermission() async {
   //   PermissionStatus status = await Permission.camera.request();
@@ -76,7 +79,9 @@ class BaseProvider extends ChangeNotifier {
   }
 
   Future createPost() async {
-    if (loading || (postDescriptionController.text.toString().trim().isEmpty &&!isPicked)) {
+    if (loading ||
+        (postDescriptionController.text.toString().trim().isEmpty &&
+            !isPicked)) {
       debugPrint(
           "Returning because image is not picked $isPicked and description is ${postDescriptionController.text.toString().trim()} and loading is $loading");
       resetImage();
@@ -204,10 +209,61 @@ class BaseProvider extends ChangeNotifier {
     return _api.getUserFeedWithDetails();
   }
 
-    removeFollower({required String uid}) async {
+  removeFollower({required String uid}) async {
     String id = _auth.currentUser!.uid;
-    storeRef.doc(uid).update({'followingList':FieldValue.arrayRemove([id])});
-    storeRef.doc(id).update({'followerList':FieldValue.arrayRemove([uid])});
+    storeRef.doc(uid).update({
+      'followingList': FieldValue.arrayRemove([id])
+    });
+    storeRef.doc(id).update({
+      'followerList': FieldValue.arrayRemove([uid])
+    });
+  }
+
+  Future<void> editComment(
+      Comment comment, BuildContext context, String? prevComment) async {
+    bool? isPreEdited = comment.isEdited;
+    try {
+      CollectionReference commentsCollection =
+          FirebaseFirestore.instance.collection('comment');
+      comment.isEdited = true;
+      await commentsCollection.doc(comment.postId).update({
+        'postCommentList': FieldValue.arrayUnion([comment.toJson()]),
+      }).then((value) {
+        notifyListeners();
+        CustomToast(context: context, message: "Comment edited successfully");
+      });
+      comment.isEdited = isPreEdited;
+      comment.comment = prevComment;
+      await commentsCollection.doc(comment.postId).update({
+        'postCommentList': FieldValue.arrayRemove([comment.toJson()]),
+      }).then((value) {
+          notifyListeners();
+        CustomToast(context: context, message: "Comment edited successfully");
+      });
+
+      print('Comment ${comment.toJson()} successfully edited');
+    } catch (error) {
+      print('Error editing comment: $error');
+    }
+  }
+
+  Future<void> editPost(
+      PostModel des, BuildContext context, String? prevdes) async {
+    // bool? isPreEdited = comment.isEdited;
+    try {
+      CollectionReference postsCollection =
+          FirebaseFirestore.instance.collection('post');
+      // comment.isEdited = true;
+      await postsCollection.doc(des.postId).update({
+        'description': des.description,
+      }).then((value) {
+        notifyListeners();
+        CustomToast(context: context, message: "post edited successfully");
+      });
+
+      print('description ${des} successfully edited');
+    } catch (error) {
+      print('Error editing post: $error');
+    }
   }
 }
- 

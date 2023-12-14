@@ -52,7 +52,7 @@ abstract class AppFonts {
   static const montserrat = 'Montserrat';
 }
 
-abstract class FirebaseKey{
+abstract class FirebaseKey {
   static const String postKey = "post";
   static const String commentKey = "comment";
   static const String likeKey = "like";

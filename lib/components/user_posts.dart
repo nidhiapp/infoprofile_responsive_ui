@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:info_profile_ui/components/comment_list.dart';
 import 'package:info_profile_ui/components/commentbox.dart';
 import 'package:info_profile_ui/models/comment_model.dart';
@@ -10,8 +11,10 @@ import 'package:info_profile_ui/repository/feed/feed_apis.dart';
 import 'package:info_profile_ui/utils/app_colors.dart';
 import 'package:info_profile_ui/utils/app_images.dart';
 import 'package:info_profile_ui/utils/global.dart';
+import 'package:info_profile_ui/utils/routes/app_routes_constants.dart';
 import 'package:info_profile_ui/utils/ui_helper.dart/app_link.dart';
 import 'package:info_profile_ui/utils/ui_helper.dart/circular_network_img.dart';
+import 'package:info_profile_ui/utils/ui_helper.dart/custom_dialog_box.dart';
 import 'package:info_profile_ui/utils/ui_helper.dart/custom_textstyles.dart';
 import 'package:info_profile_ui/view_model/base_provider.dart';
 import 'package:info_profile_ui/view_model/comment_controller.dart';
@@ -32,10 +35,12 @@ class userPostConatiner extends StatefulWidget {
 }
 
 class _userPostConatinerState extends State<userPostConatiner> {
+  bool showAllComments = false;
   final LikeDislikeApis _likeDislikeApis = LikeDislikeApis();
   final TextEditingController commentController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    String? prevDes = widget.post.description;
     w = MediaQuery.of(context).size.width;
     h = MediaQuery.of(context).size.height;
     return Consumer<BaseProvider>(builder: (context, baseProvider, child) {
@@ -53,35 +58,126 @@ class _userPostConatinerState extends State<userPostConatiner> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             StreamBuilder(
-              stream: EditProfileAndProfile()
+              stream: EditProfileProvider()
                   .getUserDetails(id: widget.post.postedBy),
               builder: (context, snapshot) {
                 if (snapshot.hasData && snapshot.data != null) {
                   return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      ClipOval(
-                        child: CircularNetworkImage(
-                          imageUrl: widget.post.userProfileImage == true
-                              ? widget.post.imageLink.toString()
-                              : AppLink.defaultFemaleImg,
-                          height: 45,
-                          width: 45,
-                        ),
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      Row(
                         children: [
-                          Text(
-                            snapshot.data!.username!,
-                            style: AppStyle.sixOneTwoTs,
+                          ClipOval(
+                            child: CircularNetworkImage(
+                              imageUrl: widget.post.userProfileImage == true
+                                  ? widget.post.imageLink.toString()
+                                  : AppLink.defaultFemaleImg,
+                              height: 45,
+                              width: 45,
+                            ),
                           ),
-                          Text(
-                            formatMillisecondsSinceEpoch(
-                                int.parse(widget.post.time!)),
-                            style: AppStyle.sixOnezeroTs,
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                snapshot.data!.username!,
+                                style: AppStyle.sixOneTwoTs,
+                              ),
+                              Text(
+                                formatMillisecondsSinceEpoch(
+                                    int.parse(widget.post.time!)),
+                                style: AppStyle.sixOnezeroTs,
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          InkWell(
+                              onTap: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return CustomDialogBox(
+                                      content:
+                                          "Do you want to delete this post?",
+                                      title: "Delete Post",
+                                      onAction: (bool isConfirmed) {
+                                        if (isConfirmed) {
+                                          setState(() {});
+                                          FirebaseFeedRepo().deletePost(
+                                              widget.post.postId!, context);
+                                          //  context.goNamed(MyAppRouteConstants.homePageRoute);
+                                        } else {}
+                                      },
+                                    );
+                                  },
+                                );
+
+                                // baseProvider.deletePost(
+                                //     widget.post.postId!);
+                              },
+                              child: FirebaseAuth.instance.currentUser!.uid ==
+                                      widget.post.postedBy
+                                  ? Icon(
+                                      Icons.delete_outline,
+                                      size: 23,
+                                    )
+                                  : SizedBox()),
+                          Consumer<BaseProvider>(
+                            builder: (context, value, child) {
+                              if (FirebaseAuth.instance.currentUser!.uid ==
+                                  widget.post.postedBy) {
+                                return InkWell(
+                                    onTap: () {
+                                      showDialog(
+                                          context: context,
+                                          builder: ((context) {
+                                            String updatedDes = value
+                                                .updateCont.text
+                                                .toString()
+                                                .trim();
+                                            return AlertDialog(
+                                              content: TextFormField(
+                                                initialValue:
+                                                    widget.post.description,
+                                                maxLines: null,
+                                                onChanged: (value) =>
+                                                    updatedDes = value,
+                                              ),
+                                              actions: [
+                                                InkWell(
+                                                  onTap: () async {
+                                                    widget.post.description =
+                                                        updatedDes;
+                                                    // setState(() {
+
+                                                    // });
+                                                    await value
+                                                        .editPost(widget.post,
+                                                            context, prevDes)
+                                                        .then((value) {});
+                                                    Navigator.pop(context);
+                                                  },
+                                                  child: Text(
+                                                    "edit",
+                                                    style: AppStyle
+                                                        .fiveOneFiveBlue,
+                                                  ),
+                                                ),
+                                              ],
+                                            );
+                                          }));
+                                    },
+                                    child: Icon(Icons.edit));
+                              } else {
+                                return SizedBox();
+                              }
+                            },
                           )
                         ],
                       ),
@@ -119,7 +215,7 @@ class _userPostConatinerState extends State<userPostConatiner> {
             Row(
               children: [
                 StreamBuilder<PostLikeModel?>(
-                  stream: FirebaseFeedApi()
+                  stream: FirebaseFeedRepo()
                       .getPostLikeList(postId: widget.post.postId!),
                   builder: (context, snapshot) {
                     if (snapshot.hasData && snapshot.data != null) {
@@ -147,7 +243,44 @@ class _userPostConatinerState extends State<userPostConatiner> {
                           width: 7,
                         ),
                         InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            void _showAllLikes(BuildContext context) {
+                              PostLikeModel listModel = snapshot.data!;
+                              showModalBottomSheet(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return ListView.builder(
+                                    itemCount: listModel.likeList!.length,
+                                    itemBuilder: (context, index) {
+                                      return Column(
+                                        children: [
+                                          Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Column(
+                                                children: [
+                                                  Row(
+                                                    children: [
+                                                      CachedNetworkImage(
+                                                          imageUrl: AppLink
+                                                              .defaultFemaleImg),
+                                                      Text(snapshot.data!
+                                                          .likeList![index])
+                                                    ],
+                                                  ),
+                                                ],
+                                              )),
+                                          Divider(
+                                            height: 2,
+                                          )
+                                        ],
+                                      );
+                                    },
+                                  );
+                                },
+                              );
+                            }
+                          },
                           child: Text(
                             snapshot.data!.likeList!.length.toString(),
                             style: AppStyle.sixOneFourGreyTs,
@@ -184,7 +317,7 @@ class _userPostConatinerState extends State<userPostConatiner> {
                   width: 15,
                 ),
                 StreamBuilder(
-                  stream: FirebaseFeedApi()
+                  stream: FirebaseFeedRepo()
                       .getPostCommentList(postId: widget.post.postId!),
                   builder: (context, snapshot) {
                     if (snapshot.hasData && snapshot.data != null) {
@@ -229,8 +362,15 @@ class _userPostConatinerState extends State<userPostConatiner> {
                 SizedBox(
                   width: 15,
                 ),
-                ImageIcon(
-                  AssetImage(AppImages.reportIcon),
+                InkWell(
+                  onTap: () {
+                    FirebaseFeedRepo().reportOnPost(
+                        postId: widget.post.postId!,
+                        reportedById: FirebaseAuth.instance.currentUser!.uid);
+                  },
+                  child: ImageIcon(
+                    AssetImage(AppImages.reportIcon),
+                  ),
                 ),
               ],
             ),
@@ -247,20 +387,49 @@ class _userPostConatinerState extends State<userPostConatiner> {
             ),
             //comment user slide
             StreamBuilder(
-                stream: CommentController().getFeedCommentList(postId: widget.post.postId!),
+                stream: CommentController()
+                    .getFeedCommentList(postId: widget.post.postId!),
                 builder: ((context, snapshot) {
                   if (snapshot.hasData && snapshot.data != null) {
                     PostCommentListModel listModel = snapshot.data!;
-                    return Column(
-                      children: [
-                        ...List.generate(listModel.postCommentList?.length ?? 0, (index){
-                          return  Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: CommentUserCard(
-                                comment: listModel.postCommentList![listModel.postCommentList!.length - index - 1]),
-                          );
-                        }),
-                      ],
+                    if (listModel.postCommentList!.length > 1) {
+                      void _showAllComments(BuildContext context) {
+                        showModalBottomSheet(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return ListView.builder(
+                              itemCount: listModel.postCommentList?.length,
+                              itemBuilder: (context, index) {
+                                return Column(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: CommentUserCard(
+                                        comment:
+                                            listModel.postCommentList![index],
+                                      ),
+                                    ),
+                                    Divider(
+                                      height: 2,
+                                    )
+                                  ],
+                                );
+                              },
+                            );
+                          },
+                        );
+                      }
+
+                      return TextButton(
+                          onPressed: () {
+                            _showAllComments(context);
+                          },
+                          child: Text("view all comments"));
+                    }
+                    // return SizedBox();
+                    return CommentUserCard(
+                      comment: listModel.postCommentList![
+                          listModel.postCommentList!.length - 1],
                     );
                   } else {
                     return Container(
@@ -268,7 +437,6 @@ class _userPostConatinerState extends State<userPostConatiner> {
                     );
                   }
                 })),
-            
           ],
         ),
       );

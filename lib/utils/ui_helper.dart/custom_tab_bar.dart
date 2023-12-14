@@ -1,4 +1,3 @@
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -42,17 +41,17 @@ class _CustomTabBarState extends State<CustomTabBar> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               //  mainAxisSize: MainAxisSize.min,
               children: [
-                PersonalProfButton(uid: widget.uid,
-                  onPressed: () {}),
+                PersonalProfButton(uid: widget.uid, onPressed: () {}),
                 InkWell(
                     onTap: () {
-                       context.goNamed(
-                                        MyAppRouteConstants.editProfilePageRoute,
-                                        pathParameters: {
-                                          'uid': FirebaseAuth.instance.currentUser!.uid,
-                                        });;
+                      context.goNamed(MyAppRouteConstants.editProfilePageRoute,
+                          pathParameters: {
+                            'uid': FirebaseAuth.instance.currentUser!.uid,
+                          });
+                      ;
                     },
-                    child: _currentIndex == 0 && FirebaseAuth.instance.currentUser!.uid==widget.uid
+                    child: _currentIndex == 0 &&
+                            FirebaseAuth.instance.currentUser!.uid == widget.uid
                         ? Image.asset(
                             AppImages.editButton,
                             width: w * 0.07,
@@ -109,70 +108,99 @@ class _CustomTabBarState extends State<CustomTabBar> {
                 :
                 // Feeds Tab Content
 
-                Consumer<BaseProvider>(
-                    builder: (context, feedController, child) {
-                      return StreamBuilder(
-                        stream: feedController.getUserProfile(widget.uid),
-                        builder: (context, snapshots) {
-                          if (snapshots.hasData && snapshots.data != null) {
-                            UserProfileModel posts = snapshots.data!;
-                            return Column(
-                              children: [
-                                ...List.generate(
-                                    snapshots.data!.postList!.length,
-                                    (index) => Container(
-                                          padding: EdgeInsets.symmetric(
-                                              vertical: 14.0, horizontal: 16.0),
-                                          decoration: BoxDecoration(
-                                            color: AppColors.logincardColor,
-                                          ),
-                                          child: Row(
-                                            children: [
-                                              SizedBox(
-                                                width: w * 0.06,
-                                              ),
-                                              Expanded(
-                                                  child: StreamBuilder(
-                                                      stream: FirebaseFeedApi()
-                                                          .getCurrentPostDetails(
-                                                              snapshots.data!
-                                                                      .postList![
-                                                                  index]),
-                                                      builder:
-                                                          (context, snapshot) {
-                                                        if (snapshot.hasData &&
-                                                            snapshot.data !=
-                                                                null) {
-                                                          return userPostConatiner(
-                                                            post:
-                                                                snapshot.data!,
-                                                          );
-                                                        } else {
-                                                          return SizedBox();
-                                                        }
-                                                      })),
-                                              SizedBox(
-                                                width: w * 0.06,
-                                              ),
-                                            ],
-                                          ),
-                                        ))
-                                // ListView.builder(
-                                //   itemCount: 2,
-                                //   itemBuilder: (context, index) {
-                                //     return userPostConatiner();
-                                //   },
-                                // ),
-                              ],
-                            );
-                          } else {
-                            return SizedBox(
-                              child: Text("there is no content"),
-                            );
-                          }
-                        },
-                      );
-                    },
+                Container(
+                    padding: EdgeInsets.symmetric(
+                        // vertical: 14.0,
+                        horizontal: 16.0),
+                    decoration: BoxDecoration(
+                      color: AppColors.logincardColor,
+                    ),
+                    child: Consumer<BaseProvider>(
+                      builder: (context, feedController, child) {
+                        return StreamBuilder(
+                          stream: feedController.getUserProfile(widget.uid),
+                          builder: (context, snapshots) {
+                            if (snapshots.connectionState ==
+                                ConnectionState.waiting) {
+                              return Center(child: CircularProgressIndicator());
+                            } else if (snapshots.hasData &&
+                                snapshots.data != null) {
+                              UserProfileModel posts = snapshots.data!;
+                              return Column(
+                                children: [
+                                  ...List.generate(
+                                      snapshots.data!.postList!.length,
+                                      (index) => Container(
+                                            padding: EdgeInsets.symmetric(
+                                                // vertical: 14.0,
+                                                horizontal: 16.0),
+                                            decoration: BoxDecoration(
+                                              color: AppColors.logincardColor,
+                                            ),
+                                            child: Row(
+                                              children: [
+                                                SizedBox(
+                                                  width: w * 0.06,
+                                                ),
+                                                Expanded(
+                                                    child: StreamBuilder(
+                                                        stream: FirebaseFeedRepo()
+                                                            .getCurrentPostDetails(
+                                                                snapshots.data!
+                                                                        .postList![
+                                                                    index]),
+                                                        builder: (context,
+                                                            snapshot) {
+                                                          if (snapshot
+                                                                  .hasData &&
+                                                              snapshot.data !=
+                                                                  null) {
+                                                            return userPostConatiner(
+                                                              post: snapshot
+                                                                  .data!,
+                                                            );
+                                                          } else {
+                                                            return Container(
+                                                              height: 400,
+                                                              width: 1000,
+                                                              padding: EdgeInsets
+                                                                  .symmetric(
+                                                                      vertical:
+                                                                          14.0,
+                                                                      horizontal:
+                                                                          16.0),
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                color: AppColors
+                                                                    .logincardColor,
+                                                              ),
+                                                              // child: Center(child: Text("no post found")),
+                                                            );
+                                                          }
+                                                        })),
+                                                SizedBox(
+                                                  width: w * 0.06,
+                                                ),
+                                              ],
+                                            ),
+                                          ))
+                                  // ListView.builder(
+                                  //   itemCount: 2,
+                                  //   itemBuilder: (context, index) {
+                                  //     return userPostConatiner();
+                                  //   },
+                                  // ),
+                                ],
+                              );
+                            } else {
+                              return SizedBox(
+                                child: Text("no post found"),
+                              );
+                            }
+                          },
+                        );
+                      },
+                    ),
                   ),
           ],
         ),

@@ -6,14 +6,15 @@ import 'package:info_profile_ui/utils/ui_helper.dart/enums.dart';
 
 class LikeDislikeApis {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  final FirebaseFeedApi _api = FirebaseFeedApi();
+  final FirebaseFeedRepo  _api = FirebaseFeedRepo ();
 
-  addLike({required String postId, required String postedBy}) async {
+  addLike({required String postId, required String postedBy,}) async {
     String time = DateTime.now().millisecondsSinceEpoch.toString();
     String userId = _auth.currentUser!.uid;
     bool isAdded = false;
-    await _api.likeOnPost(postId: postId, postedById: _auth.currentUser!.uid).then((value){
+    await _api.likePost(postId: postId, postedById: _auth.currentUser!.uid).then((value){
       debugPrint("Like Added Successfully");
+    
       isAdded = true;
     }).onError((error, stackTrace){
       debugPrint("Error on Adding Like");
@@ -28,7 +29,7 @@ class LikeDislikeApis {
   }
 
   addDisLike({required String postId}) async {
-    await _api.dislikeOnPost(postId: postId, postedById: _auth.currentUser!.uid).then((value){
+    await _api.dislikePost(postId: postId, postedById: _auth.currentUser!.uid).then((value){
       debugPrint("DisLike Added Successfully");
     }).onError((error, stackTrace){
       debugPrint("Error on Adding DisLike");

@@ -97,11 +97,19 @@ class _HomePageState extends State<HomePage> {
                                                 return ConnectionsList(
                                                   imageLink:
                                                       AppLink.defaultFemaleImg,
-                                                  uid: snapshot.data!.followerList?[index] ??
+                                                  uid: snapshot.data!
+                                                              .followerList?[
+                                                          index] ??
                                                       "",
                                                   name: snapshot.data!.email!,
                                                   removeOnTap: () {
-                                                    FirebaseProfileRepository().removeFollower(uid: snapshot.data!.followerList![index].toString());
+                                                    FirebaseProfileRepository()
+                                                        .removeFollower(
+                                                            uid: snapshot
+                                                                .data!
+                                                                .followerList![
+                                                                    index]
+                                                                .toString());
                                                   },
                                                 );
                                               });
@@ -175,9 +183,12 @@ class _HomePageState extends State<HomePage> {
                                                     name: snapshot.data!.email!,
                                                     removeOnTap: () {
                                                       debugPrint("remove user");
-                                                      FirebaseProfileRepository().removeFollowing(uid:
-                                                          snapshot.data!
-                                                        .followingList![index]);
+                                                      FirebaseProfileRepository()
+                                                          .removeFollowing(
+                                                              uid: snapshot
+                                                                      .data!
+                                                                      .followingList![
+                                                                  index]);
                                                     },
                                                   );
                                                 },
@@ -214,9 +225,37 @@ class _HomePageState extends State<HomePage> {
                         return StreamBuilder<List<PostModel?>>(
                           stream: baseProvider.getUserFeed(),
                           builder: (context, snapshot) {
-                            if (snapshot.hasError) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return SingleChildScrollView(
+                                child: Column(
+                                  //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Expanded(
+                                      child: CreatePosts(),
+                                    ),
+                                  ],
+                                ),
+                              
+                              
+                                    Center(
+                                      child: CircularProgressIndicator(
+                                        color: AppColors.primaryColor,
+                                      ),
+                                    ),
+                                    SizedBox(height: 560,)
+                                    
+                                  ],
+                                ),
+                              );
+                            } else if (snapshot.hasError) {
                               debugPrint("Error State ${snapshot.error}");
-                              return Container();
+                              return Container(
+                                child: Text("errro is: ${snapshot.error}"),
+                              );
                             } else if (snapshot.hasData &&
                                 snapshot.data != null) {
                               List<PostModel?> posts = snapshot.data!;
@@ -316,8 +355,10 @@ class _HomePageState extends State<HomePage> {
                                                           snapshot.data!.email!,
                                                       removeOnTap: () {
                                                         value.removeFollower(
-                                                            uid: snapshot.data!
-                                                          .followerList![index],);
+                                                          uid: snapshot.data!
+                                                                  .followerList![
+                                                              index],
+                                                        );
                                                       },
                                                     );
                                                   },

@@ -32,15 +32,12 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => Providers()),
         ChangeNotifierProvider(create: (_) => AuthProviders()),
            ChangeNotifierProvider(create: (_) => BaseProvider()),
-          ChangeNotifierProvider(create: (_) =>  EditProfileAndProfile())
+          ChangeNotifierProvider(create: (_) =>  EditProfileProvider())
       ],
-      // child: MaterialApp(
-      //   home: HomePage(),
-      // ),
+      
       child:MaterialApp.router(
         debugShowCheckedModeBanner: false,
         title: 'Infoprofile',
-     // home: WelcomePage(),
         routeInformationParser: MyAppRouter.router.routeInformationParser,
         routerDelegate: MyAppRouter.router.routerDelegate ,
         routeInformationProvider: MyAppRouter.router.routeInformationProvider,

@@ -2,15 +2,17 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:info_profile_ui/models/comment_model.dart';
 import 'package:info_profile_ui/models/notification_model.dart';
 import 'package:info_profile_ui/models/post_like.dart';
 import 'package:info_profile_ui/models/user_post_model.dart';
 import 'package:info_profile_ui/models/user_profile.dart';
+import 'package:info_profile_ui/utils/ui_helper.dart/custom_toast.dart';
 import 'package:info_profile_ui/utils/ui_helper.dart/enums.dart';
 import 'package:info_profile_ui/utils/ui_helper.dart/keys.dart';
 
-class FirebaseFeedApi {
+class FirebaseFeedRepo {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final storePostRef =
       FirebaseFirestore.instance.collection(FirebaseKey.postKey);
@@ -29,8 +31,7 @@ class FirebaseFeedApi {
   final storeUserNotificationRef =
       FirebaseFirestore.instance.collection(FirebaseKey.userNotification);
 
-  Future likeOnPost(
-      {required String postId, required String postedById}) async {
+  Future likePost({required String postId, required String postedById}) async {
     final postLikeList = await storePostRef.doc(postId).get();
     bool isAdded = false;
     if (postLikeList.exists) {
@@ -67,12 +68,20 @@ class FirebaseFeedApi {
   reportOnPost({required String postId, required String reportedById}) async {
     bool isReported = false;
     await storeReportPostRef
+        .doc(reportedById)
+        .update({
+          'reportPostList': FieldValue.arrayUnion([postId])
+        })
+        .then((value) {})
+        .onError((error, stackTrace) {});
+   await storePostRef
         .doc(postId)
-        .set({
+        .update({
           'reportPostList': FieldValue.arrayUnion([reportedById])
         })
         .then((value) {})
         .onError((error, stackTrace) {});
+
   }
 
   reportOnComment(
@@ -96,7 +105,7 @@ class FirebaseFeedApi {
     }
   }
 
-  Future dislikeOnPost(
+  Future dislikePost(
       {required String postId, required String postedById}) async {
     final postLikeList = await storePostRef.doc(postId).get();
     bool isDisliked = false;
@@ -446,8 +455,6 @@ class FirebaseFeedApi {
     }
   }
 
- 
-
   Stream<PostModel?> getCurrentPostDetails(String postId) {
     final postSnapshots = storePostRef.doc(postId).snapshots();
     return postSnapshots.map((DocumentSnapshot<Map<String, dynamic>> snapshot) {
@@ -457,14 +464,27 @@ class FirebaseFeedApi {
     });
   }
 
+  // await storeReportPostRef
+  //       .doc(reportedById)
+  //       .set({
+  //         'reportPostList': FieldValue.arrayUnion([postId])
+  //       })
+  //       .then((value) {})
+  //       .onError((error, stackTrace) {});
   Stream<List<PostModel>> getUserFeedWithDetails() {
     String uid = _auth.currentUser!.uid;
     debugPrint("User's uid is $uid");
     final followerStream = storeUserRef.doc(uid).snapshots();
-    debugPrint("Fetching followerStream for user: $uid");
+    // final reportPostStream = storeReportPostRef.doc(uid).snapshots();
+    //   reportPostStream
+    //       .asyncMap((DocumentSnapshot<Map<String, dynamic>> snapshots)async {
+    //               debugPrint("--------- data of report post--------------------- ${snapshots.data()}");
+    //       });
+    // debugPrint("Fetching followerStream for user: $uid");
 
     return followerStream
         .asyncMap((DocumentSnapshot<Map<String, dynamic>> snapshot) async {
+    
       debugPrint("Fetching for data ${snapshot.data()}");
       UserProfileModel userProfileModel =
           UserProfileModel.fromJson(snapshot.data()!);
@@ -502,7 +522,7 @@ class FirebaseFeedApi {
             // debugPrint( "Fetched Post Details for user $followingId, post ID $postId are ${postSnapshot.data()!}");
             try {
               PostModel thisPost = PostModel.fromJson(postSnapshot.data()!);
-              if (posts.isNotEmpty) {
+              if (posts.isNotEmpty ) {
                 posts.add(thisPost);
                 debugPrint("Post Added!");
               } else {
@@ -605,11 +625,53 @@ class FirebaseFeedApi {
     });
   }
 
-  updateProfileData({required String name, required String username, required String gender, required String dob, required String about, required String mobile, required String email}) async {
+  updateProfileData(
+      {required String name,
+      required String username,
+      required String gender,
+      required String dob,
+      required String about,
+      required String mobile,
+      required String email}) async {
     String uid = _auth.currentUser!.uid;
-    await storeUserRef.doc(uid).update({'name': name, 'username':username, 'gender': gender, 'dob': dob, 'about': about, 'mobile': mobile, 'email': email});
+    await storeUserRef.doc(uid).update({
+      'name': name,
+      'username': username,
+      'gender': gender,
+      'dob': dob,
+      'about': about,
+      'mobile': mobile,
+      'email': email
+    });
   }
 
+  Future<void> deletePost(String postId, BuildContext context) async {
+    try {
+      CollectionReference postsCollection =
+          FirebaseFirestore.instance.collection('post');
+      await postsCollection.doc(postId).delete().then((value) {
+        CustomToast(context: context, message: "post deleted succesfully");
+      });
 
- 
+      print('Post $postId successfully deleted');
+    } catch (error) {
+      print('Error deleting post: $error');
+    }
+  }
+
+  Future<void> deleteComment(Comment comment, BuildContext context) async {
+    try {
+      CollectionReference commentsCollection =
+          FirebaseFirestore.instance.collection('comment');
+      await commentsCollection.doc(comment.postId).update({
+        'postCommentList': FieldValue.arrayRemove([comment.toJson()])
+      }).then((value) {
+        CustomToast(context: context, message: "comment deleted succesfully");
+      });
+
+      print('comment ${comment.toJson()} successfully deleted');
+    } catch (error) {
+      print('Error deleting comment: $error');
+    }
+  }
 }

@@ -22,8 +22,9 @@ class CustomDialogBox extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
       ),
       child: Container(
+        height: 190,width: 300,
         padding: const EdgeInsets.all(16),
-        child: Column(
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(

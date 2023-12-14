@@ -7,7 +7,7 @@ import 'package:info_profile_ui/utils/ui_helper.dart/enums.dart';
 
 class CommentController {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  final FirebaseFeedApi _api = FirebaseFeedApi();
+  final FirebaseFeedRepo  _api = FirebaseFeedRepo ();
 
   Future addComment(
       {required String comment,

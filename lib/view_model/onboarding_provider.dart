@@ -48,31 +48,36 @@ class AuthProviders extends ChangeNotifier {
   }
 
   final FirebaseApi _api = FirebaseApi();
-  final FirebaseProfileRepository _profileRepository = FirebaseProfileRepository();
+  final FirebaseProfileRepository _profileRepository =
+      FirebaseProfileRepository();
 
-   Future<bool?> createAccount(BuildContext context) async {
+  Future<bool?> createAccount(BuildContext context) async {
     setLoading(true);
     String email = emailCont.text.toString().trim();
     String pass = passCont.text.toString().trim();
     debugPrint("Email is $email password is $pass");
     String time = DateTime.now().millisecondsSinceEpoch.toString();
     bool? res;
-    await _api.registerUserWithEmailPassword(email, pass, context).then((userCred)  async {
+    await _api
+        .registerUserWithEmailPassword(email, pass, context)
+        .then((userCred) async {
       res = (userCred != null);
       if (userCred != null) {
-        await _profileRepository.registerUser(UserProfileModel(
-          uid: FirebaseAuth.instance.currentUser!.uid,
-          image: AppLink.defaultFemaleImg,
-          name: "Your Name", 
-          email: FirebaseAuth.instance.currentUser!.email,
-          pass: "",
-          joinDate: time,
-          postList: [], 
-          followerList: [], 
-          followingList: [],
-          username:"User Name",
-          gender: "Not Specified", 
-          mobile: "")).then((value) {
+        await _profileRepository
+            .registerUser(UserProfileModel(
+                uid: FirebaseAuth.instance.currentUser!.uid,
+                image: AppLink.defaultFemaleImg,
+                name: "Your Name",
+                email: FirebaseAuth.instance.currentUser!.email,
+                pass: "",
+                joinDate: time,
+                postList: [],
+                followerList: [],
+                followingList: [],
+                username: "User Name",
+                gender: "Not Specified",
+                mobile: ""))
+            .then((value) {
           debugPrint("Register Success");
           CustomToast(context: context, message: "Register Success");
         }).onError((error, stackTrace) {
@@ -81,7 +86,9 @@ class AuthProviders extends ChangeNotifier {
       }
     }).onError((error, stackTrace) {
       debugPrint("Register Failed!");
-      CustomToast(context: context, message: "Create Account Error $error");
+
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("Create Account Error: $error")));
     });
     setLoading(false);
     return res;
@@ -170,17 +177,20 @@ class AuthProviders extends ChangeNotifier {
       res = value;
       if (value == true) {
         debugPrint("Login Success Using Email and Password");
+          CustomToast(context: context, message: 'Login Success Using Email and Password');
         try {
-        onTap();
-        emailCont.text = "";
-        passCont.text = "";
+          onTap();
+          emailCont.text = "";
+          passCont.text = "";
         } catch (e) {
           debugPrint("Error is $e");
         }
       } else {
-        debugPrint("Login failed! Using Email and Password");
+     CustomToast(context: context, message: 'login failed');
       }
-    }).onError((error, stackTrace) {});
+    }).onError((error, stackTrace) {
+      CustomToast(context: context, message: '${error}');
+    });
     setLoading(false);
     return res;
   }

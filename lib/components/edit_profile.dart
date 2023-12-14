@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -14,6 +15,7 @@ import 'package:info_profile_ui/utils/ui_helper.dart/circular_network_img.dart';
 import 'package:info_profile_ui/utils/ui_helper.dart/custom_drop_down_textfield.dart';
 import 'package:info_profile_ui/utils/ui_helper.dart/custom_textfield.dart';
 import 'package:info_profile_ui/utils/ui_helper.dart/custom_textstyles.dart';
+import 'package:info_profile_ui/view_model/base_provider.dart';
 import 'package:info_profile_ui/view_model/edit_profile.dart';
 import 'package:provider/provider.dart';
 
@@ -29,7 +31,7 @@ class EditProfile extends StatelessWidget {
   Widget build(BuildContext context) {
     String dob;
     String gender;
-    return Consumer<EditProfileAndProfile>(
+    return Consumer<EditProfileProvider>(
       builder: (context, editProfileAndProfile, child) {
         return StreamBuilder<UserProfileModel?>(
           stream: editProfileAndProfile.getUserDetails(),
@@ -47,10 +49,11 @@ class EditProfile extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    padding: EdgeInsets.all(20),
+                    padding: const EdgeInsets.all(20),
                     height: 410,
                     decoration: BoxDecoration(
                       color: AppColors.logincardColor,
+                      border: Border.all(color: AppColors.borderCol),
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Column(
@@ -63,7 +66,7 @@ class EditProfile extends StatelessWidget {
                               Text(
                                 AppTexts.profile,
                                 style: GoogleFonts.poppins(
-                                  textStyle: TextStyle(
+                                  textStyle: const TextStyle(
                                     color: Colors.black,
                                     fontSize: 18,
                                     fontWeight: FontWeight.w600,
@@ -82,33 +85,48 @@ class EditProfile extends StatelessWidget {
                             ],
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Container(
                             height: 2,
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               color: AppColors.lightGreyCol,
                             )),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
-                        Stack(children: [
-                          Container(
-                              decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  border: Border.all(
-                                      width: 2, color: AppColors.borderCol)),
-                              child: CircularNetworkImage(
-                                imageUrl: AppLink.defaultFemaleImg,
-                                height: 126,
-                                width: 126,
-                                //fit: BoxFit.cover,
-                              )),
-                          Positioned(
-                              top: 80, left: 85, child: BlueCircularImage())
-                        ]),
-                        SizedBox(
+                        Consumer<EditProfileProvider>(
+                          builder: (context, value, child) {
+                            return Stack(children: [
+                              Container(
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                          width: 2,
+                                          color: AppColors.borderCol)),
+                                          child:value.isPicked?Image.memory(value.webImage!) :
+                                 
+                                  CircularNetworkImage(
+                                    imageUrl:AppLink.defaultFemaleImg,
+                                    height: 126,
+                                    width: 126,
+                                    //fit: BoxFit.cover,
+                                  )
+                                  ),
+                              Positioned(
+                                  top: 80,
+                                  left: 85,
+                                  child: InkWell(
+                                      onTap: 
+                                        value.pickImageFromDevice,
+                                        
+                                    
+                                      child: const BlueCircularImage()))
+                            ]);
+                          },
+                        ),
+                        const SizedBox(
                           height: 20,
                         ),
                         Row(
@@ -123,7 +141,7 @@ class EditProfile extends StatelessWidget {
                               iconCol: AppColors.primaryColor,
                               customValidator: Utils.isValidName,
                             )),
-                            SizedBox(
+                            const SizedBox(
                               width: 20,
                             ),
                             Expanded(
@@ -138,7 +156,7 @@ class EditProfile extends StatelessWidget {
                             )),
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         Row(
@@ -147,7 +165,7 @@ class EditProfile extends StatelessWidget {
                               child: CustomDropdownFormField<String>(
                                 // prefIcon: ,
                                 label: AppTexts.selectGender,
-                                items: [
+                                items: const [
                                   AppTexts.genderOption1,
                                   AppTexts.genderOption2,
                                   AppTexts.genderOption3
@@ -161,13 +179,13 @@ class EditProfile extends StatelessWidget {
                                 dropdownIconColor: AppColors.primaryColor,
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 20,
                             ),
                             Expanded(
                               child: CustomDropdownFormField<DateTime>(
                                 label: AppTexts.selectDate,
-                                items: [], // You can leave this empty for date picker
+                                items: const [], // You can leave this empty for date picker
                                 onChanged: (DateTime? value) {
                                   //  print('Selected Date: $value');
                                 },
@@ -185,13 +203,14 @@ class EditProfile extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Container(
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                     height: 150,
                     decoration: BoxDecoration(
+                       border: Border.all(color: AppColors.borderCol,width: 2),
                       color: AppColors.logincardColor,
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -201,26 +220,26 @@ class EditProfile extends StatelessWidget {
                         Text(
                           AppTexts.tagLine,
                           style: GoogleFonts.poppins(
-                            textStyle: TextStyle(
+                            textStyle: const TextStyle(
                               color: Color.fromRGBO(158, 159, 160, 1),
                               fontSize: 18,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Container(
                           height: 2,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             color: AppColors.lightGreyCol,
                           ),
                         ),
                         //    SizedBox(
                         //   height: 20,
                         // ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         CustomTextField(
@@ -235,13 +254,15 @@ class EditProfile extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Container(
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                     height: 150,
+                    
                     decoration: BoxDecoration(
+                        border: Border.all(color: AppColors.borderCol,width: 2),
                       color: AppColors.logincardColor,
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -251,26 +272,26 @@ class EditProfile extends StatelessWidget {
                         Text(
                           AppTexts.contactInfo,
                           style: GoogleFonts.poppins(
-                            textStyle: TextStyle(
+                            textStyle: const TextStyle(
                               color: Color.fromRGBO(158, 159, 160, 1),
                               fontSize: 18,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Container(
                           height: 2,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             color: AppColors.lightGreyCol,
                           ),
                         ),
                         //    SizedBox(
                         //   height: 20,
                         // ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         Row(
@@ -285,7 +306,7 @@ class EditProfile extends StatelessWidget {
                               iconCol: AppColors.primaryColor,
                               customValidator: Utils.isValidph,
                             )),
-                            SizedBox(
+                            const SizedBox(
                               width: 20,
                             ),
                             Expanded(
@@ -303,24 +324,34 @@ class EditProfile extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 30,
                   ),
-                  InkWell(onTap: () {
-                    editProfileAndProfile.updateProfile(name: nameCont.text.toString().trim(), username: userNameCont.text.toString().trim(), gender: gender.toString().trim(), dob: dob.toString().trim(), about: desCont.text.toString().trim(), mobile: mobileNoCont.text.toString().trim(), email: emailCont.text.toString().trim()).then((value){
-                         //isEdit = true;
-                            context.goNamed(MyAppRouteConstants.profilePageRoute,pathParameters: {
-            'uid':FirebaseAuth.instance.currentUser!.uid,
-          });
-                          }).onError((error, stackTrace){
-
-                          });
-                  },
+                  InkWell(
+                    onTap: () {
+                      editProfileAndProfile
+                          .updateProfile(
+                              name: nameCont.text.toString().trim(),
+                              username: userNameCont.text.toString().trim(),
+                              gender: gender.toString().trim(),
+                              dob: dob.toString().trim(),
+                              about: desCont.text.toString().trim(),
+                              mobile: mobileNoCont.text.toString().trim(),
+                              email: emailCont.text.toString().trim())
+                          .then((value) {
+                        //isEdit = true;
+                        context.goNamed(MyAppRouteConstants.profilePageRoute,
+                            pathParameters: {
+                              'uid': FirebaseAuth.instance.currentUser!.uid,
+                            });
+                      }).onError((error, stackTrace) {});
+                    },
                     child: Container(
-                      constraints: BoxConstraints(maxHeight: 56, maxWidth: 278),
+                      constraints: const BoxConstraints(maxHeight: 56, maxWidth: 278),
                       decoration: BoxDecoration(
+
                         borderRadius: BorderRadius.circular(10),
-                        color: Color.fromRGBO(7, 99, 198, 1),
+                        color: const Color.fromRGBO(7, 99, 198, 1),
                       ),
                       child: Center(
                           child: Text(
@@ -332,7 +363,7 @@ class EditProfile extends StatelessWidget {
                 ],
               );
             } else {
-              return SizedBox(
+              return const SizedBox(
                 child: Text("hsddjfhdjhsjhjs"),
               );
             }

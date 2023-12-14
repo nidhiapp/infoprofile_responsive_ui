@@ -82,11 +82,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                     builder: (context, snapshot) {
                                       if (snapshot.hasData &&
                                           snapshot.data != null) {
-                                        if (snapshot
-                                                .data!.followerList?.length ==
-                                            0) {
-                                          return Image.asset(
-                                              AppImages.emptyImg);
+                                        if (snapshot .data!.followerList?.length ==0) {
+                                          return Image.asset(  AppImages.emptyImg);
                                         }
                                         return ListView.builder(
                                             itemCount: snapshot.data!
@@ -154,7 +151,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                       if (snapshot.hasData &&
                                           snapshot.data != null) {
                                         if (snapshot
-                                                .data!.followerList!.length ==
+                                                .data!.followingList!.length ==
                                             0) {
                                           return Image.asset(
                                               AppImages.emptyImg);

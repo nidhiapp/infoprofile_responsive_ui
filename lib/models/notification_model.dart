@@ -17,7 +17,7 @@ class ApiNotification{
   factory ApiNotification.fromJson({required Map<String, dynamic> json}){
     return ApiNotification(
         id: json['id'],
-        type: json['type'],
+        type: json['type'] == ('NotificationType.comment') ? NotificationType.comment : json['type']  == 'NotificationType.like'? NotificationType.like: NotificationType.follow,
         activityId: json['activityId'],
         time: json['time'],
         message: json['message'],

@@ -8,7 +8,7 @@ class BlueCircularImage extends StatelessWidget {
     return  Container(
                       height: 43,
                       width: 43,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                           color: AppColors.primaryColor,
                           boxShadow: [
                             BoxShadow(
@@ -18,8 +18,8 @@ class BlueCircularImage extends StatelessWidget {
                                 color: AppColors.logincardColor)
                           ],
                           shape: BoxShape.circle),
-                      child: Padding(
-                        padding: const EdgeInsets.all(2.0),
+                      child: const Padding(
+                        padding: EdgeInsets.all(2.0),
                        
                             child: Icon(
                           Icons.image_outlined,

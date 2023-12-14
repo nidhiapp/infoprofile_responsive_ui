@@ -9,6 +9,7 @@ import 'package:info_profile_ui/utils/ui_helper.dart/app_link.dart';
 import 'package:info_profile_ui/utils/ui_helper.dart/circular_network_img.dart';
 import 'package:info_profile_ui/utils/ui_helper.dart/custom_textstyles.dart';
 import 'package:info_profile_ui/view_model/base_provider.dart';
+import 'package:info_profile_ui/view_model/onboarding_provider.dart';
 import 'package:info_profile_ui/view_model/provider.dart';
 import 'package:provider/provider.dart';
 
@@ -24,8 +25,8 @@ class CreatePosts extends StatelessWidget {
       decoration: BoxDecoration(
           color: AppColors.logincardColor,
           border: Border.all(width: 1, color: AppColors.borderCol),
-          boxShadow: [
-            const BoxShadow(
+          boxShadow: const [
+            BoxShadow(
               offset: Offset(0, 1),
               color: Color.fromRGBO(0, 0, 0, 0.02),
               blurRadius: 21,
@@ -139,7 +140,7 @@ class CreatePosts extends StatelessWidget {
                             children: [
                               Container(
                                 padding: const EdgeInsets.all(10),
-                                width: w * 0.3,
+                              width: w * 0.3,
                                 child: ClipRRect(
                                     borderRadius: BorderRadius.circular(20),
                                     child: kIsWeb
@@ -147,7 +148,8 @@ class CreatePosts extends StatelessWidget {
                                             baseProvider.webImage!,
                                             fit: BoxFit.cover,
                                           )
-                                        : Image.file(baseProvider.pickedImage)),
+                                        : Image.file(baseProvider.pickedImage))
+                                        
                               ),
                               Positioned(
                                 right: 3,
@@ -189,7 +191,8 @@ class CreatePosts extends StatelessWidget {
                 builder: (context, value, child) {
                   return Row(
                     children: [
-                      InkWell(
+                      InkWell(highlightColor: AppColors.primaryColor,
+                      splashColor:AppColors.primaryColor ,
                         onTap: value.pickImageFromDevice,
                         child: const Icon(Icons.image_sharp,
                             color: Color.fromRGBO(114, 178, 249, 1)),
@@ -214,18 +217,18 @@ class CreatePosts extends StatelessWidget {
                   );
                 },
               ),
-              Consumer<BaseProvider>(
-                builder: (context, baseProvider, child) {
+              Consumer2<BaseProvider,AuthProviders>(
+                builder: (context, baseProvider,provider, child) {
                   return InkWell(
                     onTap: baseProvider.createPost,
                     child: Container(
                       padding: const EdgeInsets.symmetric(
                           vertical: 5.0, horizontal: 20),
                       decoration: BoxDecoration(
-                          color:baseProvider.postDescriptionController.text.toString().isEmpty? AppColors.azureCol:AppColors.primaryColor,
+                          color:baseProvider.postDescriptionController.text.toString().isEmpty? AppColors.primaryColor:AppColors.primaryColor,
                           borderRadius: BorderRadius.circular(10)),
                       child: Center(
-                          child: Text(
+                          child:provider.loading?const Center(child: CircularProgressIndicator()): Text(
                         AppTexts.post,
                         style: GoogleFonts.poppins(
                           textStyle: const TextStyle(

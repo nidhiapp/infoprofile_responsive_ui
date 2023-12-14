@@ -1,7 +1,7 @@
 class PostModel {
   final String? postId;
   final String? time;
-  final String? description;
+   String? description;
   final String? postedBy;
   final List<String>? likeList;
   final List<String>? commentIdList;

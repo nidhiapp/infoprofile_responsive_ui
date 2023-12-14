@@ -151,7 +151,7 @@ h=MediaQuery.of(context).size.height;
                                       if (snapshot.hasData &&
                                           snapshot.data != null) {
                                                if (snapshot
-                                                .data!.followerList!.length ==
+                                                .data!.followingList!.length ==
                                             0) {
                                           return  Image.asset(AppImages.emptyImg);
                                         }

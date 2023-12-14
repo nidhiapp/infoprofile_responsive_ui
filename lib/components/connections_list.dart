@@ -73,10 +73,18 @@ class ConnectionsList extends StatelessWidget {
                                   width: 5,
                                 ),
                                 Expanded(
-                                    child: Text(
+                                    child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                          Text(
+                                  snapshot.data!.name!,
+                                  style: AppStyle.connectionTextName,
+                                ),
+                                        Text(
                                   snapshot.data!.email!,
                                   style: AppStyle.connectionTextName,
-                                ))
+                                ),
+                                      ],
+                                    ))
                               ],
                             ),
                           ),
