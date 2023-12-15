@@ -26,7 +26,7 @@ class CustomContainer extends StatelessWidget {
       padding: padding,
       decoration: BoxDecoration(
         color: AppColors.logincardColor,
-        boxShadow: [
+        boxShadow: const [
           BoxShadow(
             offset: Offset(0, 1),
             blurRadius: 21,

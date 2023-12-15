@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:info_profile_ui/components/blue_circular_image.dart';
+import 'package:info_profile_ui/widgets/home_page_widgets/components/blue_circular_image.dart';
 import 'package:info_profile_ui/repository/profile_repo.dart';
 import 'package:info_profile_ui/utils/app_colors.dart';
 import 'package:info_profile_ui/utils/app_images.dart';
@@ -22,9 +22,9 @@ class PersonalProfile extends StatelessWidget {
         Container(
           height: 450,
           //width: 1000,
-          margin: EdgeInsets.symmetric(),
-          padding: EdgeInsets.symmetric(horizontal: 16),
-          decoration: BoxDecoration(
+          margin: const EdgeInsets.symmetric(),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          decoration: const BoxDecoration(
             //border: Border.all(width: 1,color: AppColors.borderCol),
             color: AppColors.logincardColor,
             borderRadius: BorderRadius.only(
@@ -33,8 +33,8 @@ class PersonalProfile extends StatelessWidget {
           ),
           child: Stack(children: [
             Container(
-              margin: EdgeInsets.symmetric(vertical: 35, horizontal: 30),
-              padding: EdgeInsets.symmetric(vertical: 25, horizontal: 10),
+              margin: const EdgeInsets.symmetric(vertical: 35, horizontal: 30),
+              padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 10),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
              border: Border.all(color: AppColors.borderCol,width: 2),),
@@ -47,7 +47,7 @@ class PersonalProfile extends StatelessWidget {
                       children: [
                         Row(
                           children: [
-                            SizedBox(
+                            const SizedBox(
                               width: 120,
                             ),
                             Column(
@@ -65,22 +65,22 @@ class PersonalProfile extends StatelessWidget {
                             ),
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 30,
                         ),
                         Container(
                           height: 2.5,
                           color: AppColors.lightGreyCol,
-                          padding: EdgeInsets.symmetric(vertical: 10),
+                          padding: const EdgeInsets.symmetric(vertical: 10),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         Text(
                           AppTexts.about,
                           style: AppStyle.sixOneFourGreyTs,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         Expanded(
@@ -96,12 +96,12 @@ class PersonalProfile extends StatelessWidget {
                                   children: [
                                     Row(
                                       children: [
-                                        Icon(
+                                        const Icon(
                                           Icons.person_outlined,
                                           color: AppColors.primaryColor,
                                           size: 28,
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           width: 10,
                                         ),
                                         Text(
@@ -115,12 +115,12 @@ class PersonalProfile extends StatelessWidget {
                                     ),
                                     Row(
                                       children: [
-                                        Icon(
+                                        const Icon(
                                           Icons.email_outlined,
                                           color: AppColors.primaryColor,
                                           size: 28,
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           width: 10,
                                         ),
                                         Expanded(
@@ -139,12 +139,12 @@ class PersonalProfile extends StatelessWidget {
                                     ),
                                     Row(
                                       children: [
-                                        Icon(
+                                        const Icon(
                                           Icons.phone,
                                           color: AppColors.primaryColor,
                                           size: 28,
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           width: 10,
                                         ),
                                         Text(
@@ -167,12 +167,12 @@ class PersonalProfile extends StatelessWidget {
                                   children: [
                                     Row(
                                       children: [
-                                        Icon(
+                                        const Icon(
                                           Icons.calendar_month,
                                           color: AppColors.primaryColor,
                                           size: 28,
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           width: 10,
                                         ),
                                         Text(
@@ -187,12 +187,12 @@ class PersonalProfile extends StatelessWidget {
                                     ),
                                     Row(
                                       children: [
-                                        Icon(
+                                        const Icon(
                                           Icons.people_outlined,
                                           color: AppColors.primaryColor,
                                           size: 28,
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           width: 10,
                                         ),
                                         Text(
@@ -210,12 +210,12 @@ class PersonalProfile extends StatelessWidget {
                                     ),
                                     Row(
                                       children: [
-                                        Icon(
+                                        const Icon(
                                           Icons.people_outline,
                                           color: AppColors.primaryColor,
                                           size: 28,
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           width: 10,
                                         ),
                                         Text(
@@ -244,12 +244,12 @@ class PersonalProfile extends StatelessWidget {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Icon(
+                                        const Icon(
                                           Icons.image_sharp,
                                           color: AppColors.primaryColor,
                                           size: 28,
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           width: 10,
                                         ),
                                         Text(
@@ -264,11 +264,11 @@ class PersonalProfile extends StatelessWidget {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        ImageIcon(
+                                        const ImageIcon(
                                           AssetImage(AppImages.genderIcon),
                                           color: AppColors.primaryColor,
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           width: 10,
                                         ),
                                         Text(
@@ -278,9 +278,22 @@ class PersonalProfile extends StatelessWidget {
                                         ),
                                       ],
                                     ),
-                                    SizedBox(
-                                      height: 30,
-                                    )
+                                      Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        const Icon(Icons.calendar_today_sharp,
+                                        color: AppColors.primaryColor),
+                                        const SizedBox(
+                                          width: 10,
+                                        ),
+                                        Text(
+                                          snapshot.data!.dob!.toString().substring(0,10),
+                                          style: AppStyle.fontSixOneSixBlackTs(
+                                              context),
+                                        ),
+                                      ],
+                                    ),
                                   ],
                                 ),
                               )
@@ -290,7 +303,7 @@ class PersonalProfile extends StatelessWidget {
                       ],
                     );
                   } else {
-                    return Center(child: Text("profile is not available"));
+                    return const Center(child: Text(AppTexts.profNotAvailable));
                   }
                 },
               ),
@@ -319,7 +332,7 @@ class PersonalProfile extends StatelessWidget {
                       showDialog(
                           context: context,
                           builder: ((BuildContext context) {
-                            return ProfileDialog(
+                            return const ProfileDialog(
                               imageUrl: AppLink.defaultFemaleImg,
                             );
                           }));
@@ -332,15 +345,15 @@ class PersonalProfile extends StatelessWidget {
                 }
               },
             ),
-            Positioned(top: 80, left: 80, child: BlueCircularImage())
+            //Positioned(top: 80, left: 80, child: BlueCircularImage())
           ]),
         ),
-        SizedBox(
+        const SizedBox(
           height: 30,
         ),
         Container(
           //width: 1000,
-          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
           decoration: BoxDecoration(
               border: Border.all(color: AppColors.borderCol,width: 2),
             color: AppColors.logincardColor,
@@ -353,22 +366,22 @@ class PersonalProfile extends StatelessWidget {
               Text(
                 AppTexts.tagLine,
                 style: GoogleFonts.poppins(
-                  textStyle: TextStyle(
+                  textStyle: const TextStyle(
                     color: AppColors.greyCol,
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Container(
                 height: 3,
                 color: AppColors.lightGreyCol,
-                padding: EdgeInsets.symmetric(vertical: 10),
+                padding: const EdgeInsets.symmetric(vertical: 10),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               StreamBuilder(
@@ -378,9 +391,9 @@ class PersonalProfile extends StatelessWidget {
                     return Container(
                       // height: 300,width: 1000,
                       margin:
-                          EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+                          const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
                       padding:
-                          EdgeInsets.symmetric(vertical: 24, horizontal: 10),
+                          const EdgeInsets.symmetric(vertical: 24, horizontal: 10),
                       decoration: BoxDecoration(
                           color: AppColors.logincardColor,
                           borderRadius: BorderRadius.circular(10),
@@ -388,12 +401,12 @@ class PersonalProfile extends StatelessWidget {
                               color: AppColors.borderCol, width: 1.5)),
                       child: Row(
                         children: [
-                          Icon(
+                          const Icon(
                             Icons.edit_note_outlined,
                             color: AppColors.primaryColor,
                             size: 30,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 10,
                           ),
                           Text(
@@ -404,7 +417,7 @@ class PersonalProfile extends StatelessWidget {
                       ),
                     );
                   } else {
-                    return SizedBox(
+                    return const SizedBox(
                       child: Text("bio not available"),
                     );
                   }

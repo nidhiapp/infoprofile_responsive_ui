@@ -50,9 +50,6 @@ class AppCustomDialog extends StatelessWidget {
                               minThumbLength: 0,
                               crossAxisMargin: 2,
                               mainAxisMargin: 40,
-                              // thumbColor: MaterialStateProperty.all(
-                              //     AppColors.color0763C6EXLT
-                              //         .withOpacity(0.5))
                             ),
                             child: Scrollbar(
                               // controller: scrollController,

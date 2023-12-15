@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:info_profile_ui/utils/app_colors.dart';
-import 'package:info_profile_ui/utils/constants.dart';
 import 'package:info_profile_ui/widgets/welcome_page_widgets/appstore_playstore.dart';
-import 'package:info_profile_ui/widgets/welcome_page_widgets/base_page.dart';
 import 'package:info_profile_ui/widgets/welcome_page_widgets/download_our_app_from.dart';
 import 'package:info_profile_ui/widgets/welcome_page_widgets/footer_block/mobile_footer_block.dart';
 import 'package:info_profile_ui/widgets/welcome_page_widgets/footer_block/tablet_footer_block.dart';
@@ -205,7 +203,7 @@ class _WelcomePageState extends State<WelcomePage> {
                         if (provider.index == 2) const OtpPage(),
                         if (provider.index == 4) const ForgetPassword(),
                         if (provider.index == 5) const ResetPassword(),
-                        if (provider.index == 3) LoginUsingPhone(),
+                        if (provider.index == 3) const LoginUsingPhone(),
                        // if (provider.index == 6) BasePage(),
                       ],
                     )
@@ -294,7 +292,7 @@ class _WelcomePageState extends State<WelcomePage> {
                         if (provider.index == 2) const OtpPage(),
                         if (provider.index == 4) const ForgetPassword(),
                         if (provider.index == 5) const ResetPassword(),
-                        if (provider.index == 3) LoginUsingPhone(),
+                        if (provider.index == 3) const LoginUsingPhone(),
                        // if (provider.index == 6) BasePage(),
 
                         SizedBox(

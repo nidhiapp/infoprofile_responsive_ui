@@ -1,11 +1,10 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:info_profile_ui/components/blue_circular_image.dart';
+import 'package:info_profile_ui/widgets/home_page_widgets/components/blue_circular_image.dart';
 import 'package:info_profile_ui/models/user_profile.dart';
+import 'package:info_profile_ui/repository/feed/feed_apis.dart';
 import 'package:info_profile_ui/utils/app_colors.dart';
 import 'package:info_profile_ui/utils/app_texts.dart';
 import 'package:info_profile_ui/utils/custom_validation.dart';
@@ -15,17 +14,18 @@ import 'package:info_profile_ui/utils/ui_helper.dart/circular_network_img.dart';
 import 'package:info_profile_ui/utils/ui_helper.dart/custom_drop_down_textfield.dart';
 import 'package:info_profile_ui/utils/ui_helper.dart/custom_textfield.dart';
 import 'package:info_profile_ui/utils/ui_helper.dart/custom_textstyles.dart';
-import 'package:info_profile_ui/view_model/base_provider.dart';
 import 'package:info_profile_ui/view_model/edit_profile.dart';
 import 'package:provider/provider.dart';
 
 class EditProfile extends StatelessWidget {
   EditProfile({super.key});
-  TextEditingController nameCont = TextEditingController();
-  TextEditingController emailCont = TextEditingController();
-  TextEditingController userNameCont = TextEditingController();
-  TextEditingController mobileNoCont = TextEditingController();
-  TextEditingController desCont = TextEditingController();
+  final TextEditingController nameCont = TextEditingController();
+  final TextEditingController emailCont = TextEditingController();
+  final TextEditingController userNameCont = TextEditingController();
+  final TextEditingController mobileNoCont = TextEditingController();
+  final TextEditingController desCont = TextEditingController();
+
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -100,28 +100,29 @@ class EditProfile extends StatelessWidget {
                           builder: (context, value, child) {
                             return Stack(children: [
                               Container(
+                                  height: 126,
+                                  width: 126,
                                   decoration: BoxDecoration(
                                       shape: BoxShape.circle,
                                       border: Border.all(
                                           width: 2,
                                           color: AppColors.borderCol)),
-                                          child:value.isPicked?Image.memory(value.webImage!) :
-                                 
-                                  CircularNetworkImage(
-                                    imageUrl:AppLink.defaultFemaleImg,
-                                    height: 126,
-                                    width: 126,
-                                    //fit: BoxFit.cover,
-                                  )
-                                  ),
+                                  child: value.isPicked
+                                      ? Image.memory(
+                                          value.webImage!,
+                                          fit: BoxFit.cover,
+                                        )
+                                      : CircularNetworkImage(
+                                          imageUrl: AppLink.defaultFemaleImg,
+                                          height: 126,
+                                          width: 126,
+                                          //fit: BoxFit.cover,
+                                        )),
                               Positioned(
                                   top: 80,
                                   left: 85,
                                   child: InkWell(
-                                      onTap: 
-                                        value.pickImageFromDevice,
-                                        
-                                    
+                                      onTap: value.pickImageFromDevice,
                                       child: const BlueCircularImage()))
                             ]);
                           },
@@ -129,32 +130,35 @@ class EditProfile extends StatelessWidget {
                         const SizedBox(
                           height: 20,
                         ),
-                        Row(
-                          children: [
-                            Expanded(
-                                child: CustomTextField(
-                              borderCol: AppColors.greyCol,
-                              enBorderCol: AppColors.borderCol,
-                              customController: nameCont,
-                              hintext: AppTexts.enterName,
-                              prefixicon: Icons.person,
-                              iconCol: AppColors.primaryColor,
-                              customValidator: Utils.isValidName,
-                            )),
-                            const SizedBox(
-                              width: 20,
-                            ),
-                            Expanded(
-                                child: CustomTextField(
-                              borderCol: AppColors.greyCol,
-                              enBorderCol: AppColors.borderCol,
-                              customController: userNameCont,
-                              hintext: AppTexts.enterUsername,
-                              prefixicon: Icons.person_4_outlined,
-                              iconCol: AppColors.primaryColor,
-                              customValidator: Utils.isValidName,
-                            )),
-                          ],
+                        Form(
+                          key: _formKey,
+                          child: Row(
+                            children: [
+                              Expanded(
+                                  child: CustomTextField(
+                                borderCol: AppColors.greyCol,
+                                enBorderCol: AppColors.borderCol,
+                                customController: nameCont,
+                                hintext: AppTexts.enterName,
+                                prefixicon: Icons.person,
+                                iconCol: AppColors.primaryColor,
+                                customValidator: Utils.isValidName,
+                              )),
+                              const SizedBox(
+                                width: 20,
+                              ),
+                              Expanded(
+                                  child: CustomTextField(
+                                borderCol: AppColors.greyCol,
+                                enBorderCol: AppColors.borderCol,
+                                customController: userNameCont,
+                                hintext: "user name",
+                                prefixicon: Icons.person_4_outlined,
+                                iconCol: AppColors.primaryColor,
+                                customValidator: Utils.isValidName,
+                              )),
+                            ],
+                          ),
                         ),
                         const SizedBox(
                           height: 20,
@@ -170,8 +174,10 @@ class EditProfile extends StatelessWidget {
                                   AppTexts.genderOption2,
                                   AppTexts.genderOption3
                                 ],
-                                onChanged: (String? value) {
+                                onChanged: (String? value) async {
                                   //   print('Selected Gender: $value');
+                                  await FirebaseFeedRepo()
+                                      .updateGenderInProfile(value!);
                                 },
 
                                 hintText: AppTexts.selectGender,
@@ -186,7 +192,9 @@ class EditProfile extends StatelessWidget {
                               child: CustomDropdownFormField<DateTime>(
                                 label: AppTexts.selectDate,
                                 items: const [], // You can leave this empty for date picker
-                                onChanged: (DateTime? value) {
+                                onChanged: (DateTime? value) async {
+                                  await FirebaseFeedRepo()
+                                      .updateDobInProfile(value.toString());
                                   //  print('Selected Date: $value');
                                 },
                                 hintText: AppTexts.selectDate,
@@ -207,10 +215,11 @@ class EditProfile extends StatelessWidget {
                     height: 20,
                   ),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                     height: 150,
                     decoration: BoxDecoration(
-                       border: Border.all(color: AppColors.borderCol,width: 2),
+                      border: Border.all(color: AppColors.borderCol, width: 2),
                       color: AppColors.logincardColor,
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -258,11 +267,11 @@ class EditProfile extends StatelessWidget {
                     height: 20,
                   ),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                     height: 150,
-                    
                     decoration: BoxDecoration(
-                        border: Border.all(color: AppColors.borderCol,width: 2),
+                      border: Border.all(color: AppColors.borderCol, width: 2),
                       color: AppColors.logincardColor,
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -288,9 +297,6 @@ class EditProfile extends StatelessWidget {
                             color: AppColors.lightGreyCol,
                           ),
                         ),
-                        //    SizedBox(
-                        //   height: 20,
-                        // ),
                         const SizedBox(
                           height: 20,
                         ),
@@ -328,36 +334,47 @@ class EditProfile extends StatelessWidget {
                     height: 30,
                   ),
                   InkWell(
-                    onTap: () {
-                      editProfileAndProfile
-                          .updateProfile(
-                              name: nameCont.text.toString().trim(),
-                              username: userNameCont.text.toString().trim(),
-                              gender: gender.toString().trim(),
-                              dob: dob.toString().trim(),
-                              about: desCont.text.toString().trim(),
-                              mobile: mobileNoCont.text.toString().trim(),
-                              email: emailCont.text.toString().trim())
-                          .then((value) {
-                        //isEdit = true;
-                        context.goNamed(MyAppRouteConstants.profilePageRoute,
-                            pathParameters: {
-                              'uid': FirebaseAuth.instance.currentUser!.uid,
-                            });
-                      }).onError((error, stackTrace) {});
+                    onTap: () async {
+                      bool isUpdated = false;
+                      debugPrint(" profile Edited ---- --- --- -- - -- - -- - - - - - -");
+                      if (_formKey.currentState!.validate()) {
+                        debugPrint(" profile Edited");
+                        await editProfileAndProfile .updateProfile(
+                                name: nameCont.text.toString().trim(),
+                                username: userNameCont.text.toString().trim(),
+                                gender: gender.toString().trim(),
+                                dob: dob.toString().trim(),
+                                about: desCont.text.toString().trim(),
+                                mobile: mobileNoCont.text.toString().trim(),
+                                email: emailCont.text.toString().trim())
+                            .then((value) {
+                          isUpdated = true;
+                          debugPrint("Edited profile");
+                        }).onError((error, stackTrace) {});
+                        if (isUpdated && context.mounted) {
+                          context.goNamed(MyAppRouteConstants.profilePageRoute,
+                              pathParameters: {
+                                'uid': FirebaseAuth.instance.currentUser!.uid,
+                              });
+                        }
+                      }
                     },
                     child: Container(
-                      constraints: const BoxConstraints(maxHeight: 56, maxWidth: 278),
+                      constraints:
+                          const BoxConstraints(maxHeight: 56, maxWidth: 278),
                       decoration: BoxDecoration(
-
                         borderRadius: BorderRadius.circular(10),
                         color: const Color.fromRGBO(7, 99, 198, 1),
                       ),
                       child: Center(
-                          child: Text(
-                        AppTexts.save,
-                        style: AppStyle.sixOneSixwhite,
-                      )),
+                          child: editProfileAndProfile.loading
+                              ? const CircularProgressIndicator(
+                                  color: AppColors.logincardColor,
+                                )
+                              : Text(
+                                  AppTexts.save,
+                                  style: AppStyle.sixOneSixwhite,
+                                )),
                     ),
                   )
                 ],

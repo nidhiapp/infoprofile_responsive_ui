@@ -101,7 +101,7 @@ class AuthProviders extends ChangeNotifier {
   Future<bool?> logout() async {
     bool? res;
     debugPrint("Going to logout Provider");
-    setLoading(true);
+   // setLoading(true);
     await FirebaseApi.logOut().then((value) {
       if (value == true) {
         res = value;
@@ -112,7 +112,7 @@ class AuthProviders extends ChangeNotifier {
     }).onError((error, stackTrace) {
       debugPrint("Error $error");
     });
-    setLoading(false);
+  //  setLoading(false);
     return res;
   }
 

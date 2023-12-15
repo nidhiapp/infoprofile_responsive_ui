@@ -1,13 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:info_profile_ui/components/connections_list.dart';
-import 'package:info_profile_ui/components/create_post.dart';
+import 'package:info_profile_ui/widgets/home_page_widgets/components/connections_list.dart';
+import 'package:info_profile_ui/widgets/home_page_widgets/components/create_post.dart';
 import 'package:info_profile_ui/models/user_post_model.dart';
 import 'package:info_profile_ui/repository/profile_repo.dart';
 import 'package:info_profile_ui/utils/ui_helper.dart/app_link.dart';
-import 'package:info_profile_ui/utils/ui_helper.dart/custom_app_bar.dart';
-import 'package:info_profile_ui/components/home_page_footer.dart';
-import 'package:info_profile_ui/components/user_posts.dart';
+import 'package:info_profile_ui/widgets/home_page_widgets/custom_app_bar.dart';
+import 'package:info_profile_ui/widgets/home_page_widgets/components/home_page_footer.dart';
+import 'package:info_profile_ui/widgets/home_page_widgets/components/user_posts.dart';
 import 'package:info_profile_ui/utils/app_colors.dart';
 import 'package:info_profile_ui/utils/app_images.dart';
 import 'package:info_profile_ui/utils/app_texts.dart';
@@ -42,7 +42,7 @@ class _HomePageState extends State<HomePage> {
           ),
 
           // Body App Bar
-          CustomAppBar(),
+          const CustomAppBar(),
 
           // Remaining Content
           Padding(
@@ -115,7 +115,7 @@ class _HomePageState extends State<HomePage> {
                                               });
                                         }
                                       } else {
-                                        return Text("no follower found");
+                                        return const Text("no follower found");
                                       }
                                     },
                                   )),
@@ -161,9 +161,7 @@ class _HomePageState extends State<HomePage> {
                                     builder: (context, snapshot) {
                                       if (snapshot.hasData &&
                                           snapshot.data != null) {
-                                        if (snapshot
-                                                .data!.followingList!.length ==
-                                            0) {
+                                        if (snapshot.data!.followingList!.length ==0) {
                                           return Image.asset(
                                               AppImages.emptyImg);
                                         }
@@ -227,7 +225,7 @@ class _HomePageState extends State<HomePage> {
                           builder: (context, snapshot) {
                             if (snapshot.connectionState ==
                                 ConnectionState.waiting) {
-                              return SingleChildScrollView(
+                              return const SingleChildScrollView(
                                 child: Column(
                                   //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
@@ -253,9 +251,7 @@ class _HomePageState extends State<HomePage> {
                               );
                             } else if (snapshot.hasError) {
                               debugPrint("Error State ${snapshot.error}");
-                              return Container(
-                                child: Text("errro is: ${snapshot.error}"),
-                              );
+                              return Text("errro is: ${snapshot.error}");
                             } else if (snapshot.hasData &&
                                 snapshot.data != null) {
                               List<PostModel?> posts = snapshot.data!;
@@ -268,7 +264,7 @@ class _HomePageState extends State<HomePage> {
                                       const CreatePosts(),
                                       ...List.generate(
                                           posts.length,
-                                          (index) => userPostConatiner(
+                                          (index) => UserPostConatiner(
                                                 post: posts[index]!,
                                               )),
                                     ],
@@ -289,7 +285,7 @@ class _HomePageState extends State<HomePage> {
                                 ],
                               );
                             } else {
-                              return SizedBox();
+                              return const SizedBox();
                             }
                           },
                         );
@@ -366,7 +362,7 @@ class _HomePageState extends State<HomePage> {
                                               },
                                             );
                                           } else {
-                                            return Text(
+                                            return const Text(
                                                 "no follower found------");
                                           }
                                         }),

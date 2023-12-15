@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:info_profile_ui/models/notification_model.dart';
 import 'package:info_profile_ui/repository/feed/feed_apis.dart';
 import 'package:info_profile_ui/repository/notification.dart';
+import 'package:info_profile_ui/repository/profile_repo.dart';
 import 'package:info_profile_ui/utils/app_colors.dart';
 import 'package:info_profile_ui/utils/app_images.dart';
 import 'package:info_profile_ui/utils/app_texts.dart';
@@ -53,7 +54,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
           // Home icon
           InkWell(
             onTap: () {
-              context.goNamed(MyAppRouteConstants.homePageRoute);
+              GoRouter.of(context).goNamed(MyAppRouteConstants.homePageRoute);
             },
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 3),
@@ -84,7 +85,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
           ),
           SizedBox(width: w * 0.01),
 
-          ImageIcon(
+          const ImageIcon(
             AssetImage(AppImages.iconVisitingCard),
             color: AppColors.greyNormalTextColor,
           ),
@@ -100,18 +101,18 @@ class _CustomAppBarState extends State<CustomAppBar> {
                     const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
                 enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(color: AppColors.borderCol)),
+                    borderSide: const BorderSide(color: AppColors.borderCol)),
                 border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(color: AppColors.borderCol)),
+                    borderSide: const BorderSide(color: AppColors.borderCol)),
                 focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                     borderSide:
-                        BorderSide(color: AppColors.borderCol, width: 2)),
+                        const BorderSide(color: AppColors.borderCol, width: 2)),
                 disabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                     borderSide:
-                        BorderSide(color: AppColors.borderCol, width: 2)),
+                        const BorderSide(color: AppColors.borderCol, width: 2)),
                 prefixIcon: InkWell(
                   onTap: () async {
                     String searchText = searchController.text.toString().trim();
@@ -129,15 +130,16 @@ class _CustomAppBarState extends State<CustomAppBar> {
             ),
           ),
 
-          SizedBox(
+          const SizedBox(
             width: 20,
           ),
 
           // Notification icon
-          StreamBuilder<List<ApiNotification?>>(
-              stream: getOwnNotification(),
+          StreamBuilder<NotificationListModel?>(
+              stream: getNotification(),
               builder: (context, snapshot) {
                 if (snapshot.hasData && snapshot.data != null) {
+                  NotificationListModel res = snapshot.data!;
                   return InkWell(
                       onTap: () {
                         //AppCustomDialog();
@@ -145,6 +147,8 @@ class _CustomAppBarState extends State<CustomAppBar> {
                           context: context,
                           builder: (context) {
                             if (snapshot.hasData && snapshot.data != null) {
+                              // final data =
+                              //     snapshot.data as Map<String, dynamic>;
                               return AlertDialog(
                                 content: Container(
                                   height: 400,
@@ -153,23 +157,48 @@ class _CustomAppBarState extends State<CustomAppBar> {
                                       color: AppColors.logincardColor),
                                   child: SingleChildScrollView(
                                     child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
-                                        ...List.generate(snapshot.data!.length,
+                                        ...List.generate(
+                                            res.notificationList!.length,
                                             (index) {
                                           return ListTile(
-                                            onTap: () {
-                                              debugPrint(
-                                                  getNotificationWithType(
-                                                          snapshot
-                                                              .data![index]!) +
-                                                      "Tapped!");
-                                              deleteMyNotification(
-                                                  notificationId: snapshot
-                                                      .data![index]!.id
-                                                      .toString());
-                                            },
-                                            title: Text(getNotificationWithType(
-                                                snapshot.data![index]!)),
+                                            onTap: () {},
+                                            title: StreamBuilder(
+                                                stream: FirebaseFeedRepo()
+                                                    .getUserData(
+                                                        id: res
+                                                            .notificationList![
+                                                                index]
+                                                            .sentById!
+                                                            .toString()),
+                                                builder: (context, snapshot) {
+                                                  if (snapshot.hasData &&
+                                                      snapshot.data != null) {
+                                                    return Column(
+                                                      children: [
+                                                        Text(getNotificationWithType(
+                                                                res.notificationList![
+                                                                    index],
+                                                                snapshot.data!
+                                                                    .name) ??
+                                                            ""),
+                                                        const Divider(
+                                                          height: 2,
+                                                        )
+                                                      ],
+                                                    );
+                                                  } else {
+                                                    return Text(
+                                                      getNotificationWithType(
+                                                              res.notificationList![
+                                                                  index],
+                                                              null) ??
+                                                          "",
+                                                    );
+                                                  }
+                                                }),
                                           );
                                         })
                                       ],
@@ -178,11 +207,11 @@ class _CustomAppBarState extends State<CustomAppBar> {
                                 ),
                               );
                             } else {
-                              return AlertDialog(
-                                content: Container(
+                              return const AlertDialog(
+                                content: SizedBox(
                                   height: 100,
                                   width: 100,
-                                  child: const Center(
+                                  child: Center(
                                       child: Text("No Notification Found!")),
                                 ),
                               );
@@ -198,11 +227,44 @@ class _CustomAppBarState extends State<CustomAppBar> {
                         width: 20,
                       ));
                 } else {
-                  return SizedBox();
+                  return InkWell(
+                    onTap: () {
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              content: Container(
+                                height: 400,
+                                width: 400,
+                                decoration: const BoxDecoration(
+                                    color: AppColors.logincardColor),
+                                child: SingleChildScrollView(
+                                  child: Column(
+                                    children: [
+                                      Image.asset(
+                                        AppImages.notificationIcon,
+                                        fit: BoxFit.fill,
+                                        height: 20,
+                                        width: 20,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            );
+                          });
+                    },
+                    child: Image.asset(
+                      AppImages.notificationIcon,
+                      fit: BoxFit.fill,
+                      height: 20,
+                      width: 20,
+                    ),
+                  );
                 }
               }),
 
-          SizedBox(
+          const SizedBox(
             width: 10,
           ),
 
@@ -251,10 +313,11 @@ class _CustomAppBarState extends State<CustomAppBar> {
                                 style: AppStyle.custompoppinNormalTs),
                             actions: [
                               TextButton(
-                                child: const Text("No",
+                                child: const Text(AppTexts.no,
                                     style: TextStyle(color: Colors.black)),
                                 onPressed: () {
-                                  Navigator.pop(context); // Close the dialog
+                                  // Navigator.of(context)
+                                  //     .pop(); // Close the dialog
                                 },
                               ),
                               TextButton(
@@ -263,12 +326,17 @@ class _CustomAppBarState extends State<CustomAppBar> {
                                   style: TextStyle(color: Colors.black),
                                 ),
                                 onPressed: () async {
+                                  // Navigator.of(context).pop();
+                             
                                   await value2.logout().then((value) {
                                     context.goNamed(
                                         MyAppRouteConstants.welcomePageRoute);
-                                    // if (value == true) {
-                                    //   provider.desktopLogin();
-                                    // }
+                                     Navigator.of(context).pop();
+                                    if (value == true) {
+                                      //provider.desktopLogin();
+                                    }
+
+                                  //  GoRouter.of(context).pushReplacementNamed(MyAppRouteConstants.welcomePageRoute);
                                   });
                                 },
                               ),
@@ -281,10 +349,24 @@ class _CustomAppBarState extends State<CustomAppBar> {
                 ],
                 offset: const Offset(0, 50),
                 elevation: 2,
-                child: CircularNetworkImage(
-                  height: 50,
-                  width: 50,
-                  imageUrl: AppLink.defaultFemaleImg,
+                child: StreamBuilder(
+                  stream: FirebaseProfileRepository().getCurrentUserProfile(
+                      FirebaseAuth.instance.currentUser?.uid ?? ""),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData && snapshot.data != null) {
+                      return CircularNetworkImage(
+                        height: 50,
+                        width: 50,
+                        imageUrl: snapshot.data?.image ?? "",
+                      );
+                    } else {
+                      return CircularNetworkImage(
+                        height: 50,
+                        width: 50,
+                        imageUrl: AppLink.defaultFemaleImg,
+                      );
+                    }
+                  },
                 ),
               );
             },
@@ -294,11 +376,11 @@ class _CustomAppBarState extends State<CustomAppBar> {
     );
   }
 
-  getNotificationWithType(ApiNotification notification) {
+  getNotificationWithType(ApiNotification notification, String? name) {
     if (notification.type == NotificationType.follow) {
-      return "${notification.message} ${notification.activityId!.substring(0, 5)}";
+      return "${name ?? notification.activityId!.substring(0, 5)} ${notification.message} ";
     } else {
-      return "${notification.activityId!.substring(0, 5)} ${notification.message}";
+      return " ${notification.message} ${name ?? notification.activityId!.substring(0, 5)}";
     }
   }
 }

@@ -1,11 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:info_profile_ui/components/connections_list.dart';
+import 'package:info_profile_ui/widgets/home_page_widgets/components/connections_list.dart';
 import 'package:info_profile_ui/repository/profile_repo.dart';
 import 'package:info_profile_ui/utils/ui_helper.dart/app_link.dart';
-import 'package:info_profile_ui/utils/ui_helper.dart/custom_app_bar.dart';
-import 'package:info_profile_ui/components/edit_profile.dart';
-import 'package:info_profile_ui/components/personal_prof_button.dart';
+import 'package:info_profile_ui/widgets/home_page_widgets/custom_app_bar.dart';
+import 'package:info_profile_ui/widgets/home_page_widgets/components/edit_profile.dart';
 import 'package:info_profile_ui/utils/app_colors.dart';
 import 'package:info_profile_ui/utils/app_images.dart';
 import 'package:info_profile_ui/utils/app_texts.dart';
@@ -40,7 +39,7 @@ h=MediaQuery.of(context).size.height;
 
 
          // Body App Bar
-         CustomAppBar(),
+         const CustomAppBar(),
 
 
          // Remaining Content
@@ -78,15 +77,13 @@ h=MediaQuery.of(context).size.height;
                                     builder: (context, snapshot) {
                                       if (snapshot.hasData &&
                                           snapshot.data != null) {
-                                        if (snapshot
-                                                .data!.followerList!.length ==
-                                            0) {
+                                        if (snapshot .data!.followerList!.length == 0) {
                                           return Image.asset(
                                               AppImages.emptyImg);
                                         }
                                         return ListView.builder(
                                             itemCount: snapshot.data!
-                                                    .followingList!.length ??
+                                                    .followingList?.length ??
                                                 0,
                                             itemBuilder: (context, index) {
                                               return ConnectionsList(
@@ -102,7 +99,7 @@ h=MediaQuery.of(context).size.height;
                                               );
                                             });
                                       } else {
-                                        return Text("no following found");
+                                        return const Text("no following found");
                                       }
                                     },
                                   )
@@ -150,9 +147,7 @@ h=MediaQuery.of(context).size.height;
                                     builder: (context, snapshot) {
                                       if (snapshot.hasData &&
                                           snapshot.data != null) {
-                                               if (snapshot
-                                                .data!.followingList!.length ==
-                                            0) {
+                                               if (snapshot .data!.followingList!.length == 0) {
                                           return  Image.asset(AppImages.emptyImg);
                                         }
                                         return ListView.builder(
@@ -164,7 +159,7 @@ h=MediaQuery.of(context).size.height;
                                               },);
                                             });
                                       } else {
-                                        return Text("no follower found");
+                                        return const Text("no follower found");
                                       }
                                     },
                                   )
@@ -183,7 +178,7 @@ h=MediaQuery.of(context).size.height;
                      ],
                    ),
                  ),
-                 SizedBox(width: 35,),
+                 const SizedBox(width: 35,),
                  Expanded(
                  flex: 6,
                  child: SingleChildScrollView(child:
@@ -202,7 +197,7 @@ h=MediaQuery.of(context).size.height;
 
                        
                       
-                      SizedBox(height: 20,),
+                      const SizedBox(height: 20,),
                       EditProfile(),
                     ],
                   )),

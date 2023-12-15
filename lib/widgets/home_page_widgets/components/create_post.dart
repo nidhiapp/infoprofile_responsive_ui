@@ -1,7 +1,9 @@
-import 'dart:io';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:info_profile_ui/repository/profile_repo.dart';
 import 'package:info_profile_ui/utils/app_colors.dart';
 import 'package:info_profile_ui/utils/app_texts.dart';
 import 'package:info_profile_ui/utils/global.dart';
@@ -15,11 +17,10 @@ import 'package:provider/provider.dart';
 
 class CreatePosts extends StatelessWidget {
   const CreatePosts({super.key});
- 
 
   @override
   Widget build(BuildContext context) {
-     bool isEmpty=true;
+    bool isEmpty = true;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
       decoration: BoxDecoration(
@@ -108,18 +109,37 @@ class CreatePosts extends StatelessWidget {
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.only(top: 3.0),
-                          child: ClipOval(
-                              child: CircularNetworkImage(
-                            imageUrl: AppLink.defaultFemaleImg,
-                            height: 30,
-                            width: 30,
-                          )),
+                        StreamBuilder(
+                          stream: FirebaseProfileRepository()
+                              .getCurrentUserProfile(
+                                  FirebaseAuth.instance.currentUser!.uid),
+                          builder: (context, snapshot) {
+                            if (snapshot.hasData && snapshot.data != null) {
+                              return Padding(
+                                padding: const EdgeInsets.only(top: 3.0),
+                                child: ClipOval(
+                                    child: CircularNetworkImage(
+                                  imageUrl: snapshot.data!.image!,
+                                  height: 30,
+                                  width: 30,
+                                )),
+                              );
+                            }else{
+                              return Padding(
+                                padding: const EdgeInsets.only(top: 3.0),
+                                child: ClipOval(
+                                    child: CircularNetworkImage(
+                                  imageUrl: AppLink.defaultFemaleImg,
+                                  height: 30,
+                                  width: 30,
+                                )),
+                              );
+                            }
+                          },
                         ),
                         Expanded(
                           child: TextFormField(
-                            controller:baseProvider.postDescriptionController ,
+                            controller: baseProvider.postDescriptionController,
                             style: AppStyle.custompoppinNormalTs,
                             decoration: InputDecoration(
                               contentPadding: const EdgeInsets.all(10),
@@ -139,18 +159,17 @@ class CreatePosts extends StatelessWidget {
                         ? Stack(
                             children: [
                               Container(
-                                padding: const EdgeInsets.all(10),
-                              width: w * 0.3,
-                                child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(20),
-                                    child: kIsWeb
-                                        ? Image.memory(
-                                            baseProvider.webImage!,
-                                            fit: BoxFit.cover,
-                                          )
-                                        : Image.file(baseProvider.pickedImage))
-                                        
-                              ),
+                                  padding: const EdgeInsets.all(10),
+                                  width: w * 0.3,
+                                  child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(20),
+                                      child: kIsWeb
+                                          ? Image.memory(
+                                              baseProvider.webImage!,
+                                              fit: BoxFit.cover,
+                                            )
+                                          : Image.file(
+                                              baseProvider.pickedImage))),
                               Positioned(
                                 right: 3,
                                 top: 3,
@@ -191,8 +210,9 @@ class CreatePosts extends StatelessWidget {
                 builder: (context, value, child) {
                   return Row(
                     children: [
-                      InkWell(highlightColor: AppColors.primaryColor,
-                      splashColor:AppColors.primaryColor ,
+                      InkWell(
+                        highlightColor: AppColors.primaryColor,
+                        splashColor: AppColors.primaryColor,
                         onTap: value.pickImageFromDevice,
                         child: const Icon(Icons.image_sharp,
                             color: Color.fromRGBO(114, 178, 249, 1)),
@@ -217,27 +237,33 @@ class CreatePosts extends StatelessWidget {
                   );
                 },
               ),
-              Consumer2<BaseProvider,AuthProviders>(
-                builder: (context, baseProvider,provider, child) {
+              Consumer2<BaseProvider, AuthProviders>(
+                builder: (context, baseProvider, provider, child) {
                   return InkWell(
                     onTap: baseProvider.createPost,
                     child: Container(
                       padding: const EdgeInsets.symmetric(
                           vertical: 5.0, horizontal: 20),
                       decoration: BoxDecoration(
-                          color:baseProvider.postDescriptionController.text.toString().isEmpty? AppColors.primaryColor:AppColors.primaryColor,
+                          color: baseProvider.postDescriptionController.text
+                                  .toString()
+                                  .isEmpty
+                              ? AppColors.primaryColor
+                              : AppColors.primaryColor,
                           borderRadius: BorderRadius.circular(10)),
                       child: Center(
-                          child:provider.loading?const Center(child: CircularProgressIndicator()): Text(
-                        AppTexts.post,
-                        style: GoogleFonts.poppins(
-                          textStyle: const TextStyle(
-                            color: Color.fromRGBO(255, 255, 255, 1),
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      )),
+                          child: baseProvider.loading
+                              ? const Center(child: CircularProgressIndicator(color: AppColors.logincardColor,))
+                              : Text(
+                                  AppTexts.post,
+                                  style: GoogleFonts.poppins(
+                                    textStyle: const TextStyle(
+                                      color: Color.fromRGBO(255, 255, 255, 1),
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                )),
                     ),
                   );
                 },

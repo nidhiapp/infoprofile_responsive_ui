@@ -1,12 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:info_profile_ui/repository/profile_repo.dart';
 import 'package:info_profile_ui/utils/app_colors.dart';
+import 'package:info_profile_ui/utils/app_texts.dart';
 import 'package:info_profile_ui/utils/routes/app_routes_constants.dart';
-import 'package:info_profile_ui/utils/ui_helper.dart/app_link.dart';
 import 'package:info_profile_ui/utils/ui_helper.dart/custom_textstyles.dart';
 import 'package:info_profile_ui/view_model/base_provider.dart';
 import 'package:provider/provider.dart';
@@ -60,31 +59,49 @@ class ConnectionsList extends StatelessWidget {
                                           'uid': snapshot.data!.uid!,
                                         });
                                   },
-                                  child: ClipOval(
-                                    child: CachedNetworkImage(
-                                      imageUrl: imageLink,
-                                      height: 33,
-                                      width: 33,
-                                      fit: BoxFit.cover,
-                                    ),
+                                  child: StreamBuilder(stream: FirebaseProfileRepository().getCurrentUserProfile(snapshot.data!.uid!),
+                                    builder: (context, snapshot) {
+                                      if (snapshot.hasData &&
+                                          snapshot.data != null) {
+                                        return ClipOval(
+                                          child: CachedNetworkImage(
+                                            imageUrl: snapshot.data!.image!,
+                                            height: 33,
+                                            width: 33,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        );
+                                      }
+                                      else{
+                                       return ClipOval(
+                                          child: CachedNetworkImage(
+                                            imageUrl: imageLink,
+                                            height: 33,
+                                            width: 33,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        );
+                                      }
+                                    },
                                   ),
                                 ),
                                 const SizedBox(
                                   width: 5,
                                 ),
                                 Expanded(
-                                    child: Column(crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                          Text(
-                                  snapshot.data!.name!,
-                                  style: AppStyle.connectionTextName,
-                                ),
-                                        Text(
-                                  snapshot.data!.email!,
-                                  style: AppStyle.connectionTextName,
-                                ),
-                                      ],
-                                    ))
+                                    child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      snapshot.data!.name!,
+                                      style: AppStyle.connectionTextName,
+                                    ),
+                                    Text(
+                                      snapshot.data!.email!,
+                                      style: AppStyle.connectionTextName,
+                                    ),
+                                  ],
+                                ))
                               ],
                             ),
                           ),
@@ -93,10 +110,12 @@ class ConnectionsList extends StatelessWidget {
                               debugPrint("remove on tap called");
                               removeOnTap();
                             },
-                            child:FirebaseAuth.instance.currentUser!.uid !=uid? Text(
-                              "Remove",
-                              style: AppStyle.connectionTextRemove,
-                            ):Text(""),
+                            child: FirebaseAuth.instance.currentUser!.uid != uid
+                                ? Text(
+                                    AppTexts.remove,
+                                    style: AppStyle.connectionTextRemove,
+                                  )
+                                : const Text(""),
                           ),
                         ],
                       ),
@@ -106,7 +125,7 @@ class ConnectionsList extends StatelessWidget {
                     ],
                   );
                 } else {
-                  return Text("no follower available");
+                  return const Text(AppTexts.nofollower);
                 }
               },
             );

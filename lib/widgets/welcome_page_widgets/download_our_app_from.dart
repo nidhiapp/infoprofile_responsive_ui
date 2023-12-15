@@ -58,8 +58,8 @@ class DownloadOurAppFrom extends StatelessWidget {
         ],
       ),
     ),
-    Positioned(
-      child: const DotRectangleBg()),
+    const Positioned(
+      child: DotRectangleBg()),
   ],
 );
 

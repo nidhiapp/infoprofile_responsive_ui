@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:info_profile_ui/utils/app_texts.dart';
 import 'package:info_profile_ui/utils/ui_helper.dart/custom_textstyles.dart';
-class Feature_Footer extends StatelessWidget {
-  const Feature_Footer({super.key});
+class FeatureFooter extends StatelessWidget {
+  const FeatureFooter({super.key});
 
   @override
   Widget build(BuildContext context) {

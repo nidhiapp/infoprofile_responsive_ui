@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:info_profile_ui/models/comment_model.dart';
 import 'package:info_profile_ui/models/notification_model.dart';
 import 'package:info_profile_ui/repository/feed/feed_apis.dart';
-import 'package:info_profile_ui/utils/ui_helper.dart/enums.dart';
 
 class CommentController {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -47,7 +46,7 @@ class CommentController {
               sentByImage: "",
               sentById: userId,
               message: "Created Comment on your post ",
-              type: NotificationType.comment,
+              type: NotificationTypes.comment,
               activityId: postId))
           .then((value) {
         debugPrint("Notification Added Successfully");

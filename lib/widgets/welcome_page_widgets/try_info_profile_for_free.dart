@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:info_profile_ui/utils/app_colors.dart';
 import 'package:info_profile_ui/utils/app_texts.dart';
-import 'package:info_profile_ui/utils/constants.dart';
 import 'package:info_profile_ui/utils/global.dart';
 import 'package:info_profile_ui/utils/ui_helper.dart/custom_textstyles.dart';
 
@@ -59,7 +58,7 @@ class TryInfoProfileForFree extends StatelessWidget {
                           AppTexts.multipleProfiles,
                           style: AppStyle.fontFiveOneTwoTs,
                         ),
-                         SizedBox(width: 10,),
+                         const SizedBox(width: 10,),
                         const Icon(
                           Icons.check,
                           size: 20,
@@ -68,7 +67,7 @@ class TryInfoProfileForFree extends StatelessWidget {
                           AppTexts.creative,
                           style: AppStyle.fontFiveOneTwoTs,
                         ),
-                         SizedBox(width: 10,),
+                         const SizedBox(width: 10,),
                         const Icon(
                           Icons.check,
                           size: 20,
@@ -209,7 +208,7 @@ class TryInfoProfileForFree extends StatelessWidget {
                       ),
                     ],
                   ),
-                   SizedBox(width: 5,),
+                   const SizedBox(width: 5,),
                 ],
               ),
             )));

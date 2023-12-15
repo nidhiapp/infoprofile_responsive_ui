@@ -111,10 +111,15 @@ class AppTexts {
   static const String writeDes = "Write description";
   static const String contactInfo = "Contact Information";
   static const String enterMobNum = "Enter mobile number";
-  static const String save ="Save";
+  static const String save = "Save";
   static const String writeYourComment = "write your comments here";
-  static const String faq ="FAQs";
+  static const String faq = "FAQs";
   static const String about = "About";
   static const String home = 'Home';
-    static const String feeds = "Feeds";
+  static const String feeds = "Feeds";
+  static const String remove = "Remove";
+  static const String nofollower = "no follower available";
+  static const String no = 'No';
+  static const String yes = 'Yes';
+  static const String profNotAvailable ="profile is not available";
 }

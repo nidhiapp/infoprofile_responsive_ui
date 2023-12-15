@@ -73,10 +73,10 @@ class _CustomDropdownFormFieldState<T>
             borderRadius: BorderRadius.circular(10),
             borderSide: BorderSide(color: widget.borderColor ?? Colors.blue),
           ),
-           errorBorder: OutlineInputBorder(
+           errorBorder: const OutlineInputBorder(
             borderSide: BorderSide(color: Colors.red),
           ),
-          focusedErrorBorder: OutlineInputBorder(
+          focusedErrorBorder: const OutlineInputBorder(
             borderSide: BorderSide(color: Colors.red),
           ),
             suffixIcon: InkWell(onTap: () async{
@@ -117,9 +117,9 @@ class _CustomDropdownFormFieldState<T>
           );
         }).toList(),
         decoration: InputDecoration(
-          suffixIcon:Icon(widget.suffIcon),
-          prefixIcon:Padding(
-            padding: const EdgeInsets.all(8.0),
+          suffixIcon: Icon(widget.suffIcon),
+          prefixIcon: const Padding(
+            padding: EdgeInsets.all(8.0),
             child: ImageIcon(AssetImage(AppImages.genderIcon,),
             color: AppColors.primaryColor,),
           ),
@@ -135,10 +135,10 @@ class _CustomDropdownFormFieldState<T>
             borderRadius: BorderRadius.circular(10),
             borderSide: BorderSide(color: widget.borderColor ?? Colors.blue),
           ),
-          errorBorder: OutlineInputBorder(
+          errorBorder: const OutlineInputBorder(
             borderSide: BorderSide(color: Colors.red),
           ),
-          focusedErrorBorder: OutlineInputBorder(
+          focusedErrorBorder: const OutlineInputBorder(
             borderSide: BorderSide(color: Colors.red),
           ),
           // prefixIcon: Icon(

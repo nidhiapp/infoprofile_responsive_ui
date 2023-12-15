@@ -9,7 +9,6 @@ import 'package:info_profile_ui/models/post_like.dart';
 import 'package:info_profile_ui/models/user_post_model.dart';
 import 'package:info_profile_ui/models/user_profile.dart';
 import 'package:info_profile_ui/utils/ui_helper.dart/custom_toast.dart';
-import 'package:info_profile_ui/utils/ui_helper.dart/enums.dart';
 import 'package:info_profile_ui/utils/ui_helper.dart/keys.dart';
 
 class FirebaseFeedRepo {
@@ -66,7 +65,7 @@ class FirebaseFeedRepo {
   }
 
   reportOnPost({required String postId, required String reportedById}) async {
-    bool isReported = false;
+    //bool isReported = false;
     await storeReportPostRef
         .doc(reportedById)
         .update({
@@ -74,14 +73,13 @@ class FirebaseFeedRepo {
         })
         .then((value) {})
         .onError((error, stackTrace) {});
-   await storePostRef
+    await storePostRef
         .doc(postId)
         .update({
           'reportPostList': FieldValue.arrayUnion([reportedById])
         })
         .then((value) {})
         .onError((error, stackTrace) {});
-
   }
 
   reportOnComment(
@@ -309,7 +307,15 @@ class FirebaseFeedRepo {
     }).onError((error, stackTrace) {});
     return res;
   }
-
+ Future<bool?> updateDobInProfile(String dob) async {
+    bool? res = false;
+    await storeUserRef
+        .doc(_auth.currentUser!.uid)
+        .update({"dob": dob}).then((value) {
+      res = true;
+    }).onError((error, stackTrace) {});
+    return res;
+  }
   Future<bool?> updateEmailInProfile(String newEmail) async {
     bool? res = false;
     await storeUserRef
@@ -377,7 +383,7 @@ class FirebaseFeedRepo {
             "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Going to send Notification%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
         await sendNotification(
           ApiNotification(
-            type: NotificationType.follow,
+            type: NotificationTypes.follow,
             id: time + followingId,
             message: "You are being followed by ",
             sentById: _auth.currentUser!.uid,
@@ -464,27 +470,13 @@ class FirebaseFeedRepo {
     });
   }
 
-  // await storeReportPostRef
-  //       .doc(reportedById)
-  //       .set({
-  //         'reportPostList': FieldValue.arrayUnion([postId])
-  //       })
-  //       .then((value) {})
-  //       .onError((error, stackTrace) {});
   Stream<List<PostModel>> getUserFeedWithDetails() {
     String uid = _auth.currentUser!.uid;
     debugPrint("User's uid is $uid");
     final followerStream = storeUserRef.doc(uid).snapshots();
-    // final reportPostStream = storeReportPostRef.doc(uid).snapshots();
-    //   reportPostStream
-    //       .asyncMap((DocumentSnapshot<Map<String, dynamic>> snapshots)async {
-    //               debugPrint("--------- data of report post--------------------- ${snapshots.data()}");
-    //       });
-    // debugPrint("Fetching followerStream for user: $uid");
 
     return followerStream
         .asyncMap((DocumentSnapshot<Map<String, dynamic>> snapshot) async {
-    
       debugPrint("Fetching for data ${snapshot.data()}");
       UserProfileModel userProfileModel =
           UserProfileModel.fromJson(snapshot.data()!);
@@ -522,7 +514,7 @@ class FirebaseFeedRepo {
             // debugPrint( "Fetched Post Details for user $followingId, post ID $postId are ${postSnapshot.data()!}");
             try {
               PostModel thisPost = PostModel.fromJson(postSnapshot.data()!);
-              if (posts.isNotEmpty ) {
+              if (posts.isNotEmpty) {
                 posts.add(thisPost);
                 debugPrint("Post Added!");
               } else {
@@ -552,28 +544,42 @@ class FirebaseFeedRepo {
 
   Future sendNotification(ApiNotification notification) async {
     // Adding Notification in the Notification Table
-    await storeNotificationRef.doc(notification.id).set(notification.toMap());
-
-    // Getting the List of Notification of the user
-    final notificationSnaps = await getNotification(notification.sentToId!);
-    if (notificationSnaps.exists) {
-      final notifications = notificationSnaps.data() as Map<String, dynamic>;
-      NotificationList notificationList =
-          NotificationList.fromJson(notifications);
-      notificationList.notificationIds!.add(notification.id!);
-      await storeUserNotificationRef
-          .doc(notification.sentToId)
-          .update({'notificationIds': notificationList.notificationIds!});
+    debugPrint("Going to send notification ${notification.toMap()}");
+    final stream =
+        await storeUserNotificationRef.doc(notification.sentToId).get();
+    if (stream.exists) {
+      await storeUserNotificationRef.doc(notification.sentToId).update({
+        'notificationList': FieldValue.arrayUnion([notification.toMap()])
+      });
     } else {
       await storeUserNotificationRef.doc(notification.sentToId).set({
-        'notificationIds': [notification.id!]
+        'notificationList': FieldValue.arrayUnion([notification.toMap()])
       });
     }
+
+    // Getting the List of Notification of the user
+    // final notificationSnaps = await getNotification(notification.sentToId!);
+    // if (notificationSnaps.exists) {
+    //   final notifications = notificationSnaps.data() as Map<String, dynamic>;
+    //   NotificationList notificationList =
+    //       NotificationList.fromJson(notifications);
+    //   notificationList.notificationIds!.add(notification.id!);
+    //   await storeUserNotificationRef
+    //       .doc(notification.sentToId)
+    //       .update({'notificationIds': notificationList.notificationIds!});
+    // } else {
+    //   await storeUserNotificationRef.doc(notification.sentToId).set({
+    //     'notificationIds': [notification.id!]
+    //   });
+    // }
   }
 
-  Future getNotification(String userId) async {
-    final notification = await storeUserNotificationRef.doc(userId).get();
-    return notification;
+  Stream getNotification(String userId) {
+    final notification = storeUserNotificationRef.doc(userId).snapshots();
+    return notification.map((event) {
+      debugPrint("${event.data()}");
+      return event;
+    });
   }
 
   Future<List<UserProfileModel>> searchUsers(String searchText) async {
@@ -593,7 +599,7 @@ class FirebaseFeedRepo {
       // Convert query results to a list of UserProfileModel
       List<UserProfileModel> users = querySnapshot.docs.map((doc) {
         debugPrint("Search Result is ${doc.data()}");
-        return UserProfileModel.fromJson(doc.data()!);
+        return UserProfileModel.fromJson(doc.data());
       }).toList();
       // await followUser(users[0].uid.toString());
       return users;
@@ -653,9 +659,9 @@ class FirebaseFeedRepo {
         CustomToast(context: context, message: "post deleted succesfully");
       });
 
-      print('Post $postId successfully deleted');
+      debugPrint('Post $postId successfully deleted');
     } catch (error) {
-      print('Error deleting post: $error');
+      debugPrint('Error deleting post: $error');
     }
   }
 
@@ -669,9 +675,9 @@ class FirebaseFeedRepo {
         CustomToast(context: context, message: "comment deleted succesfully");
       });
 
-      print('comment ${comment.toJson()} successfully deleted');
+      debugPrint('comment ${comment.toJson()} successfully deleted');
     } catch (error) {
-      print('Error deleting comment: $error');
+     debugPrint('Error deleting comment: $error');
     }
   }
 }

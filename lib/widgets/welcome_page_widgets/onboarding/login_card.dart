@@ -3,7 +3,6 @@ import 'package:go_router/go_router.dart';
 import 'package:info_profile_ui/utils/app_colors.dart';
 import 'package:info_profile_ui/utils/app_images.dart';
 import 'package:info_profile_ui/utils/app_texts.dart';
-import 'package:info_profile_ui/utils/constants.dart';
 import 'package:info_profile_ui/utils/custom_validation.dart';
 import 'package:info_profile_ui/utils/global.dart';
 import 'package:info_profile_ui/utils/routes/app_routes_constants.dart';
@@ -129,7 +128,8 @@ class LoginCard extends StatelessWidget {
                  
                 }).then((value) {
                   if (value == true) {
-                     context.goNamed(MyAppRouteConstants.homePageRoute);
+                     // context.goNamed(MyAppRouteConstants.homePageRoute);
+                     GoRouter.of(context).goNamed(MyAppRouteConstants.homePageRoute);
                     // GoRouter.of(context) .pushNamed(MyAppRouteConstants.homePageRoute);
                     //  provider.basePage();
                   }
@@ -210,8 +210,7 @@ class LoginCard extends StatelessWidget {
                       onTap: () async {
                         await authProvider.googleLogin().then((value) {
                           if (value == true) {
-                            GoRouter.of(context)
-                                .pushNamed(MyAppRouteConstants.homePageRoute);
+                            GoRouter.of(context).goNamed(MyAppRouteConstants.homePageRoute);
                             // provider.basePage();
                           }
                         }).onError((error, stackTrace) {

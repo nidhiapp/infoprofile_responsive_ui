@@ -20,9 +20,9 @@ class FirebaseProfileRepository{
     return res;
   }
 
-  Stream<UserProfileModel?> getCurrentUserProfile(String currentUserUID) {
+  Stream<UserProfileModel?> getCurrentUserProfile(String? currentUserUID) {
     UserProfileModel? res;
-    final fireStoreStream = storeRef.doc(currentUserUID).snapshots();
+    final fireStoreStream = storeRef.doc(currentUserUID ?? "").snapshots();
     return fireStoreStream.map((DocumentSnapshot<Map<String, dynamic>> snapshot) {
       if (snapshot.exists)
       {

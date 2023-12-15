@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:info_profile_ui/utils/app_colors.dart';
+import 'package:info_profile_ui/utils/app_texts.dart';
 
 class CustomDialogBox extends StatelessWidget {
   final String title;
@@ -31,12 +32,12 @@ class CustomDialogBox extends StatelessWidget {
               title,
               style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 26),
             Text(
               content,
               style: const TextStyle(fontSize: 16),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 36),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -45,14 +46,14 @@ class CustomDialogBox extends StatelessWidget {
                     onAction(false); // User selected "No"
                     Navigator.of(context).pop(); // Close the dialog
                   },
-                  child: const Text('No',style: TextStyle(color: Colors.black)),
+                  child: const Text(AppTexts.no,style: TextStyle(color: Colors.black)),
                 ),
                 TextButton(
                   onPressed: () {
                     onAction(true); // User selected "Yes"
                     Navigator.of(context).pop(); // Close the dialog
                   },
-                  child: const Text('Yes',style: TextStyle(color: Colors.black)),
+                  child: const Text(AppTexts.yes,style: TextStyle(color: Colors.black)),
                 ),
               ],
             ),

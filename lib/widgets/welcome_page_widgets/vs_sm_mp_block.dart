@@ -11,7 +11,7 @@ class VsSmMpBlockContent extends StatefulWidget {
    late var item2;
   @override
   VsSmMpBlockContent(
-      {required this.icon, required this.item, required this.item2});
+      {super.key,required this.icon, required this.item, required this.item2});
 
   @override
   State<VsSmMpBlockContent> createState() => _VsSmMpBlockContentState();
@@ -22,6 +22,7 @@ class _VsSmMpBlockContentState extends State<VsSmMpBlockContent> {
   Color headLineColor = Colors.blue.shade900;
   Color contentColor = Colors.black;
   Color container = Colors.transparent;
+  @override
   Widget build(BuildContext context) {
     return Consumer<Providers>(
       builder: (context, value, child) {
@@ -49,14 +50,6 @@ class _VsSmMpBlockContentState extends State<VsSmMpBlockContent> {
             decoration: BoxDecoration(
                 color: container, 
                 borderRadius: BorderRadius.circular(10),
-              //     boxShadow: [
-              //   BoxShadow(
-              //     color: value.isHovered?Colors.transparent: Color.fromRGBO(25, 55, 102, 0.25),
-              //     offset:  value.isHovered?Offset(0,0):Offset(0, 30) ,
-              //     blurRadius:value.isHovered?0:60,
-              //     spreadRadius: 0,
-              //   ),
-              // ],
                 ),
             padding:  const EdgeInsets.all(50),
             child: Column(

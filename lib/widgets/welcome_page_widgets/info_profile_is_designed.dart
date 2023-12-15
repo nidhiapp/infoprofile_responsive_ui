@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:info_profile_ui/utils/app_texts.dart';
-import 'package:info_profile_ui/utils/constants.dart';
 import 'package:info_profile_ui/utils/global.dart';
 import 'package:info_profile_ui/utils/ui_helper.dart/custom_textstyles.dart';
 class InfoProfileIsDesigned extends StatelessWidget {

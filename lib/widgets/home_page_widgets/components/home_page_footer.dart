@@ -11,7 +11,7 @@ class HomePageFooter extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 22, vertical: 28),
+        padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 28),
        
         decoration:BoxDecoration(
           borderRadius: BorderRadius.circular(10),
@@ -28,7 +28,7 @@ class HomePageFooter extends StatelessWidget {
             Text(AppTexts.faq,style:AppStyle.fourOneFourUnderLineTs,)
            ],
          ),
-         SizedBox(height: 10,),
+         const SizedBox(height: 10,),
         Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -68,16 +68,16 @@ class HomePageFooter extends StatelessWidget {
         ],
       ),
     
-         SizedBox(height: 8,),
+         const SizedBox(height: 8,),
         Container(
-          constraints: BoxConstraints(
+          constraints: const BoxConstraints(
             maxWidth: 154
           ),
           child: Image.asset(AppImages.infoProfFooterLogo,)),
-        SizedBox(height: 8,),
+        const SizedBox(height: 8,),
         Text(AppTexts.notANormal,
         style: GoogleFonts.poppins(
-        textStyle:TextStyle(
+        textStyle:const TextStyle(
         color: Color.fromRGBO(255, 255, 255, 1) ,
           fontSize: 10,
           fontWeight: FontWeight.w400,
@@ -86,16 +86,16 @@ class HomePageFooter extends StatelessWidget {
           ),),
         Text(AppTexts.servicesAreProvided,
         style: GoogleFonts.poppins(
-        textStyle:TextStyle(
+        textStyle:const TextStyle(
         color: Color.fromRGBO(255, 255, 255, 1) ,
           fontSize: 10,
           fontWeight: FontWeight.w400,
     
           ), ),
           ),
-          SizedBox(height: 20,),
+          const SizedBox(height: 20,),
           Container(
-            constraints: BoxConstraints(
+            constraints: const BoxConstraints(
             maxWidth: 154
           ),
             child: Image.asset(AppImages.socilaMedia,))

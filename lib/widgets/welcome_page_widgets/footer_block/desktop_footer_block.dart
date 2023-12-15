@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:info_profile_ui/utils/app_colors.dart';
 import 'package:info_profile_ui/utils/app_images.dart';
 import 'package:info_profile_ui/utils/app_texts.dart';
-import 'package:info_profile_ui/utils/constants.dart';
 import 'package:info_profile_ui/utils/global.dart';
 import 'package:info_profile_ui/utils/ui_helper.dart/custom_textstyles.dart';
 import 'package:info_profile_ui/widgets/welcome_page_widgets/footer_block/elements_in%20_footer/company.dart';
@@ -29,7 +28,7 @@ class DesktopFooterSetUp extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
               TryInfoProfileForFree.desktopTryInfoProfileForFree(),
-          SizedBox(height: 70,),
+          const SizedBox(height: 70,),
             Padding(
               padding: const EdgeInsets.only(left:48.0),
               child: Row(crossAxisAlignment: CrossAxisAlignment.start,
@@ -47,11 +46,11 @@ class DesktopFooterSetUp extends StatelessWidget {
                     ],
                   ), 
                   const SizedBox(width: 200,),
-                  Expanded(
+                  const Expanded(
                     child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Expanded(child: Feature_Footer()),
+                        Expanded(child: FeatureFooter()),
                         SizedBox(width: 20,),
                      InBetweenConts(),
                         SizedBox(width: 20,),
@@ -93,7 +92,7 @@ class DesktopFooterSetUp extends StatelessWidget {
               
               ],),
             ),
-            SizedBox(height: 20,)
+            const SizedBox(height: 20,)
           ],
         ),
             

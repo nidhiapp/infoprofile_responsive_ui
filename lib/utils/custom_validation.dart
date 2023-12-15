@@ -69,7 +69,7 @@ class Utils {
 
   static String? isValidName(String? value) {
     if (value!.isEmpty) {
-      return null;
+      return 'enter name';
     } else if (value.length < 3) {
       return 'Enter a name';
     }

@@ -1,14 +1,14 @@
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
-import 'package:info_profile_ui/components/connections_list.dart';
+import 'package:info_profile_ui/widgets/home_page_widgets/components/connections_list.dart';
 import 'package:info_profile_ui/repository/profile_repo.dart';
 import 'package:info_profile_ui/utils/ui_helper.dart/app_link.dart';
-import 'package:info_profile_ui/utils/ui_helper.dart/custom_app_bar.dart';
+import 'package:info_profile_ui/widgets/home_page_widgets/custom_app_bar.dart';
 import 'package:info_profile_ui/utils/app_colors.dart';
 import 'package:info_profile_ui/utils/app_images.dart';
 import 'package:info_profile_ui/utils/app_texts.dart';
 import 'package:info_profile_ui/utils/global.dart';
-import 'package:info_profile_ui/utils/ui_helper.dart/custom_tab_bar.dart';
+import 'package:info_profile_ui/widgets/home_page_widgets/custom_tab_bar.dart';
 import 'package:info_profile_ui/utils/ui_helper.dart/custom_textstyles.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -39,7 +39,7 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
 
           // Body App Bar
-          CustomAppBar(),
+          const CustomAppBar(),
 
           // Remaining Content
           Padding(
@@ -82,7 +82,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     builder: (context, snapshot) {
                                       if (snapshot.hasData &&
                                           snapshot.data != null) {
-                                        if (snapshot .data!.followerList?.length ==0) {
+                                        if (snapshot.data!.followerList?.length ==0) {
                                           return Image.asset(  AppImages.emptyImg);
                                         }
                                         return ListView.builder(
@@ -104,7 +104,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                               );
                                             });
                                       } else {
-                                        return Text("no follower found");
+                                        return const Text("no follower found");
                                       }
                                     },
                                   )),
@@ -150,15 +150,13 @@ class _ProfilePageState extends State<ProfilePage> {
                                     builder: (context, snapshot) {
                                       if (snapshot.hasData &&
                                           snapshot.data != null) {
-                                        if (snapshot
-                                                .data!.followingList!.length ==
-                                            0) {
+                                        if (snapshot.data!.followingList!.length == 0) {
                                           return Image.asset(
                                               AppImages.emptyImg);
                                         }
                                         return ListView.builder(
                                             itemCount: snapshot.data!
-                                                    .followingList!.length ??
+                                                    .followingList?.length ??
                                                 0,
                                             itemBuilder: (context, index) {
                                               return ConnectionsList(
@@ -174,7 +172,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                               );
                                             });
                                       } else {
-                                        return Text("no following found");
+                                        return const Text("no following found");
                                       }
                                     },
                                   )
@@ -194,7 +192,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 25,
                   ),
                   Expanded(

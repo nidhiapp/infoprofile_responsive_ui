@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:info_profile_ui/utils/app_colors.dart';
 import 'package:info_profile_ui/utils/app_images.dart';
 import 'package:info_profile_ui/utils/app_texts.dart';
-import 'package:info_profile_ui/utils/constants.dart';
 import 'package:info_profile_ui/utils/global.dart';
 import 'package:info_profile_ui/utils/ui_helper.dart/custom_textstyles.dart';
 import 'package:info_profile_ui/widgets/welcome_page_widgets/footer_block/elements_in%20_footer/company.dart';
@@ -30,7 +29,7 @@ class MobileFooter extends StatelessWidget {
              SizedBox(width: w*0.5,
               child: Image.asset(AppImages.socilaMedia)),
              SizedBox(height: h*0.03,),
-              const Feature_Footer(),
+              const FeatureFooter(),
                SizedBox(height: h*0.03,),
               const LinkFooter(),
                SizedBox(height: h*0.03,),

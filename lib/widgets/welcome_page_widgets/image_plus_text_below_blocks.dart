@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:info_profile_ui/utils/app_images.dart';
 import 'package:info_profile_ui/utils/app_texts.dart';
-import 'package:info_profile_ui/utils/constants.dart';
 import 'package:info_profile_ui/utils/global.dart';
 import 'package:info_profile_ui/utils/ui_helper.dart/custom_textstyles.dart';
 import 'package:info_profile_ui/widgets/background_widgets.dart/overlapping_shapes_bg.dart';
@@ -61,7 +60,7 @@ class ImageplusText extends StatelessWidget {
                       Wrap(children: [Text(AppTexts.hereWeProduce,style: AppStyle.imgtextcol,)]),
                     ],
                   )),
-                  SizedBox(width: 20,)
+                  const SizedBox(width: 20,)
                 
           ],),
           

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:info_profile_ui/utils/app_colors.dart';
 import 'package:info_profile_ui/utils/app_images.dart';
 import 'package:info_profile_ui/utils/app_texts.dart';
-import 'package:info_profile_ui/utils/constants.dart';
 import 'package:info_profile_ui/utils/global.dart';
 import 'package:info_profile_ui/utils/ui_helper.dart/custom_textstyles.dart';
 import 'package:info_profile_ui/widgets/welcome_page_widgets/footer_block/elements_in%20_footer/company.dart';
@@ -45,11 +44,11 @@ class TabletFooter extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: 30,),
-                  Expanded(
+                  const Expanded(
                     child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Feature_Footer(),
+                     FeatureFooter(),
                       SizedBox(
                         height: 25,
                       ),
@@ -65,7 +64,7 @@ class TabletFooter extends StatelessWidget {
                   ),
 
                   const SizedBox(width: 20,),
-                  Expanded(
+                  const Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -77,7 +76,7 @@ class TabletFooter extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(width: 5,)
+                  const SizedBox(width: 5,)
                   
                 
                 ],

@@ -2,9 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:info_profile_ui/components/personal_prof.dart';
-import 'package:info_profile_ui/components/personal_prof_button.dart';
-import 'package:info_profile_ui/components/user_posts.dart';
+import 'package:info_profile_ui/widgets/home_page_widgets/components/personal_prof.dart';
+import 'package:info_profile_ui/widgets/home_page_widgets/components/personal_prof_button.dart';
+import 'package:info_profile_ui/widgets/home_page_widgets/components/user_posts.dart';
 import 'package:info_profile_ui/models/user_profile.dart';
 import 'package:info_profile_ui/repository/feed/feed_apis.dart';
 import 'package:info_profile_ui/utils/app_colors.dart';
@@ -48,7 +48,7 @@ class _CustomTabBarState extends State<CustomTabBar> {
                           pathParameters: {
                             'uid': FirebaseAuth.instance.currentUser!.uid,
                           });
-                      ;
+                      
                     },
                     child: _currentIndex == 0 &&
                             FirebaseAuth.instance.currentUser!.uid == widget.uid
@@ -58,16 +58,16 @@ class _CustomTabBarState extends State<CustomTabBar> {
                             fit: BoxFit.cover,
                             height: h * 0.07,
                           )
-                        : SizedBox()),
+                        : const SizedBox()),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
 
             Container(
-              padding: EdgeInsets.symmetric(vertical: 14.0, horizontal: 16.0),
-              decoration: BoxDecoration(
+              padding: const EdgeInsets.symmetric(vertical: 14.0, horizontal: 16.0),
+              decoration: const BoxDecoration(
                 color: AppColors.logincardColor,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(10),
@@ -83,18 +83,18 @@ class _CustomTabBarState extends State<CustomTabBar> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         buildTab(AppTexts.profile, 0),
-                        SizedBox(width: 20),
+                        const SizedBox(width: 20),
                         buildTab(AppTexts.feeds, 1),
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Container(
                     height: 3,
                     color: AppColors.lightGreyCol,
-                    padding: EdgeInsets.symmetric(vertical: 10),
+                    padding: const EdgeInsets.symmetric(vertical: 10),
                   ),
                 ],
               ),
@@ -109,10 +109,10 @@ class _CustomTabBarState extends State<CustomTabBar> {
                 // Feeds Tab Content
 
                 Container(
-                    padding: EdgeInsets.symmetric(
+                    padding: const EdgeInsets.symmetric(
                         // vertical: 14.0,
                         horizontal: 16.0),
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: AppColors.logincardColor,
                     ),
                     child: Consumer<BaseProvider>(
@@ -122,19 +122,19 @@ class _CustomTabBarState extends State<CustomTabBar> {
                           builder: (context, snapshots) {
                             if (snapshots.connectionState ==
                                 ConnectionState.waiting) {
-                              return Center(child: CircularProgressIndicator());
+                              return const Center(child: CircularProgressIndicator());
                             } else if (snapshots.hasData &&
                                 snapshots.data != null) {
-                              UserProfileModel posts = snapshots.data!;
+                            //  UserProfileModel posts = snapshots.data!;
                               return Column(
                                 children: [
                                   ...List.generate(
                                       snapshots.data!.postList!.length,
                                       (index) => Container(
-                                            padding: EdgeInsets.symmetric(
+                                            padding: const EdgeInsets.symmetric(
                                                 // vertical: 14.0,
                                                 horizontal: 16.0),
-                                            decoration: BoxDecoration(
+                                            decoration: const BoxDecoration(
                                               color: AppColors.logincardColor,
                                             ),
                                             child: Row(
@@ -155,7 +155,7 @@ class _CustomTabBarState extends State<CustomTabBar> {
                                                                   .hasData &&
                                                               snapshot.data !=
                                                                   null) {
-                                                            return userPostConatiner(
+                                                            return UserPostConatiner(
                                                               post: snapshot
                                                                   .data!,
                                                             );
@@ -163,14 +163,14 @@ class _CustomTabBarState extends State<CustomTabBar> {
                                                             return Container(
                                                               height: 400,
                                                               width: 1000,
-                                                              padding: EdgeInsets
+                                                              padding: const EdgeInsets
                                                                   .symmetric(
                                                                       vertical:
                                                                           14.0,
                                                                       horizontal:
                                                                           16.0),
                                                               decoration:
-                                                                  BoxDecoration(
+                                                                  const BoxDecoration(
                                                                 color: AppColors
                                                                     .logincardColor,
                                                               ),
@@ -193,7 +193,7 @@ class _CustomTabBarState extends State<CustomTabBar> {
                                 ],
                               );
                             } else {
-                              return SizedBox(
+                              return const SizedBox(
                                 child: Text("no post found"),
                               );
                             }
@@ -216,7 +216,7 @@ class _CustomTabBarState extends State<CustomTabBar> {
         });
       },
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 18),
+        padding: const EdgeInsets.symmetric(horizontal: 18),
         decoration: BoxDecoration(
           border: Border(
             bottom: BorderSide(

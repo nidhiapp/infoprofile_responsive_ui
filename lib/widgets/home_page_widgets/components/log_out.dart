@@ -56,7 +56,7 @@ class LogoutButton extends StatelessWidget {
                           },
                         );
                       },
-                      child: Text(AppTexts.logout));
+                      child: const Text(AppTexts.logout));
                 },
               );
   }

@@ -88,6 +88,7 @@ class EditProfileProvider extends ChangeNotifier {
       required String about,
       required String mobile,
       required String email}) async {
+    setLoading(true);
     await _api.updateProfileData(
         name: name,
         username: username,
@@ -96,5 +97,7 @@ class EditProfileProvider extends ChangeNotifier {
         about: about,
         mobile: mobile,
         email: email);
+         setLoading(false);
   }
+  
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:info_profile_ui/utils/app_colors.dart';
 import 'package:info_profile_ui/utils/app_texts.dart';
-import 'package:info_profile_ui/utils/constants.dart';
 import 'package:info_profile_ui/utils/global.dart';
 import 'package:info_profile_ui/utils/ui_helper.dart/custom_textfield.dart';
 import 'package:info_profile_ui/utils/ui_helper.dart/custom_textstyles.dart';

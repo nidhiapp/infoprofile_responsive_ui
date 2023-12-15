@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:info_profile_ui/utils/app_colors.dart';
-import 'package:info_profile_ui/utils/constants.dart';
 import 'package:info_profile_ui/utils/global.dart';
 class InBetweenConts extends StatelessWidget {
   const InBetweenConts({super.key});

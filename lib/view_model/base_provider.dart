@@ -79,6 +79,7 @@ class BaseProvider extends ChangeNotifier {
   }
 
   Future createPost() async {
+  //  setLoading(true);
     if (loading ||
         (postDescriptionController.text.toString().trim().isEmpty &&
             !isPicked)) {
@@ -241,9 +242,9 @@ class BaseProvider extends ChangeNotifier {
         CustomToast(context: context, message: "Comment edited successfully");
       });
 
-      print('Comment ${comment.toJson()} successfully edited');
+      debugPrint('Comment ${comment.toJson()} successfully edited');
     } catch (error) {
-      print('Error editing comment: $error');
+      debugPrint('Error editing comment: $error');
     }
   }
 
@@ -256,14 +257,16 @@ class BaseProvider extends ChangeNotifier {
       // comment.isEdited = true;
       await postsCollection.doc(des.postId).update({
         'description': des.description,
+        
       }).then((value) {
         notifyListeners();
         CustomToast(context: context, message: "post edited successfully");
       });
+       notifyListeners();
 
-      print('description ${des} successfully edited');
+      debugPrint('description ${des} successfully edited');
     } catch (error) {
-      print('Error editing post: $error');
+      debugPrint('Error editing post: $error');
     }
   }
 }

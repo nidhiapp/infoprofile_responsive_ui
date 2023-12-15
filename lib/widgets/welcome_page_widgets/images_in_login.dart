@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:info_profile_ui/utils/app_images.dart';
-import 'package:info_profile_ui/utils/constants.dart';
 import 'package:info_profile_ui/utils/global.dart';
 
 class ImagesInLogin extends StatelessWidget {
